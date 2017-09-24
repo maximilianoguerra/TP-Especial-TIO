@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-09-22 11:39:44
+/* Smarty version 3.1.30, created on 2017-09-24 19:02:26
   from "C:\xampp\htdocs\dashboard\pagina2docuatrimestre\templates\header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59c4da60d43746_60470376',
+  'unifunc' => 'content_59c7e522e09428_96338344',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9b85ca695b945e685bf0cf1dad0d5fb4c8944ec8' => 
     array (
       0 => 'C:\\xampp\\htdocs\\dashboard\\pagina2docuatrimestre\\templates\\header.tpl',
-      1 => 1506071314,
+      1 => 1506217789,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59c4da60d43746_60470376 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59c7e522e09428_96338344 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,10 +55,10 @@ function content_59c4da60d43746_60470376 (Smarty_Internal_Template $_smarty_tpl)
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav fuentenav">
-							<li><a href="index.html">Inicio <span class="sr-only">(current)</span></a></li>
-							<li><a class="link-ajax" href="atiboostrap.html">Historia ATI</a></li>
-							<li><a class="link-ajax" href="nvidiaboostrap.html">Historia NVIDIA</a></li>
-							<li><a class="link-ajax" href="comparativa.html">Comparativa</a></li>
+							<li><a href="home">Inicio <span class="sr-only">(current)</span></a></li>
+							<li><a class="link-ajax" href="atiboostrap">Historia ATI</a></li>
+							<li><a class="link-ajax" href="nvidiaboostrap">Historia NVIDIA</a></li>
+							<li><a class="link-ajax" href="comparativa">Comparativa</a></li>
 							<li><a href="#contacto">Contacto</a></li>
 						</ul>
 

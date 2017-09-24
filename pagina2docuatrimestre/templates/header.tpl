@@ -31,10 +31,10 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav fuentenav">
-							<li><a href="index.html">Inicio <span class="sr-only">(current)</span></a></li>
-							<li><a class="link-ajax" href="atiboostrap.html">Historia ATI</a></li>
-							<li><a class="link-ajax" href="nvidiaboostrap.html">Historia NVIDIA</a></li>
-							<li><a class="link-ajax" href="comparativa.html">Comparativa</a></li>
+							<li><a href="home">Inicio <span class="sr-only">(current)</span></a></li>
+							<li><a class="link-ajax" href="atiboostrap">Historia ATI</a></li>
+							<li><a class="link-ajax" href="nvidiaboostrap">Historia NVIDIA</a></li>
+							<li><a class="link-ajax" href="comparativa">Comparativa</a></li>
 							<li><a href="#contacto">Contacto</a></li>
 						</ul>
 

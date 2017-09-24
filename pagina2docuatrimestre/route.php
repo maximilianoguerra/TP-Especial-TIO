@@ -23,6 +23,7 @@
               echo $metodo($params);
           }
           else{
+              echo $metodo();
           }
       }
   }

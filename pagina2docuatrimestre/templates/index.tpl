@@ -1,8 +1,5 @@
 {include file="header.tpl"}
-<div class="reemplazo">
-
-
-
+<div class="reemplazo" id="reemplazo" name="home">
   <div class="container">
 
     <div class="row ">
@@ -20,7 +17,5 @@
       </div>
     </div>
   </div>
-</div>
-
 </div>
 {include file="footer.tpl"}

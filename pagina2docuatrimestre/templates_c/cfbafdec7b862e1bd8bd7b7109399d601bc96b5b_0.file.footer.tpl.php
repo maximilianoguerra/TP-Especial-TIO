@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-09-22 11:42:48
+/* Smarty version 3.1.30, created on 2017-09-24 19:02:26
   from "C:\xampp\htdocs\dashboard\pagina2docuatrimestre\templates\footer.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59c4db18ab28d5_02955049',
+  'unifunc' => 'content_59c7e522e50221_31924808',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cfbafdec7b862e1bd8bd7b7109399d601bc96b5b' => 
     array (
       0 => 'C:\\xampp\\htdocs\\dashboard\\pagina2docuatrimestre\\templates\\footer.tpl',
-      1 => 1506073363,
+      1 => 1506215607,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59c4db18ab28d5_02955049 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59c7e522e50221_31924808 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="contenedorform" id="contacto">
   <div class="container contactocentrado">
@@ -83,9 +83,6 @@ function content_59c4db18ab28d5_02955049 (Smarty_Internal_Template $_smarty_tpl)
 >
 <?php echo '<script'; ?>
   src="js/js-prueba.js"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
-  src="js/js-abm.js"><?php echo '</script'; ?>
 >
 </body>
 </html>
