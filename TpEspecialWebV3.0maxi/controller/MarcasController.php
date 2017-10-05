@@ -1,11 +1,10 @@
 <?php
 include_once('model/TareasModel.php');
-include_once('model/PalabrasProhibidasModel.php');
 include_once('view/TareasView.php');
 
 class TareasController extends Controller
 {
-  private $palabrasProhibidasModel;
+
 
   function __construct()
   {

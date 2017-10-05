@@ -23,12 +23,12 @@
     <td><p>{$producto['consumo']}</p></td>
     <td>
       <div class="col-xs-12 col-sm-12 col-md-12">
-      
-        
+
+
           <a href="borrarTarea/{$producto['id']}">
            <p><span id="borrar" class="fa fa-trash-o " aria-hidden="true" value="0"></span></p>
           </a>
-       
+
       </div>
     </td>
   </tr>
@@ -37,7 +37,6 @@
 </div>
 
   </div>
-</div>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 formulario">
@@ -85,4 +84,4 @@
  </div>
 </div>
 
-
+</div>

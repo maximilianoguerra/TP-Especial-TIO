@@ -1,12 +1,11 @@
 <?php
 include_once('model/TareasModel.php');
 include_once('model/MarcasModel.php');
-include_once('model/PalabrasProhibidasModel.php');
 include_once('view/TareasView.php');
 
 class TareasController extends Controller
 {
-  private $palabrasProhibidasModel;
+
 
   function __construct()
   {
@@ -32,7 +31,7 @@ class TareasController extends Controller
    $productos = $this->model->getTareas();
    $marcas = $this->marcasModel->getMarcas();
 
-   for ($i=0; $i < count($productos); $i++) { 
+   for ($i=0; $i < count($productos); $i++) {
       $id_marca = $productos[$i]['id_marca'];// puede ser 1, 2, 3, etc son los id que envio con el formulario
       $j=0;
       while (( $j < count($marcas) && (!(isset($productos[$i]['marca']))) ) ) {
@@ -41,7 +40,7 @@ class TareasController extends Controller
         }
         $j++;
       }
-    } 
+    }
     $this->view->mostrarTareas($productos, $marcas);
   }
   public function create()
@@ -60,7 +59,7 @@ class TareasController extends Controller
         $productos = $this->model->getTareas();
     $marcas = $this->marcasModel->getMarcas();
 
-   for ($i=0; $i < count($productos); $i++) { 
+   for ($i=0; $i < count($productos); $i++) {
       $id_marca = $productos[$i]['id_marca'];// puede ser 1, 2, 3, etc son los id que envio con el formulario
       $j=0;
       while (( $j < count($marcas) && (!(isset($productos[$i]['marca']))) ) ) {
@@ -69,7 +68,7 @@ class TareasController extends Controller
         }
         $j++;
       }
-    } 
+    }
       $this->model->guardarTarea($id_marca,$modelo,$memoria,$banda,$consumo);
       $this->view->guardaTareas($productos,$marcas);
   }
@@ -88,14 +87,7 @@ class TareasController extends Controller
     header('Location: '.HOME);
   }
 
-  private function tienePalabrasProhibidas($titulo){
-    $pprohibidas = $this->palabrasProhibidasModel->getPalabrasProhibidas();
-    foreach ($pprohibidas as $palabra) {
-      if(strpos($titulo, $palabra['palabra']) !== false)
-        return true;
-    }
-    return false;
-  }
+
 }
 
 ?>

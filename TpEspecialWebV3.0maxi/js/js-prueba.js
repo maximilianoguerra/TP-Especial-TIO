@@ -2,7 +2,7 @@ $(".link-ajax").on("click", function(event)
 {
   let url=$(this).attr("href");
   $.ajax({
-    url:"http://localhost/dashboard/MvcLodeCharlyYloMIO/TpEspecialWebV3.0/" + url,
+    url:"http://localhost/dashboard/TpEspecialWebV3.0maxi/" + url,
     method:"GET",
     dataType:"html",
     beforeSend:function(){
