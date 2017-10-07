@@ -37,13 +37,17 @@ function mostrarAti(){
 }
 
 function mostrarComparativa(){
-  
+
   $this->smarty->display('templates/comparativa.tpl');
 }
   function guardaProductos($producto,$marca){
     $this->smarty->assign('productos', $producto);
     $this->smarty->assign('marcas', $marca);
     $this->smarty->display('templates/guardarProductos.tpl');
+  }
+  function mostraredit($producto){
+    $this->smarty->assign('productos', $producto);
+    $this->smarty->display('templates/formEdit.tpl');
   }
 
 

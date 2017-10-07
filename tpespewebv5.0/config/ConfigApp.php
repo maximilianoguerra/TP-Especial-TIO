@@ -14,7 +14,8 @@ class ConfigApp
       'agregarProducto'=> 'ProductosController#create',
       'guardarProducto'=> 'ProductosController#store',
       'borrarProducto' => 'ProductosController#destroy',
-      'finalizarProducto' => 'ProductosController#finish',
+      'editarProducto' => 'ProductosController#edit',//BOTON QUE INICIA LA EDICION
+      'editar' => 'ProductosController#editar',
       'filtrar' => 'ProductosController#filtro'
 
     ];

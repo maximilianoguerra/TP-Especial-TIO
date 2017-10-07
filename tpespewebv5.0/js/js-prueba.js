@@ -30,8 +30,8 @@ $(document).on('submit','.formFiltrar', function(){
 function getForm (datos) {
   event.preventDefault();
 
-  var dir = $(datos).attr("href");
-  var formData = new FormData(datos);
+  let dir = $(datos).attr("href");
+  let formData = new FormData(datos);
 
   $.ajax({
     method: "POST",
@@ -56,7 +56,25 @@ $(document).on('click','.borrarProducto', function(event){
   $.post("borrarProducto", jsonProducto, function(data) {
     $('.reemplazo').html(data);
   });
+  });
+  $(document).on('click','.editarProducto', function(event){
+      event.preventDefault();
 
-});
+      let idProducto = $(this).attr("href");
+      let jsonProducto = {id_producto: idProducto};
 
- 
+      $.post("editarProducto", jsonProducto, function(data) {
+        $('.reemplazo').html(data);
+      });
+  });
+
+  $(document).on('submit','.buttonEditar', function(event){
+      event.preventDefault();
+
+      let idProducto = $(this).attr("href");
+      let jsonProducto = {id_producto: idProducto};
+
+      $.post("buttonEditar", jsonProducto, function(data) {
+        $('.reemplazo').html(data);
+      });
+  });

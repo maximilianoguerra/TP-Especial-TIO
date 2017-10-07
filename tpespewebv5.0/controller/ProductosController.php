@@ -58,11 +58,11 @@ class ProductosController extends Controller
     $consumo = $_POST['consumo'];
     if(isset($_POST['modelo']) && !empty($_POST['modelo'])){
       $this->model->guardarProducto($id_marca,$modelo,$memoria,$banda,$consumo);
-      $this->comparativa();    
+      $this->comparativa();
     }
     else{
       $this->view->errorCrear("El campo modelo es requerido");
-    }  
+    }
   }
 
   public function destroy()
@@ -84,7 +84,7 @@ class ProductosController extends Controller
     $this->model->finalizarProducto($id_producto);
     header('Location: '.HOME);
   }
-  
+
   public function filtro()
   {
   //  var_dump($_POST);
@@ -105,7 +105,24 @@ class ProductosController extends Controller
   }
   $this->view->mostrarProductos($productos, $marcas);
 }
+public function edit()
+{
+   if (isset($_POST['id_producto'])) {
 
+      $id = $_POST['id_producto'];
+      $productos=$this->model->getProducto($id);
+      $this->view->mostraredit($productos);
+   }
 }
-
+public function editar()
+{
+  $id = $_POST['id_producto'];
+  $modelo = $_POST['modelo'];
+  $memoria = $_POST['memoria'];
+  $banda = $_POST['banda'];
+  $consumo = $_POST['consumo'];
+  $this->model->editarProducto($id,$modelo,$memoria,$banda,$consumo);
+  $this->comparativa();
+   }
+}
 ?>

@@ -23,6 +23,7 @@ class ProductosModel extends Model
     $sentencia = $this->db->prepare( "update producto set completado=1 where id_producto=?");
     $sentencia->execute([$id_producto]);
   }
+
   function getFiltro($id_marca){
   $where="where id_marca ='".$id_marca."'";
   $sentencia = $this->db->prepare( "select * from producto " .$where);
@@ -31,6 +32,18 @@ class ProductosModel extends Model
   return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getProducto($id){
+  $where="where id ='".$id."'";
+  $sentencia = $this->db->prepare("select * from producto " .$where);//producto es la tabla de la BBDD
+  $sentencia->execute();
+  return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+}
+
+ function editarProducto($id,$modelo,$memoria,$banda,$consumo)
+{
+  $sentencia = $this->db->prepare( "update producto set modelo=?, memoria=?, banda=?, consumo=? where id_producto=?");
+  $sentencia->execute([$modelo,$memoria,$banda,$consumo,$id]);
+}
 }
 
  ?>
