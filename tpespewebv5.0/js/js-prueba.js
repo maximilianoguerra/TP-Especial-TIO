@@ -68,13 +68,13 @@ $(document).on('click','.borrarProducto', function(event){
       });
   });
 
-  $(document).on('submit','.buttonEditar', function(event){
-      event.preventDefault();
-
-      let idProducto = $(this).attr("href");
-      let jsonProducto = {id_producto: idProducto};
-
-      $.post("buttonEditar", jsonProducto, function(data) {
-        $('.reemplazo').html(data);
-      });
-  });
+  // $(document).on('submit','.editar', function(event){
+  //     event.preventDefault();
+  //
+  //     let idProducto = $(this).attr("href");
+  //     let jsonProducto = {id_producto: idProducto};
+  //
+  //     $.post("editar", jsonProducto, function(data) {
+  //       $('.reemplazo').html(data);
+  //     });
+  // });

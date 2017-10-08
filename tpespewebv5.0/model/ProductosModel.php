@@ -39,10 +39,10 @@ function getProducto($id){
   return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 }
 
- function editarProducto($id,$modelo,$memoria,$banda,$consumo)
+ function editarProducto($modelo,$memoria,$banda,$consumo,$id)
 {
-  $sentencia = $this->db->prepare( "update producto set modelo=?, memoria=?, banda=?, consumo=? where id_producto=?");
-  $sentencia->execute([$modelo,$memoria,$banda,$consumo,$id]);
+  $sentencia = $this->db->prepare("UPDATE producto SET modelo = '".$modelo."', memoria = '".$memoria."', banda = '".$banda."', consumo = '".$consumo."' WHERE id = '".$id."'");
+  $sentencia->execute([$modelo]);
 }
 }
 

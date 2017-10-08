@@ -121,8 +121,9 @@ public function editar()
   $memoria = $_POST['memoria'];
   $banda = $_POST['banda'];
   $consumo = $_POST['consumo'];
-  $this->model->editarProducto($id,$modelo,$memoria,$banda,$consumo);
-  $this->comparativa();
+  echo $id,$modelo,$memoria,$banda,$consumo;
+  $this->model->editarProducto($modelo,$memoria,$banda,$consumo,$id);
+   $this->comparativa();
    }
 }
 ?>
