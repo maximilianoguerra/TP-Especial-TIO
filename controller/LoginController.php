@@ -9,7 +9,6 @@ class LoginController extends Controller
   {
     $this->view = new LoginView();
     $this->model = new LoginModel();
-    //$this->controllerProduct = new ProductosController();
   }
 
   public function index()
@@ -30,9 +29,7 @@ class LoginController extends Controller
             session_start();
             $_SESSION['usuario'] = $userName;
             $_SESSION['LAST_ACTIVITY'] = time();
-           header('Location: '.HOME);
-          die();
-            //$this->controllerProduct->comparativa();
+            header('Location: '.HOME);
         }
         else{
             $this->view->mostrarLogin('Usuario o Password incorrectos');
@@ -44,13 +41,8 @@ class LoginController extends Controller
   {
     session_start();
     session_destroy();
-    header('Location: '.HOME);
-    die();
+    header('Location: '.LOGIN);
   }
-
-  
-
 }
-
 
  ?>

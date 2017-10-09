@@ -5,7 +5,7 @@ class SecuredController extends Controller
 
   function __construct()
   {
-    //session_start();
+    session_start();
     if(isset($_SESSION['usuario'])){
       if (time() - $_SESSION['LAST_ACTIVITY'] > 10) {
         header('Location: '.LOGOUT);
@@ -13,10 +13,10 @@ class SecuredController extends Controller
       }
       $_SESSION['LAST_ACTIVITY'] = time();
     }
- //   else {
-   //   header('Location: '.LOGIN);
-     // die();
-    //}
+    else {
+      header('Location: '.LOGIN);
+      die();
+    }
   }
 }
 

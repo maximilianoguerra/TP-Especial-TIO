@@ -29,9 +29,7 @@
             <th><p >MEMORIA RAM (GB)</p></th>
             <th><p >ANCHO DE BANDA (GB/s)</p></th>
             <th><p >CONSUMO (W)</p></th>
-            {if $usuario}
             <th><p ></p></th>
-            {/if}
           </tr>
           {foreach from=$productos item=producto}
           <tr>
@@ -40,7 +38,6 @@
             <td><p>{$producto['memoria']}</p></td>
             <td><p>{$producto['banda']}</p></td>
             <td><p>{$producto['consumo']}</p></td>
-            {if $usuario}
             <td>
               <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="borrarEditarCentrado">
@@ -57,7 +54,6 @@
                 </div>      
              </div>
            </td>
-           {/if}
          </tr>
          {/foreach}
        </table>

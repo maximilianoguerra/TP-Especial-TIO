@@ -11,7 +11,6 @@ class ConfigApp
       'nvidiaboostrap'=> 'ProductosController#nvidia',
       'atiboostrap'=> 'ProductosController#Ati',
       'comparativa'=> 'ProductosController#comparativa',
-      'comparativaNormal'=> 'ProductosController#comparativa',
       'agregarProducto'=> 'ProductosController#create',
       'guardarProducto'=> 'ProductosController#store',
       'borrarProducto' => 'ProductosController#destroy',

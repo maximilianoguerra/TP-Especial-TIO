@@ -3,11 +3,11 @@ include_once('model/ProductosModel.php');
 include_once('model/MarcasModel.php');
 include_once('view/ProductosView.php');
 
-class ProductosController extends SecuredController
+class ProductosController extends /*Secured*/Controller
 {
   function __construct()
   {
-    parent::__construct();
+    /*parent::__construct();*/
     $this->view = new ProductosView();
     $this->model = new ProductosModel();
     $this->marcasModel = new MarcasModel();
@@ -15,13 +15,7 @@ class ProductosController extends SecuredController
 
   public function index()
   {
-    $usuario = null;
-    session_start();
-    if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
-      $usuario = $_SESSION['usuario'];
-    }  
-
-    $this->view->mostrarIndex($usuario);
+    $this->view->mostrarIndex();
   }
 
   public function nvidia()
@@ -49,15 +43,7 @@ class ProductosController extends SecuredController
         $j++;
       }
     }
-    $usuario = false;
-    session_start();
-    if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
-      $usuario = true;
-    }  
- 
-    $this->view->mostrarProductos($productos, $marcas, $usuario);
-    
-  
+    $this->view->mostrarProductos($productos, $marcas);
   }
   public function create()
   {

@@ -11,14 +11,8 @@ function cargar(url) {
     beforeSend:function(){
       $(".reemplazo").html("<h1><i class='fa fa-superpowers fa-spin'></i> Loading...</h1>");
     },
-    success: function(data){ 
-      if(url === "logout" ) {
-        // Reload la web completa
-        window.location.reload();
-      }   
-      else {
-        $(".reemplazo").html(data);
-      }
+    success: function(data){
+      $(".reemplazo").html(data);
     },
     error: function(){
       $(".reemplazo").html("<h1>Error - Request Failed!</h1>");
@@ -47,15 +41,8 @@ function getForm (datos) {
     cache: false,
     processData: false,
     success: function(data) {
-      // Si el usuario está logueado refresco la web
-      if(dir === "verificarUsuario" ) {
-         // Reload la web completa
-        window.location.reload();
-      }
-      else {
         $(".reemplazo").html(data);
       }
-    }
   });
 }
 
