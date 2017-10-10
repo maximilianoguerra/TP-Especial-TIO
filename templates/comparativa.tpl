@@ -1,6 +1,3 @@
-<div class="reemplazo">
-
-
   <div class="tablafondo">
     <!--HOME Presentation -->
     <div class="conthome2">
@@ -29,7 +26,9 @@
             <th><p >MEMORIA RAM (GB)</p></th>
             <th><p >ANCHO DE BANDA (GB/s)</p></th>
             <th><p >CONSUMO (W)</p></th>
+            {if $usuario}
             <th><p ></p></th>
+            {/if}
           </tr>
           {foreach from=$productos item=producto}
           <tr>
@@ -38,6 +37,7 @@
             <td><p>{$producto['memoria']}</p></td>
             <td><p>{$producto['banda']}</p></td>
             <td><p>{$producto['consumo']}</p></td>
+            {if $usuario}
             <td>
               <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="borrarEditarCentrado">
@@ -51,16 +51,17 @@
                         <p><span id="editar" class="fa fa-pencil-square-o " aria-hidden="true" value="0"></span></p>
                         </a>
                       </div>
-                </div>      
+                </div>
              </div>
            </td>
+           {/if}
          </tr>
          {/foreach}
        </table>
      </div>
 
-   </div>
- </div>
+
+
  <div class="row">
   <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 formulario">
     <div class="msj">
@@ -105,6 +106,72 @@
      </div>
    </div>
  </div>
+ </div>
+
+ <div class="table-responsive">
+   <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 formulario">
+   <table class="table table-striped centradoBlanco">
+     <tr>
+       <th><p >MARCA</p></th>
+       {if $usuario}
+       <th><p ></p></th>
+       {/if}
+     </tr>
+     {foreach from=$marcas item=marca}
+     <tr>
+       <td><p>{$marca['nombre']}</p></td>
+       {if $usuario}
+       <td>
+         <div class="col-xs-12 col-sm-12 col-md-12">
+           <div class="borrarEditarCentrado">
+                 <div class="enLinea">
+                   <a href="{$marca['id']}" class="borrarMarca">
+                   <p><span id="borrarMarca" class="fa fa-trash-o " aria-hidden="true" value="0"></span></p>
+                   </a>
+                 </div>
+                 <div class="enLinea">
+                   <a href="{$marca['id']}" class="comienzoEditarMarca">
+                   <p><span id="editarMarca" class="fa fa-pencil-square-o " aria-hidden="true" value="0"></span></p>
+                   </a>
+                 </div>
+           </div>
+        </div>
+      </td>
+      {/if}
+    </tr>
+    {/foreach}
+  </table>
+   </div>
+   </div>
+
+ <div class="row">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 formulario">
+    <div class="msj">
+      <div class="panel panel-default">
+        <div class="panel-body">
+        <form href="guardarMarca" class="formAgregarMarca">
+
+            <div class="form-group">
+              <label for="id_marca">Agregar una marca</label>
+            </div>
+            <div class="form-group">
+              <label for="marca">Marca</label>
+              <input type="text" class="form-control" id="marca" name="marca"  placeholder="Marca ej:msi">
+            </div>
+            <input type="submit" class="btn btn-default" value="Crear">
+            <div class="panel-footer">
+             {if isset($error)}
+             <div class="alert alert-danger" role="alert">{$error}</div>
+             {/if}
+           </div>
+         </form>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

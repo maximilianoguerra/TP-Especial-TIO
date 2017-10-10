@@ -9,6 +9,7 @@ class LoginController extends Controller
   {
     $this->view = new LoginView();
     $this->model = new LoginModel();
+    //$this->controllerProduct = new ProductosController();
   }
 
   public function index()
@@ -20,29 +21,33 @@ class LoginController extends Controller
 
   public function verify()
   {
-      $userName = $_POST['usuario'];
-      $password = $_POST['password'];
+    $userName = $_POST['usuario'];
+    $password = $_POST['password'];
 
-      if(!empty($userName) && !empty($password)){
-        $user = $this->model->getUser($userName);
-        if((!empty($user)) && password_verify($password, $user[0]['password'])) {
-            session_start();
-            $_SESSION['usuario'] = $userName;
-            $_SESSION['LAST_ACTIVITY'] = time();
-            header('Location: '.HOME);
-        }
-        else{
-            $this->view->mostrarLogin('Usuario o Password incorrectos');
-        }
+    if(!empty($userName) && !empty($password)){
+      $user = $this->model->getUser($userName);
+      if((!empty($user)) && password_verify($password, $user[0]['password'])) {
+        session_start();
+        $_SESSION['usuario'] = $userName;
+        $_SESSION['LAST_ACTIVITY'] = time();
+        header('Location: '.HOME);
+        die();
+            //$this->controllerProduct->comparativa();
       }
+      else{
+        $this->view->mostrarLogin('Usuario o Password incorrectos');
+      }
+    }
   }
 
   public function destroy()
   {
     session_start();
     session_destroy();
-    header('Location: '.LOGIN);
+    $this->view->mostrarLogin();
+    die();
   }
 }
 
- ?>
+
+?>

@@ -12,7 +12,13 @@ function cargar(url) {
       $(".reemplazo").html("<h1><i class='fa fa-superpowers fa-spin'></i> Loading...</h1>");
     },
     success: function(data){
-      $(".reemplazo").html(data);
+      if(url === "logout" ) {
+        // Reload la web completa
+        window.location.reload();
+      }
+      else {
+        $(".reemplazo").html(data);
+      }
     },
     error: function(){
       $(".reemplazo").html("<h1>Error - Request Failed!</h1>");
@@ -24,6 +30,9 @@ function cargar(url) {
 
 
 $(document).on('submit','.formFiltrar', function(){
+  getForm(this);
+});
+$(document).on('submit','.formAgregarMarca', function(){
   getForm(this);
 });
 
@@ -41,8 +50,15 @@ function getForm (datos) {
     cache: false,
     processData: false,
     success: function(data) {
+      // Si el usuario está logueado refresco la web
+      if(dir === "verificarUsuario" ) {
+         // Reload la web completa
+        window.location.reload();
+      }
+      else {
         $(".reemplazo").html(data);
       }
+    }
   });
 }
 
@@ -67,4 +83,26 @@ $(document).on('click','.borrarProducto', function(event){
       $.post("editarProducto", jsonProducto, function(data) {
         $('.reemplazo').html(data);
       });
+  });
+  $(document).on('click','.borrarMarca', function(event){
+    event.preventDefault();
+
+    let idMarca = $(this).attr("href");
+    let jsonProducto = {id_marca: idMarca};
+
+    $.post("borrarMarca", jsonProducto, function(data) {
+      $('.reemplazo').html(data);
+    });
+
+  });
+  $(document).on('click','.comienzoEditarMarca', function(event){
+    event.preventDefault();
+
+    let idMarca = $(this).attr("href");
+    let jsonProducto = {id_marca: idMarca};
+
+    $.post("comienzoEditarMarca", jsonProducto, function(data) {
+      $('.reemplazo').html(data);
+    });
+
   });

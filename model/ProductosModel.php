@@ -42,6 +42,26 @@ function getProducto($id){
   $sentencia = $this->db->prepare("UPDATE producto SET modelo = '".$modelo."', memoria = '".$memoria."', banda = '".$banda."', consumo = '".$consumo."' WHERE id = '".$id."'");
   $sentencia->execute([$modelo]);
 }
+function addmarca($marca){
+  $sentencia = $this->db->prepare('INSERT INTO marca(nombre) VALUES(?)');
+  $sentencia->execute([$marca]);
+}
+public function deleteMarca($id)
+{
+  $sentencia = $this->db->prepare( "delete from marca where id=?");
+    $sentencia->execute([$id]);
+}
+public function editMarca($id,$nombre)
+{
+  $sentencia = $this->db->prepare("UPDATE marca SET  nombre = '".$nombre."' WHERE id = '".$id."'");
+    $sentencia->execute();
+}
+public function getMarca($id){
+  $where="where id ='".$id."'";
+  $sentencia = $this->db->prepare("select * from marca " .$where);//producto es la tabla de la BBDD
+  $sentencia->execute();
+  return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+}
 
 }
 
