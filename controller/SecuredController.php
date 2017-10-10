@@ -13,10 +13,10 @@ class SecuredController extends Controller
       }
       $_SESSION['LAST_ACTIVITY'] = time();
     }
-    else {
-      header('Location: '.LOGIN);
-      die();
-    }
+ //   else {
+   //   header('Location: '.LOGIN);
+     // die();
+    //}
   }
 }
 

@@ -55,6 +55,5 @@
 
 
 <script  src="js/js-prueba.js"></script>
-<script  src="js/js-abm.js"></script>
 </body>
 </html>
