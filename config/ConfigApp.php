@@ -19,7 +19,7 @@ class ConfigApp
       'borrarMarca' => 'ProductosController#destroyMarca',
       'finalizarProducto' => 'ProductosController#finish',
       'filtrar' => 'ProductosController#filtro',
-      'editarProducto' => 'ProductosController#edit',//BOTON QUE INICIA LA EDICION
+      'editarProducto' => 'ProductosController#edit', 
       'comienzoEditarMarca' => 'ProductosController#comienzoEditMarca',
       'editarMarca'=>'ProductosController#editarMarca',
       'editar' => 'ProductosController#editar',

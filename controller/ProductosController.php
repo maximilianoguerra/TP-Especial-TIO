@@ -16,7 +16,6 @@ class ProductosController extends SecuredController
   public function index()
   {
     $usuario = null;
-    //session_start();
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = $_SESSION['usuario'];
     }
@@ -50,7 +49,6 @@ class ProductosController extends SecuredController
       }
     }
     $usuario = false;
-    //session_start();
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = true;
     }
@@ -70,6 +68,7 @@ class ProductosController extends SecuredController
     $memoria = $_POST['memoria'];
     $banda = $_POST['banda'];
     $consumo = $_POST['consumo'];
+    
     if((isset($_POST['modelo']) && !empty($_POST['modelo'])) &&
     (isset($_POST['memoria']) && !empty($_POST['memoria'])) &&
     (isset($_POST['banda']) && !empty($_POST['banda'])) &&
@@ -80,7 +79,6 @@ class ProductosController extends SecuredController
     }
     else{
       $this->view->errorCrear("Todos los campos son requeridos", $productos, $marcas);
-    //  $this->view->mostrarProductos($productos, $marcas);
       $this->comparativa();
     }
   }
@@ -93,14 +91,10 @@ class ProductosController extends SecuredController
         $this->model->borrarProducto($id);
         $this->comparativa();
      }
-    //$id = $params[0];
-    //$this->model->borrarProducto($id);
-    //header('Location: '.HOME);
   }
 
   public function filtro()
   {
-  //  var_dump($_POST);
 
     $id_marca = $_POST['id_marca'];
     $productos = $this->model->getFiltro($id_marca);
@@ -117,7 +111,6 @@ class ProductosController extends SecuredController
     }
   }
   $usuario = false;
-    session_start();
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = true;
     }
@@ -141,27 +134,29 @@ public function editar()
   $memoria = $_POST['memoria'];
   $banda = $_POST['banda'];
   $consumo = $_POST['consumo'];
-//  echo $id,$modelo,$memoria,$banda,$consumo;
+
   $this->model->editarProducto($modelo,$memoria,$banda,$consumo,$id);
-   $this->comparativa();
+  $this->comparativa();
   }
-  public function agregarMarca(){
-    $marca=$_POST['marca'];
-    $this->model->addmarca($marca);
-    $this->comparativa();
+
+public function agregarMarca(){
+  $marca=$_POST['marca'];
+  $this->model->addmarca($marca);
+  $this->comparativa();
   }
-  public function destroyMarca(){
-       $id = $_POST['id_marca'];
-       $this->model->deleteMarca($id);
-       $this->comparativa();
+
+public function destroyMarca(){
+  $id = $_POST['id_marca'];
+  $this->model->deleteMarca($id);
+  $this->comparativa();
 }
+
 public function comienzoEditMarca()
 {
-      $id=$_POST['id_marca'];
-      $marcas=$this->model->getMarca($id);
-      print_r($marcas);
-      $this->view->mostrarEditMarca($marcas);
-
+  $id=$_POST['id_marca'];
+  $marcas=$this->model->getMarca($id);
+  print_r($marcas);
+  $this->view->mostrarEditMarca($marcas);
 }
 
 public function editarMarca()
@@ -173,6 +168,7 @@ public function editarMarca()
   $this->model->editMarca($id,$nombre);
   $this->comparativa();
 }
+
 }
 
 ?>

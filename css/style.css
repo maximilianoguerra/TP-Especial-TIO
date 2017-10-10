@@ -344,6 +344,10 @@ p{
 .filtrar {
     color: white;
 }
+
+#loginError{
+    visibility: hidden;
+}
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: rgba(181, 181, 181, 0.76);
 }
@@ -363,6 +367,7 @@ p{
 
 .form-group {
     margin-bottom: 5px;
+    color: white;
 }
 
 .footer_redes a {

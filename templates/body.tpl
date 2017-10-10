@@ -23,17 +23,13 @@
 							<li><a class="link-ajax" href="nvidiaboostrap">Historia NVIDIA</a></li>
 							<li><a class="link-ajax" href="comparativaNormal">Comparativa</a></li>
 							<li><a href="#contacto">Contacto</a></li>
-							  {if $usuario}
-            					<li><a class="link-ajax" href="logout">Log Out</a>{$usuario}</li>
-            				{else}
-            					<li><a class="link-ajax" href="login">Log In</a></li>
-            				{/if}
-
-
+							{if $usuario}
+							<li><a class="link-ajax" href="logout">Log Out</a></li>
+							<li><a >Usuario: {$usuario}</a></li>
+							{else}
+							<li><a class="link-ajax" href="login">Log In</a></li>
+							{/if}
 						</ul>
-
-
-
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
 			</nav>

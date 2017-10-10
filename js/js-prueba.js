@@ -52,13 +52,21 @@ function getForm (datos) {
     success: function(data) {
       // Si el usuario está logueado refresco la web
       if(dir === "verificarUsuario" ) {
-         // Reload la web completa
-        window.location.reload();
+         // Si ingreso la contraseña
+         if(data === "User pass error"){
+          $("div .form-group").addClass('has-error');
+          $("input").val("");
+          $('#loginError').css('visibility', 'visible');
+        }
+        else{
+          //Sino Reload la web completa
+          window.location.reload();
+        }
+      }//Cierro el IF
+      else{
+        $(".reemplazo").html(data); 
       }
-      else {
-        $(".reemplazo").html(data);
-      }
-    }
+    }//Cierro el SUCCESS
   });
 }
 
@@ -74,35 +82,35 @@ $(document).on('click','.borrarProducto', function(event){
 
 });
 
- $(document).on('click','.editarProducto', function(event){
-      event.preventDefault();
+$(document).on('click','.editarProducto', function(event){
+  event.preventDefault();
 
-      let idProducto = $(this).attr("href");
-      let jsonProducto = {id_producto: idProducto};
+  let idProducto = $(this).attr("href");
+  let jsonProducto = {id_producto: idProducto};
 
-      $.post("editarProducto", jsonProducto, function(data) {
-        $('.reemplazo').html(data);
-      });
+  $.post("editarProducto", jsonProducto, function(data) {
+    $('.reemplazo').html(data);
   });
-  $(document).on('click','.borrarMarca', function(event){
-    event.preventDefault();
+});
+$(document).on('click','.borrarMarca', function(event){
+  event.preventDefault();
 
-    let idMarca = $(this).attr("href");
-    let jsonProducto = {id_marca: idMarca};
+  let idMarca = $(this).attr("href");
+  let jsonProducto = {id_marca: idMarca};
 
-    $.post("borrarMarca", jsonProducto, function(data) {
-      $('.reemplazo').html(data);
-    });
-
+  $.post("borrarMarca", jsonProducto, function(data) {
+    $('.reemplazo').html(data);
   });
-  $(document).on('click','.comienzoEditarMarca', function(event){
-    event.preventDefault();
 
-    let idMarca = $(this).attr("href");
-    let jsonProducto = {id_marca: idMarca};
+});
+$(document).on('click','.comienzoEditarMarca', function(event){
+  event.preventDefault();
 
-    $.post("comienzoEditarMarca", jsonProducto, function(data) {
-      $('.reemplazo').html(data);
-    });
+  let idMarca = $(this).attr("href");
+  let jsonProducto = {id_marca: idMarca};
 
+  $.post("comienzoEditarMarca", jsonProducto, function(data) {
+    $('.reemplazo').html(data);
   });
+
+});

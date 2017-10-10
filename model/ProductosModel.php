@@ -18,18 +18,14 @@ class ProductosModel extends Model
     $sentencia->execute([$id]);
   }
 
-  function finalizarProducto($id_producto)
-  {
-    $sentencia = $this->db->prepare( "update producto set completado=1 where id_producto=?");
-    $sentencia->execute([$id_producto]);
-  }
   function getFiltro($id_marca){
-  $where="where id_marca ='".$id_marca."'";
-  $sentencia = $this->db->prepare( "select * from producto " .$where);
+    $where="where id_marca ='".$id_marca."'";
+    $sentencia = $this->db->prepare( "select * from producto " .$where);
   //producto es la tabla de la BBDD
-  $sentencia->execute();
-  return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $sentencia->execute();
+    return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 }
+
 function getProducto($id){
   $where="where id ='".$id."'";
   $sentencia = $this->db->prepare("select * from producto " .$where);//producto es la tabla de la BBDD
@@ -42,20 +38,24 @@ function getProducto($id){
   $sentencia = $this->db->prepare("UPDATE producto SET modelo = '".$modelo."', memoria = '".$memoria."', banda = '".$banda."', consumo = '".$consumo."' WHERE id = '".$id."'");
   $sentencia->execute([$modelo]);
 }
+
 function addmarca($marca){
   $sentencia = $this->db->prepare('INSERT INTO marca(nombre) VALUES(?)');
   $sentencia->execute([$marca]);
 }
+
 public function deleteMarca($id)
 {
   $sentencia = $this->db->prepare( "delete from marca where id=?");
     $sentencia->execute([$id]);
 }
+
 public function editMarca($id,$nombre)
 {
   $sentencia = $this->db->prepare("UPDATE marca SET  nombre = '".$nombre."' WHERE id = '".$id."'");
     $sentencia->execute();
 }
+
 public function getMarca($id){
   $where="where id ='".$id."'";
   $sentencia = $this->db->prepare("select * from marca " .$where);//producto es la tabla de la BBDD
@@ -65,4 +65,4 @@ public function getMarca($id){
 
 }
 
- ?>
+?>

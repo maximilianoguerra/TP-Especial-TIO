@@ -20,19 +20,11 @@ class ProductosView extends View
     $this->smarty->display('templates/formCrear.tpl');
   }
 
-  function errorCrear($error, $productos, $marcas){
-   // $this->assignarProductoForm($titulo, $descripcion, $completada);
-    $this->smarty->assign('error', $error);
-  //  $this->smarty->display('templates/formCrear.tpl');
-  }
+function errorCrear($error, $productos, $marcas){
+   $this->smarty->assign('error', $error);
+}
 
- /* private function assignarProductoForm($titulo='', $descripcion='', $completada=0){
-    $this->smarty->assign('titulo', $titulo);
-    $this->smarty->assign('descripcion', $descripcion);
-    $this->smarty->assign('completada', $completada);
-  }*/
-
-  function mostrarNvidia(){
+function mostrarNvidia(){
   $this->smarty->display('templates/nvidiaboostrap.tpl');
   }
 
@@ -44,22 +36,24 @@ function mostrarComparativa(){
 
   $this->smarty->display('templates/comparativa.tpl');
 }
-  function guardaProductos($producto,$marca){
-    $this->smarty->assign('productos', $producto);
-    $this->smarty->assign('marcas', $marca);
-    $this->smarty->display('templates/guardarProductos.tpl');
-  }
 
-  function mostraredit($producto){
-    $this->smarty->assign('productos', $producto);
-    $this->smarty->display('templates/formEdit.tpl');
-  }
-  function mostrarEditMarca($marcas){
-    $this->smarty->assign('marcas', $marcas);
-    $this->smarty->display('templates/editMarca.tpl');
-  }
+function guardaProductos($producto,$marca){
+  $this->smarty->assign('productos', $producto);
+  $this->smarty->assign('marcas', $marca);
+  $this->smarty->display('templates/guardarProductos.tpl');
+}
+
+function mostraredit($producto){
+  $this->smarty->assign('productos', $producto);
+  $this->smarty->display('templates/formEdit.tpl');
+}
+
+function mostrarEditMarca($marcas){
+  $this->smarty->assign('marcas', $marcas);
+  $this->smarty->display('templates/editMarca.tpl');
+}
 
 
 }
 
- ?>
+?>
