@@ -1,18 +1,6 @@
-<body>
-	<div class="contenedor">
-		<div class="pattern">
-			<nav class="navbar navbar-default nav">
-				<div class="container-fluid">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#"><img alt="ATIvsNVIDIA" src="img/lg3.png"></a>
 
+<<<<<<< HEAD
+=======
 					</div>
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
@@ -33,6 +21,7 @@
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
 			</nav>
+>>>>>>> 4d67bf810ff685b44ac1ae48aef1dbf38cdb4b78
 			<div class="reemplazo" id="reemplazo" name="home">
 				<div class="container">
 

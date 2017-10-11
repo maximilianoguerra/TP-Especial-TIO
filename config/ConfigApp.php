@@ -11,7 +11,8 @@ class ConfigApp
       'nvidiaboostrap'=> 'ProductosController#nvidia',
       'atiboostrap'=> 'ProductosController#Ati',
       'comparativa'=> 'ProductosController#comparativa',
-      'comparativaNormal'=> 'ProductosController#comparativa',
+      'body'=>'ProductosController#traemeElbody',
+      // 'comparativaNormal'=> 'ProductosController#comparativa',
       'agregarProducto'=> 'ProductosController#create',
       'guardarProducto'=> 'ProductosController#store',
       "guardarMarca"=> 'ProductosController#agregarMarca',
@@ -19,7 +20,11 @@ class ConfigApp
       'borrarMarca' => 'ProductosController#destroyMarca',
       'finalizarProducto' => 'ProductosController#finish',
       'filtrar' => 'ProductosController#filtro',
+<<<<<<< HEAD
+      'editarProducto' => 'ProductosController#edit',
+=======
       'editarProducto' => 'ProductosController#edit', 
+>>>>>>> 4d67bf810ff685b44ac1ae48aef1dbf38cdb4b78
       'comienzoEditarMarca' => 'ProductosController#comienzoEditMarca',
       'editarMarca'=>'ProductosController#editarMarca',
       'editar' => 'ProductosController#editar',

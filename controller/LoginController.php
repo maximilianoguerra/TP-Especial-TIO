@@ -17,7 +17,7 @@ class LoginController extends Controller
   //  echo password_hash('654321', PASSWORD_DEFAULT);//DE ESTA FORMA VEO EL PASSWORD ENCRIPTADO EN SHA1
   //  password: //$2y$10$mX0CJe.TzCawcbgGb1x4h.GLC4ZYlqCtqtjI85vaqmxc/kmNbX9s.//
   }
-
+  /*VERIFICA LOS DATOS DEL USUARIO SEAN CORRECTOS*/
   public function verify()
   {
     $userName = $_POST['usuario'];
@@ -38,12 +38,12 @@ class LoginController extends Controller
       }
     }
   }
-
+/*FINALIZA LA SECION*/
   public function destroy()
   {
     session_start();
     session_destroy();
-    $this->view->mostrarLogin();
+    header('Location: '.HOME);
     die();
   }
 }

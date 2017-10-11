@@ -1,13 +1,13 @@
-<?php
 
+<?php
 class SecuredController extends Controller
 {
-
+  
   function __construct()
   {
     session_start();
     if(isset($_SESSION['usuario'])){
-      if (time() - $_SESSION['LAST_ACTIVITY'] > 10) {
+      if (time() - $_SESSION['LAST_ACTIVITY'] > 3) {
         header('Location: '.LOGOUT);
         die();
       }
@@ -19,5 +19,4 @@ class SecuredController extends Controller
     //}
   }
 }
-
  ?>
