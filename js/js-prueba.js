@@ -12,10 +12,12 @@ function cargar(url) {
       $(".reemplazo").html("<h1><i class='fa fa-superpowers fa-spin'></i> Loading...</h1>");
     },
     success: function(data){
+
       if(url === "logout" ) {
         // Reload la web completa
         window.location.reload();
       }
+
       else {
         $(".reemplazo").html(data);
       }
@@ -27,7 +29,7 @@ function cargar(url) {
   event.preventDefault();
   return false;
 }
-
+/*FUNCIONES SOPORTE PARA VINCULAR EVENTOS A LOS BOTONES Q NO ESTABAN EN UN PRINCIPIO EN EL DOM*/
 
 $(document).on('submit','.formFiltrar', function(){
   getForm(this);
@@ -64,11 +66,7 @@ function getForm (datos) {
         }
       }//Cierro el IF
       else{
-<<<<<<< HEAD
         $(".reemplazo").html(data);
-=======
-        $(".reemplazo").html(data); 
->>>>>>> 4d67bf810ff685b44ac1ae48aef1dbf38cdb4b78
       }
     }//Cierro el SUCCESS
   });
@@ -88,7 +86,6 @@ $(document).on('click','.borrarProducto', function(event){
 
 $(document).on('click','.editarProducto', function(event){
   event.preventDefault();
-<<<<<<< HEAD
 
   let idProducto = $(this).attr("href");
   let jsonProducto = {id_producto: idProducto};
@@ -97,6 +94,7 @@ $(document).on('click','.editarProducto', function(event){
     $('.reemplazo').html(data);
   });
 });
+/*FUNCIONES SOPORTE PARA VINCULAR EVENTOS A LOS BOTONES Q NO ESTABAN EN UN PRINCIPIO EN EL DOM*/
 $(document).on('click','.borrarMarca', function(event){
   event.preventDefault();
 
@@ -118,35 +116,4 @@ $(document).on('click','.comienzoEditarMarca', function(event){
     $('.reemplazo').html(data);
   });
 
-=======
-
-  let idProducto = $(this).attr("href");
-  let jsonProducto = {id_producto: idProducto};
-
-  $.post("editarProducto", jsonProducto, function(data) {
-    $('.reemplazo').html(data);
-  });
-});
-$(document).on('click','.borrarMarca', function(event){
-  event.preventDefault();
-
-  let idMarca = $(this).attr("href");
-  let jsonProducto = {id_marca: idMarca};
-
-  $.post("borrarMarca", jsonProducto, function(data) {
-    $('.reemplazo').html(data);
-  });
-
-});
-$(document).on('click','.comienzoEditarMarca', function(event){
-  event.preventDefault();
-
-  let idMarca = $(this).attr("href");
-  let jsonProducto = {id_marca: idMarca};
-
-  $.post("comienzoEditarMarca", jsonProducto, function(data) {
-    $('.reemplazo').html(data);
-  });
-
->>>>>>> 4d67bf810ff685b44ac1ae48aef1dbf38cdb4b78
 });

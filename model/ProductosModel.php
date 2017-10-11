@@ -18,18 +18,13 @@ class ProductosModel extends Model
     $sentencia = $this->db->prepare( "delete from producto where id=?");
     $sentencia->execute([$id]);
   }
-<<<<<<< HEAD
   /*FUNCION Q NOS AYUDA CON EL FOLTRADO DEVOLVIENDO LAS TRAJETAS CON ES MARCA */
-=======
-
->>>>>>> 4d67bf810ff685b44ac1ae48aef1dbf38cdb4b78
   function getFiltro($id_marca){
     $where="where id_marca ='".$id_marca."'";
     $sentencia = $this->db->prepare( "select * from producto " .$where);
   //producto es la tabla de la BBDD
     $sentencia->execute();
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
-<<<<<<< HEAD
     }
     /*FUNCION Q NOS RETORNA UN PRODUCTO  */
     function getProducto($id){
@@ -68,46 +63,6 @@ class ProductosModel extends Model
     $sentencia->execute();
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }
-=======
-}
-
-function getProducto($id){
-  $where="where id ='".$id."'";
-  $sentencia = $this->db->prepare("select * from producto " .$where);//producto es la tabla de la BBDD
-  $sentencia->execute();
-  return $sentencia->fetchAll(PDO::FETCH_ASSOC);
-}
-
- function editarProducto($modelo,$memoria,$banda,$consumo,$id)
-{
-  $sentencia = $this->db->prepare("UPDATE producto SET modelo = '".$modelo."', memoria = '".$memoria."', banda = '".$banda."', consumo = '".$consumo."' WHERE id = '".$id."'");
-  $sentencia->execute([$modelo]);
-}
->>>>>>> 4d67bf810ff685b44ac1ae48aef1dbf38cdb4b78
-
-function addmarca($marca){
-  $sentencia = $this->db->prepare('INSERT INTO marca(nombre) VALUES(?)');
-  $sentencia->execute([$marca]);
-}
-
-public function deleteMarca($id)
-{
-  $sentencia = $this->db->prepare( "delete from marca where id=?");
-    $sentencia->execute([$id]);
-}
-
-public function editMarca($id,$nombre)
-{
-  $sentencia = $this->db->prepare("UPDATE marca SET  nombre = '".$nombre."' WHERE id = '".$id."'");
-    $sentencia->execute();
-}
-
-public function getMarca($id){
-  $where="where id ='".$id."'";
-  $sentencia = $this->db->prepare("select * from marca " .$where);//producto es la tabla de la BBDD
-  $sentencia->execute();
-  return $sentencia->fetchAll(PDO::FETCH_ASSOC);
-}
 
 }
 

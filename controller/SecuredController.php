@@ -2,7 +2,7 @@
 <?php
 class SecuredController extends Controller
 {
-  
+
   function __construct()
   {
     session_start();

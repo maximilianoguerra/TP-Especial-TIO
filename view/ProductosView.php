@@ -21,14 +21,9 @@ class ProductosView extends View
     $this->smarty->display('templates/formCrear.tpl');
   }
 
-<<<<<<< HEAD
 function errorCrear($error){
    $this->smarty->assign('error', $error);
 
-=======
-function errorCrear($error, $productos, $marcas){
-   $this->smarty->assign('error', $error);
->>>>>>> 4d67bf810ff685b44ac1ae48aef1dbf38cdb4b78
 }
 
 function mostrarNvidia(){
@@ -59,13 +54,10 @@ function mostrarEditMarca($marcas){
   $this->smarty->assign('marcas', $marcas);
   $this->smarty->display('templates/editMarca.tpl');
 }
-<<<<<<< HEAD
 public function seeBody()
 {
   $this->smarty->display('templates/body.tpl');
 }
-=======
->>>>>>> 4d67bf810ff685b44ac1ae48aef1dbf38cdb4b78
 
 
 }

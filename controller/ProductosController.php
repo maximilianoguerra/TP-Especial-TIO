@@ -59,7 +59,6 @@ class ProductosController extends SecuredController
     $this->view->mostrarCrearProductos();
   }
 
-<<<<<<< HEAD
   /*FUNCION PARA GUARDAR PRODUCTOS*/
    public function store()
     {
@@ -82,58 +81,8 @@ class ProductosController extends SecuredController
       else{
         $this->view->errorCrear("Todos los campos son requeridos");
         $this->comparativa();
-=======
- public function store()
-  {
-    $productos = $this->model->getProductos();
-    $marcas = $this->marcasModel->getMarcas();
-    $id_marca = $_POST['id_marca'];
-    $modelo = $_POST['modelo'];
-    $memoria = $_POST['memoria'];
-    $banda = $_POST['banda'];
-    $consumo = $_POST['consumo'];
-    
-    if((isset($_POST['modelo']) && !empty($_POST['modelo'])) &&
-    (isset($_POST['memoria']) && !empty($_POST['memoria'])) &&
-    (isset($_POST['banda']) && !empty($_POST['banda'])) &&
-    (isset($_POST['consumo']) && !empty($_POST['consumo'])))
-    {
-      $this->model->guardarProducto($id_marca,$modelo,$memoria,$banda,$consumo);
-      $this->comparativa();
-    }
-    else{
-      $this->view->errorCrear("Todos los campos son requeridos", $productos, $marcas);
-      $this->comparativa();
-    }
-  }
-
-  public function destroy()
-  {
-     if (isset($_POST['id_producto'])) {
-
-        $id = $_POST['id_producto'];
-        $this->model->borrarProducto($id);
-        $this->comparativa();
-     }
-  }
-
-  public function filtro()
-  {
-
-    $id_marca = $_POST['id_marca'];
-    $productos = $this->model->getFiltro($id_marca);
-    $marcas = $this->marcasModel->getMarcas();
-
-    for ($i=0; $i < count($productos); $i++) {
-    $id_marca = $productos[$i]['id_marca'];// puede ser 1, 2, 3, etc son los id que envio con el formulario
-    $j=0;
-    while (( $j < count($marcas) && (!(isset($productos[$i]['marca']))) ) ) {
-      if ($id_marca == $marcas[$j]['id']) {
-        $productos[$i]['marca'] = $marcas[$j]['nombre'];
->>>>>>> 4d67bf810ff685b44ac1ae48aef1dbf38cdb4b78
       }
     }
-<<<<<<< HEAD
     /*FUNCION PARA ELIMINAR UN PRODUCTO*/
       public function destroy()
       {
@@ -228,67 +177,6 @@ class ProductosController extends SecuredController
         function traemeElbody(){
             $this->view->seeBody();
         }
-=======
-  }
-  $usuario = false;
-    if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
-      $usuario = true;
-    }
-
-    $this->view->mostrarProductos($productos, $marcas, $usuario);
-}
-
-public function edit()
-{
-   if (isset($_POST['id_producto'])) {
-
-      $id = $_POST['id_producto'];
-      $productos=$this->model->getProducto($id);
-      $this->view->mostraredit($productos);
-   }
-}
-public function editar()
-{
-  $id = $_POST['id_producto'];
-  $modelo = $_POST['modelo'];
-  $memoria = $_POST['memoria'];
-  $banda = $_POST['banda'];
-  $consumo = $_POST['consumo'];
-
-  $this->model->editarProducto($modelo,$memoria,$banda,$consumo,$id);
-  $this->comparativa();
-  }
-
-public function agregarMarca(){
-  $marca=$_POST['marca'];
-  $this->model->addmarca($marca);
-  $this->comparativa();
-  }
-
-public function destroyMarca(){
-  $id = $_POST['id_marca'];
-  $this->model->deleteMarca($id);
-  $this->comparativa();
-}
-
-public function comienzoEditMarca()
-{
-  $id=$_POST['id_marca'];
-  $marcas=$this->model->getMarca($id);
-  print_r($marcas);
-  $this->view->mostrarEditMarca($marcas);
-}
-
-public function editarMarca()
-{
-  $id=$_POST['id_marca'];
-  $nombre=$_POST['nombre'];
-  echo $id;
-  echo $nombre;
-  $this->model->editMarca($id,$nombre);
-  $this->comparativa();
-}
->>>>>>> 4d67bf810ff685b44ac1ae48aef1dbf38cdb4b78
 
         }
 
