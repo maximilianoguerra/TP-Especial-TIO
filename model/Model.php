@@ -5,6 +5,7 @@ define('DB_USER', 'root');
 define('DB_PASSWORD', '');
 define('DB_HOSTNAME', 'localhost');
 define('DB_FILE','SQL/db_tarjetas.sql');
+
 class Model
 {
   protected $db;

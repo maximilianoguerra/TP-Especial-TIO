@@ -11,8 +11,7 @@ class ConfigApp
       'nvidiaboostrap'=> 'ProductosController#nvidia',
       'atiboostrap'=> 'ProductosController#Ati',
       'comparativa'=> 'ProductosController#comparativa',
-      'body'=>'ProductosController#traemeElbody',
-      // 'comparativaNormal'=> 'ProductosController#comparativa',
+      'comparativaNormal'=> 'ProductosController#comparativa',
       'agregarProducto'=> 'ProductosController#create',
       'guardarProducto'=> 'ProductosController#store',
       "guardarMarca"=> 'ProductosController#agregarMarca',
@@ -20,14 +19,17 @@ class ConfigApp
       'borrarMarca' => 'ProductosController#destroyMarca',
       'finalizarProducto' => 'ProductosController#finish',
       'filtrar' => 'ProductosController#filtro',
-      'editarProducto' => 'ProductosController#edit',
+      'editarProducto' => 'ProductosController#edit', //ABRE LA VENTANA PARA EDITAR
       'comienzoEditarMarca' => 'ProductosController#comienzoEditMarca',
       'editarMarca'=>'ProductosController#editarMarca',
-      'editar' => 'ProductosController#editar',
+      'editar' => 'ProductosController#editar',//EDITA EL PRODUCTO
       'filtrar' => 'ProductosController#filtro',
       'login' => 'LoginController#index',
       'verificarUsuario' => 'LoginController#verify',
-      'logout' => 'LoginController#destroy'
+      'logout' => 'LoginController#destroy',
+      'sesionExpirada' => 'LoginController#expirada',
+       'body'=>'ProductosController#traemeElbody',
+
     ];
 
 }

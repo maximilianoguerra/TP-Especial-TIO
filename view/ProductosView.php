@@ -1,7 +1,6 @@
 <?php
 class ProductosView extends View
 {
-  /*FUNCION PARA MOSTRAR LA TABLA */
   function mostrarProductos($producto,$marca,$usuario){
     $this->smarty->assign('productos', $producto);
     $this->smarty->assign('marcas', $marca);
@@ -54,12 +53,11 @@ function mostrarEditMarca($marcas){
   $this->smarty->assign('marcas', $marcas);
   $this->smarty->display('templates/editMarca.tpl');
 }
+
 public function seeBody()
 {
   $this->smarty->display('templates/body.tpl');
 }
-
-
 }
 
 ?>

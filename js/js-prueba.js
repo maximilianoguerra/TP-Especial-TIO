@@ -2,7 +2,7 @@ $(document).on('click', '.link-ajax', function () {
   let url=$(this).attr("href");
   cargar(url);
 });
-/*FUNCION PARA REALIZAR PARTIAL RENDER*/
+
 function cargar(url) {
   $.ajax({
     url: url,
@@ -12,12 +12,10 @@ function cargar(url) {
       $(".reemplazo").html("<h1><i class='fa fa-superpowers fa-spin'></i> Loading...</h1>");
     },
     success: function(data){
-
       if(url === "logout" ) {
         // Reload la web completa
         window.location.reload();
       }
-
       else {
         $(".reemplazo").html(data);
       }
@@ -29,7 +27,7 @@ function cargar(url) {
   event.preventDefault();
   return false;
 }
-/*FUNCIONES SOPORTE PARA VINCULAR EVENTOS A LOS BOTONES Q NO ESTABAN EN UN PRINCIPIO EN EL DOM*/
+
 
 $(document).on('submit','.formFiltrar', function(){
   getForm(this);
@@ -66,12 +64,12 @@ function getForm (datos) {
         }
       }//Cierro el IF
       else{
-        $(".reemplazo").html(data);
+        $(".reemplazo").html(data); 
       }
     }//Cierro el SUCCESS
   });
 }
-/*FUNCIONES SOPORTE PARA VINCULAR EVENTOS A LOS BOTONES Q NO ESTABAN EN UN PRINCIPIO EN EL DOM*/
+
 $(document).on('click','.borrarProducto', function(event){
   event.preventDefault();
 
@@ -94,7 +92,6 @@ $(document).on('click','.editarProducto', function(event){
     $('.reemplazo').html(data);
   });
 });
-/*FUNCIONES SOPORTE PARA VINCULAR EVENTOS A LOS BOTONES Q NO ESTABAN EN UN PRINCIPIO EN EL DOM*/
 $(document).on('click','.borrarMarca', function(event){
   event.preventDefault();
 

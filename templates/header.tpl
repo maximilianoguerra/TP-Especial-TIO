@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen">
 
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome.css" media="all">
@@ -37,7 +36,7 @@
 							<li><a class="link-ajax" href="body">Inicio <span class="sr-only">(current)</span></a></li>
 							<li><a class="link-ajax" href="atiboostrap">Historia ATI</a></li>
 							<li><a class="link-ajax" href="nvidiaboostrap">Historia NVIDIA</a></li>
-							<li><a class="link-ajax" href="comparativa">Comparativa</a></li>
+							<li><a class="link-ajax" href="comparativaNormal">Comparativa</a></li>
 							<li><a href="#contacto">Contacto</a></li>
 							{if $usuario}
 							<li><a class="link-ajax" href="logout">Log Out</a></li>
@@ -49,3 +48,4 @@
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
 			</nav>
+
