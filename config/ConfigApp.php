@@ -17,7 +17,6 @@ class ConfigApp
       "guardarMarca"=> 'ProductosController#agregarMarca',
       'borrarProducto' => 'ProductosController#destroy',
       'borrarMarca' => 'ProductosController#destroyMarca',
-      'finalizarProducto' => 'ProductosController#finish',
       'filtrar' => 'ProductosController#filtro',
       'editarProducto' => 'ProductosController#edit', //ABRE LA VENTANA PARA EDITAR
       'comienzoEditarMarca' => 'ProductosController#comienzoEditMarca',

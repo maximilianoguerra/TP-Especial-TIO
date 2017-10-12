@@ -15,6 +15,7 @@
           {/foreach}
         </select>
         <input type="submit" class="btn btn-default" value="Filtrar Marca">
+        <input type="button" class="btn btn-default refresh" href="comparativa"value="Refrescar">
       </form>
 
     </div>

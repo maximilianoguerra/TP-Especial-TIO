@@ -22,17 +22,17 @@ class ProductosController extends SecuredController
 
     $this->view->mostrarIndex($usuario);
   }
-
+  /*MUESTRO EL PARTIAL NVIDIA*/
   public function nvidia()
   {
     $this->view->mostrarNvidia();
   }
-
+  /*MUESTRO EL PARTIAL ATI*/
   public function Ati()
   {
     $this->view->mostrarAti();
   }
-
+  /*MUESTRO EL PARTIAL COMPARATIVA Y LE CARGO LOS PRODUCTOS*/
   public function comparativa()
   {
    $productos = $this->model->getProductos();
@@ -54,11 +54,7 @@ class ProductosController extends SecuredController
     }
     $this->view->mostrarProductos($productos, $marcas, $usuario);
   }
-  public function create()
-  {
-    $this->view->mostrarCrearProductos();
-  }
-
+/*FUNCION Q GUARDA PRODUCTOS*/
  public function store()
   {
     $productos = $this->model->getProductos();
@@ -68,7 +64,7 @@ class ProductosController extends SecuredController
     $memoria = $_POST['memoria'];
     $banda = $_POST['banda'];
     $consumo = $_POST['consumo'];
-    
+
     if((isset($_POST['modelo']) && !empty($_POST['modelo'])) &&
     (isset($_POST['memoria']) && !empty($_POST['memoria'])) &&
     (isset($_POST['banda']) && !empty($_POST['banda'])) &&
@@ -82,7 +78,7 @@ class ProductosController extends SecuredController
       $this->comparativa();
     }
   }
-
+  /*FUNCION Q BORRA PRODUCTOS*/
   public function destroy()
   {
      if (isset($_POST['id_producto'])) {
@@ -92,7 +88,7 @@ class ProductosController extends SecuredController
         $this->comparativa();
      }
   }
-
+    /*FUNCION PARA FILTRAR POR MARCA PRODUCTOS*/
   public function filtro()
   {
 
@@ -156,20 +152,20 @@ public function editar()
           $this->comparativa();
         }
           }
-
+  /*FUNCION Q BORRA MARCA*/
 public function destroyMarca(){
   $id = $_POST['id_marca'];
   $this->model->deleteMarca($id);
   $this->comparativa();
 }
-
+  /*FUNCION QUE INICIA LA EDICION DE UNA MARCA*/
 public function comienzoEditMarca()
 {
   $id=$_POST['id_marca'];
   $marcas=$this->model->getMarca($id);
   $this->view->mostrarEditMarca($marcas);
 }
-
+  /*FUNCION Q NOS MUETRA YA LA EDICION REALIZADA*/
 public function editarMarca()
 {
   $id=$_POST['id_marca'];
