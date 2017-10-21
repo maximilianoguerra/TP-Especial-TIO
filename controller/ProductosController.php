@@ -68,7 +68,7 @@ class ProductosController extends SecuredController
       $this->comparativa();
     }
   }
-  /*FUNCION PARA FILTRAR POR MARCA PRODUCTOS*/
+    /*FUNCION PARA FILTRAR POR MARCA PRODUCTOS*/
   public function filtro()
   {
 
