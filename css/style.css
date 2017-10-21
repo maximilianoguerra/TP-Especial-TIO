@@ -161,6 +161,13 @@ h1 {
 
 }
 
+.formulario h3 a {
+    color: #fff;
+    font-size: 20px;
+    font-family: 'robotothin', "Lucida Sans Unicode";
+
+}
+
 .marca{
     margin: 0;
     font: inherit;

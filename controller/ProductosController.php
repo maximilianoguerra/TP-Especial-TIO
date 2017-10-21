@@ -22,44 +22,20 @@ class ProductosController extends SecuredController
 
     $this->view->mostrarIndex($usuario);
   }
-
+  /*MUESTRO EL PARTIAL NVIDIA*/
   public function nvidia()
   {
     $this->view->mostrarNvidia();
   }
-
+  /*MUESTRO EL PARTIAL ATI*/
   public function Ati()
   {
     $this->view->mostrarAti();
   }
+  /*MUESTRO EL PARTIAL COMPARATIVA Y LE CARGO LOS PRODUCTOS*/
 
-  public function comparativa()
-  {
-   $productos = $this->model->getProductos();
-   $marcas = $this->marcasModel->getMarcas();
-
-   for ($i=0; $i < count($productos); $i++) {
-      $id_marca = $productos[$i]['id_marca'];// puede ser 1, 2, 3, etc son los id que envio con el formulario
-      $j=0;
-      while (( $j < count($marcas) && (!(isset($productos[$i]['marca']))) ) ) {
-        if ($id_marca == $marcas[$j]['id']) {
-          $productos[$i]['marca'] = $marcas[$j]['nombre'];
-        }
-        $j++;
-      }
-    }
-    $usuario = false;
-    if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
-      $usuario = true;
-    }
-    $this->view->mostrarProductos($productos, $marcas, $usuario);
-  }
-  public function create()
-  {
-    $this->view->mostrarCrearProductos();
-  }
-
- public function store()
+  /*FUNCION Q GUARDA PRODUCTOS*/
+  public function store()
   {
     $productos = $this->model->getProductos();
     $marcas = $this->marcasModel->getMarcas();
@@ -68,7 +44,7 @@ class ProductosController extends SecuredController
     $memoria = $_POST['memoria'];
     $banda = $_POST['banda'];
     $consumo = $_POST['consumo'];
-    
+
     if((isset($_POST['modelo']) && !empty($_POST['modelo'])) &&
     (isset($_POST['memoria']) && !empty($_POST['memoria'])) &&
     (isset($_POST['banda']) && !empty($_POST['banda'])) &&
@@ -82,17 +58,17 @@ class ProductosController extends SecuredController
       $this->comparativa();
     }
   }
-
+  /*FUNCION Q BORRA PRODUCTOS*/
   public function destroy()
   {
-     if (isset($_POST['id_producto'])) {
+    if (isset($_POST['id_producto'])) {
 
-        $id = $_POST['id_producto'];
-        $this->model->borrarProducto($id);
-        $this->comparativa();
-     }
+      $id = $_POST['id_producto'];
+      $this->model->borrarProducto($id);
+      $this->comparativa();
+    }
   }
-
+  /*FUNCION PARA FILTRAR POR MARCA PRODUCTOS*/
   public function filtro()
   {
 
@@ -101,86 +77,48 @@ class ProductosController extends SecuredController
     $marcas = $this->marcasModel->getMarcas();
 
     for ($i=0; $i < count($productos); $i++) {
-    $id_marca = $productos[$i]['id_marca'];// puede ser 1, 2, 3, etc son los id que envio con el formulario
-    $j=0;
-    while (( $j < count($marcas) && (!(isset($productos[$i]['marca']))) ) ) {
-      if ($id_marca == $marcas[$j]['id']) {
-        $productos[$i]['marca'] = $marcas[$j]['nombre'];
+      $id_marca = $productos[$i]['id_marca'];// puede ser 1, 2, 3, etc son los id que envio con el formulario
+      $j=0;
+      while (( $j < count($marcas) && (!(isset($productos[$i]['marca']))) ) ) {
+        if ($id_marca == $marcas[$j]['id']) {
+          $productos[$i]['marca'] = $marcas[$j]['nombre'];
+        }
+        $j++;
       }
-      $j++;
     }
-  }
-  $usuario = false;
+    $usuario = false;
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = true;
     }
 
     $this->view->mostrarProductos($productos, $marcas, $usuario);
-}
+  }
 
-//ABRE LA PAGINA PARA EDITAR EL PRODUCTO
-public function edit()
-{
-   if (isset($_POST['id_producto'])) {
-
+  //ABRE LA PAGINA PARA EDITAR EL PRODUCTO
+  public function edit()
+  {
+    if (isset($_POST['id_producto'])) {
       $id = $_POST['id_producto'];
       $productos=$this->model->getProducto($id);
       $this->view->mostraredit($productos);
-   }
-}
-
-//EDITA EL PRODUCTO
-public function editar()
-{
-  $id = $_POST['id_producto'];
-  $modelo = $_POST['modelo'];
-  $memoria = $_POST['memoria'];
-  $banda = $_POST['banda'];
-  $consumo = $_POST['consumo'];
-
-
-  $this->model->editarProducto($modelo,$memoria,$banda,$consumo,$id);
-  $this->comparativa();
+    }
   }
 
+  //EDITA EL PRODUCTO
+  public function editar()
+  {
+    $id = $_POST['id_producto'];
+    $modelo = $_POST['modelo'];
+    $memoria = $_POST['memoria'];
+    $banda = $_POST['banda'];
+    $consumo = $_POST['consumo'];
+    $this->model->editarProducto($modelo,$memoria,$banda,$consumo,$id);
+    $this->comparativa();
+  }
 
-
- /*FUNCION PARA AGREGAR UNA MARCA A LA TABLA*/
-        public function agregarMarca(){
-          if (isset($_POST['marca']) && !empty($_POST['marca'])){
-          $marca=$_POST['marca'];
-          $this->model->addmarca($marca);
-          $this->comparativa();
-        }else{
-          $this->view->errorCrear("Campo incompleto");
-          $this->comparativa();
-        }
-          }
-
-public function destroyMarca(){
-  $id = $_POST['id_marca'];
-  $this->model->deleteMarca($id);
-  $this->comparativa();
-}
-
-public function comienzoEditMarca()
-{
-  $id=$_POST['id_marca'];
-  $marcas=$this->model->getMarca($id);
-  $this->view->mostrarEditMarca($marcas);
-}
-
-public function editarMarca()
-{
-  $id=$_POST['id_marca'];
-  $nombre=$_POST['nombre'];
-  $this->model->editMarca($id,$nombre);
-  $this->comparativa();
-}
-
- function traemeElbody(){
+  function traemeElbody(){
     $this->view->seeBody();
- }
+  }
 
 
 }
