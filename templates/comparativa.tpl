@@ -97,7 +97,7 @@
                 </div>
 
                 <input type="submit" class="btn btn-default" value="Crear">
-                <div class="panel-footer">
+                <div>
                   {if isset($error)}
                   <div class="alert alert-danger" role="alert">{$error}</div>
                   {/if}
@@ -162,7 +162,7 @@
                   <input type="text" class="form-control" id="marca" name="marca"  placeholder="Marca ej:msi">
                 </div>
                 <input type="submit" class="btn btn-default" value="Crear">
-                <div class="panel-footer">
+                <div>
                   {if isset($error)}
                   <div class="alert alert-danger" role="alert">{$error}</div>
                   {/if}
