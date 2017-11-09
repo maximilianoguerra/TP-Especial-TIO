@@ -27,7 +27,9 @@ class ConfigApp
       'verificarUsuario' => 'LoginController#verify',
       'logout' => 'LoginController#destroy',
       'sesionExpirada' => 'LoginController#expirada',
-       'body'=>'ProductosController#traemeElbody',
+      'body'=>'ProductosController#traemeElbody',
+      'registrarse' => 'LoginController#register',
+      'register' => 'LoginController#registrarEnDB'
 
     ];
 

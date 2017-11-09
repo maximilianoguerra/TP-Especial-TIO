@@ -31,7 +31,7 @@ class LoginController extends Controller
         $_SESSION['LAST_ACTIVITY'] = time();
         header('Location: '.HOME);
         die();
-        $this->controllerProduct->comparativa();
+        // $this->controllerProduct->comparativa();
       }
       else{
         echo("User pass error");
@@ -46,6 +46,29 @@ class LoginController extends Controller
     $this->view->mostrarsesionExpirada();
     die();
   }
+  public function register()
+  {
+    $this->view->mostrarRegister();
+  }
+  public function registrarEnDB()
+  {
+    echo "asdentre";
+    $userName = $_POST['usuario'];
+    $password = $_POST['password'];
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $nombre =$_POST['nombre'];
+    $apellido=$_POST['apellido'];
+    $this->model->guardardatosusuario($userName,$hash,$nombre,$apellido);
+    $user = $this->model->getUser($userName);
+    if((!empty($user)) && password_verify($password, $user[0]['password'])) {
+      session_start();
+      $_SESSION['usuario'] = $userName;
+      $_SESSION['LAST_ACTIVITY'] = time();
+      header('Location: '.HOME);
+      die();
+    }
+  }
+
 
 }
 

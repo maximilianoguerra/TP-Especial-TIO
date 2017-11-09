@@ -8,6 +8,9 @@ class LoginView extends View
   function mostrarsesionExpirada(){
   	$this->smarty->display('templates/sesionExpirada.tpl');
   }
+  function mostrarRegister(){
+    $this->smarty->display('templates/register.tpl');
+  }
 
 public function seeBody()
 {

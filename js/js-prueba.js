@@ -41,6 +41,7 @@ $(document).on('submit','.formFiltrar', function(){
 $(document).on('submit','.formAgregarMarca', function(){
   getForm(this);
 });
+
 /*FUNCIONES PARA REGISTRAR LO Q SE ENVIA POR formulario*/
 function getForm (datos) {
   event.preventDefault();
@@ -68,12 +69,15 @@ function getForm (datos) {
           //Sino Reload la web completa
           window.location.reload();
         }
+      }
+      else if(dir === "register" ) {
+          window.location.reload();
       }//Cierro el IF
       else{
         $(".reemplazo").html(data);
       }
     }//Cierro el SUCCESS
-  });
+  }); 
 }
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.borrarProducto', function(event){
