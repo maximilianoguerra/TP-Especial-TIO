@@ -44,9 +44,9 @@ class MarcasController extends SecuredController
    public function comienzoEditMarca()
    {
      if (isset($_SESSION['usuario'])) {
-     $id=$_POST['id_marca'];
-     $marcas=$this->marcasModel->getMarca($id);
-     $this->view->mostrarEditMarca($marcas);
+         $id=$_POST['id_marca'];
+         $marcas=$this->marcasModel->getMarca($id);
+         $this->view->mostrarEditMarca($marcas);
     }
    }
    /*FUNCION Q NOS MUETRA YA LA EDICION REALIZADA*/
