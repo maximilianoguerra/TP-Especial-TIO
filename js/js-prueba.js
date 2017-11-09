@@ -1,9 +1,15 @@
+/*FUNCION PARA NAVER GAR CON PARTIAL*/
 $(document).on('click', '.link-ajax', function () {
+  let url=$(this).attr("href");
+  cargar(url);
+});
+$(document).on('click', '.refresh', function () {
   let url=$(this).attr("href");
   cargar(url);
 });
 
 function cargar(url) {
+  event.preventDefault();
   $.ajax({
     url: url,
     method:"GET",
@@ -24,7 +30,7 @@ function cargar(url) {
       $(".reemplazo").html("<h1>Error - Request Failed!</h1>");
     }
   });
-  event.preventDefault();
+
   return false;
 }
 
@@ -35,12 +41,12 @@ $(document).on('submit','.formFiltrar', function(){
 $(document).on('submit','.formAgregarMarca', function(){
   getForm(this);
 });
-
+/*FUNCIONES PARA REGISTRAR LO Q SE ENVIA POR formulario*/
 function getForm (datos) {
   event.preventDefault();
 
-  var dir = $(datos).attr("href");
-  var formData = new FormData(datos);
+  let dir = $(datos).attr("href");
+  let formData = new FormData(datos);
 
   $.ajax({
     method: "POST",
@@ -64,12 +70,12 @@ function getForm (datos) {
         }
       }//Cierro el IF
       else{
-        $(".reemplazo").html(data); 
+        $(".reemplazo").html(data);
       }
     }//Cierro el SUCCESS
   });
 }
-
+/*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.borrarProducto', function(event){
   event.preventDefault();
 
@@ -81,7 +87,7 @@ $(document).on('click','.borrarProducto', function(event){
   });
 
 });
-
+/*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.editarProducto', function(event){
   event.preventDefault();
 
@@ -92,6 +98,7 @@ $(document).on('click','.editarProducto', function(event){
     $('.reemplazo').html(data);
   });
 });
+/*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.borrarMarca', function(event){
   event.preventDefault();
 
@@ -103,6 +110,7 @@ $(document).on('click','.borrarMarca', function(event){
   });
 
 });
+/*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.comienzoEditarMarca', function(event){
   event.preventDefault();
 
