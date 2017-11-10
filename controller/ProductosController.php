@@ -34,10 +34,36 @@ class ProductosController extends SecuredController
   }
   /*MUESTRO EL PARTIAL COMPARATIVA Y LE CARGO LOS PRODUCTOS*/
 
+/****************************************************************************************************************/
+/****************************************************************************************************************/
+  /*FUNCION QUE CONTROLA QUE LAS IMAGENES TENGAN LA EXTENSION PERMITIDA*/
+
+  function getExtensionesImagenesVerificadas($imagenes){
+
+    $extensionesImagenesVerificadas = [];
+    for ($i=0; $i < count($imagenes['size']); $i++) {
+      if($imagenes['size'][$i]>0 && ($imagenes['type'][$i]=="image/jpeg" || $imagenes['type'][$i]=="image/png")){
+        $imagen_aux = [];
+        $imagen_aux['tmp_name']=$imagenes['tmp_name'][$i];
+        $imagen_aux['name']=$imagenes['name'][$i];
+        $imagenesVerificadas[]=$imagen_aux;
+      }
+      else{
+        $this->view->errorCrear("Imagen no soportada");
+      }
+    }
+    return $imagenesVerificadas;
+  }
+
   /*FUNCION Q GUARDA PRODUCTOS*/
   public function store()
   {
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
+      /****************************************************/
+        // $nombreImagen = $_FILES['imagen']['name'];
+       // $rutaTempImagen = $_FILES['imagen']['tmp_name'];
+      /****************************************************/  
+
         $productos = $this->model->getProductos();
         $marcas = $this->marcasModel->getMarcas();
         $id_marca = $_POST['id_marca'];
@@ -51,15 +77,30 @@ class ProductosController extends SecuredController
         (isset($_POST['banda']) && !empty($_POST['banda'])) &&
         (isset($_POST['consumo']) && !empty($_POST['consumo'])))
         {
-          $this->model->guardarProducto($id_marca,$modelo,$memoria,$banda,$consumo);
+            if(isset($_FILES['imagenproducto'])){    
+              $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['imagenproducto']);
+
+          $this->model->guardarProducto($id_marca,$modelo,$memoria,$banda,$consumo, $imagenes);
           $this->comparativa();
         }
         else{
           $this->view->errorCrear("Todos los campos son requeridos", $productos, $marcas);
           $this->comparativa();
         }
+        }
     }
   }
+
+  public function destroyImagen() {
+    if(isset($_POST['imgpath'])) {
+      $this->model->borrarImagen($_POST['imgpath']);
+      $this->comparativa();
+    }
+  }
+
+/****************************************************************************************************************/
+/****************************************************************************************************************/
+
   /*FUNCION Q BORRA PRODUCTOS*/
   public function destroy()
   {

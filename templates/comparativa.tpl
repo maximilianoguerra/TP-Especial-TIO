@@ -27,6 +27,7 @@
           <th><p >MEMORIA RAM (GB)</p></th>
           <th><p >ANCHO DE BANDA (GB/s)</p></th>
           <th><p >CONSUMO (W)</p></th>
+          <th><p >IMAGEN</p></th>
           {if $usuario}
           <th><p ></p></th>
           {/if}
@@ -38,6 +39,56 @@
           <td><p>{$producto['memoria']}</p></td>
           <td><p>{$producto['banda']}</p></td>
           <td><p>{$producto['consumo']}</p></td>
+          <td><p>
+
+          <!--ACA EMPIEZA EL SLIDES DE IMAGENES-->  
+<div class="container text-center">
+
+
+  <!-- Large modal -->
+  <button class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Ver</button>
+
+  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+
+          {foreach from=$turno['imagenproducto'] key=index item=imagen}
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item active">
+             <img class="img-responsive" src="http://placehold.it/1200x600/555/000&text=One" alt="...">
+             <div class="carousel-caption">
+             </div>
+           </div>
+           <div class="item">
+            <img class="img-responsive" src="http://placehold.it/5a04eef0ee773_1" alt="...">
+            <div class="carousel-caption">
+            </div>
+          </div>
+          <div class="item">
+            <img class="img-responsive" src="http://placehold.it/1200x600/fcf00c/000&text=Three" alt="...">
+            <div class="carousel-caption">
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!--ACA TERMINA EL SLIDES DE IMAGENES-->  
+          </p></td>
           {if $usuario}
           <td>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -68,7 +119,7 @@
 
             <div class="panel-body">
 
-              <form href="guardarProducto" class="formFiltrar">
+              <form href="guardarProducto" class="formFiltrar" enctype="multipart/form-data">
 
                 <div class="form-group">
                   <label for="id_marca">Seleccione una marca</label>
@@ -81,19 +132,23 @@
                 </div>
                 <div class="form-group">
                   <label for="modelo">Modelo</label>
-                  <input type="text" class="form-control" id="modelo" name="modelo"  placeholder="Modelo de VGA">
+                  <input type="text" class="form-control" id="modelo" name="modelo"  placeholder="Modelo de VGA"></input>
                 </div>
                 <div class="form-group">
                   <label for="memoria">Memoria</label>
-                  <input type="text" class="form-control" id="memoria" name="memoria"  placeholder="Memoria">
+                  <input type="text" class="form-control" id="memoria" name="memoria"  placeholder="Memoria"></input>
                 </div>
                 <div class="form-group">
                   <label for="banda">Ancho de Banda</label>
-                  <input type="text" class="form-control" id="banda" name="banda"  placeholder="Ancho de Banda">
+                  <input type="text" class="form-control" id="banda" name="banda"  placeholder="Ancho de Banda"></input>
                 </div>
                 <div class="form-group">
                   <label for="consumo">Consumo</label>
-                  <input type="text" class="form-control" id="consumo" name="consumo"  placeholder="Consumo">
+                  <input type="text" class="form-control" id="consumo" name="consumo"  placeholder="Consumo"></input>
+                </div>
+                <div class="form-group">
+                  <label for="consumo">Adjuntar Imagen</label>                  
+                  <input type="file" class="form-control" id="consumo" name="imagenproducto[]"  value="" multiple></input>
                 </div>
 
                 <input type="submit" class="btn btn-default" value="Crear">

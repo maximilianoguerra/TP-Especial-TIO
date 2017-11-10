@@ -126,3 +126,14 @@ $(document).on('click','.comienzoEditarMarca', function(event){
   });
 
 });
+
+/*FUNCION PARA ELIMINAR IMAGEN*/
+/*
+$(document).on("click",'.eliminarImagen', function(){
+    event.preventDefault();
+    var dropdown = $('#dropdownPaquete option:selected').val();
+    $.post( "eliminar_imagen",{imgpath: $(this).attr("data-imgpath"), paqueteSel: dropdown}, function(data) {
+      $('#contenedorTurnos').html(data);
+    });
+  });
+  */
