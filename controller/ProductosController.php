@@ -22,6 +22,41 @@ class ProductosController extends SecuredController
 
     $this->view->mostrarIndex($usuario);
   }
+
+    public function comparativa()
+  {
+    $productos = $this->model->getProductos();
+    $marcas = $this->marcasModel->getMarcas();
+
+    for ($i=0; $i < count($productos); $i++) {
+      $id_marca = $productos[$i]['id_marca'];// puede ser 1, 2, 3, etc son los id que envio con el formulario
+      $j=0;
+      while (( $j < count($marcas) && (!(isset($productos[$i]['marca']))) ) ) {
+        if ($id_marca == $marcas[$j]['id']) {
+          $productos[$i]['marca'] = $marcas[$j]['nombre'];
+        }
+        $j++;
+      }
+    }
+    $usuario = false;
+    if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
+      $usuario = true;
+    }
+    $this->view->mostrarProductos($productos, $marcas, $usuario);
+  }
+
+   /*   public function mostrarProducto()
+  {
+    $id = $_GET['id_producto'];
+
+    pido al model el producto e imagenes asociadas
+
+    se lo mando a la vista
+
+
+  }*/
+
+
   /*MUESTRO EL PARTIAL NVIDIA*/
   public function nvidia()
   {
@@ -58,7 +93,7 @@ class ProductosController extends SecuredController
   /*FUNCION Q GUARDA PRODUCTOS*/
   public function store()
   {
-    if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
+    $this->admin();// pregunto si tengo un usuario
       /****************************************************/
         // $nombreImagen = $_FILES['imagen']['name'];
        // $rutaTempImagen = $_FILES['imagen']['tmp_name'];
@@ -88,7 +123,7 @@ class ProductosController extends SecuredController
           $this->comparativa();
         }
         }
-    }
+    
   }
 
   public function destroyImagen() {
@@ -104,14 +139,14 @@ class ProductosController extends SecuredController
   /*FUNCION Q BORRA PRODUCTOS*/
   public function destroy()
   {
-    if (isset($_SESSION['usuario'])) {
+      $this->admin();
       if (isset($_POST['id_producto'])) {
 
         $id = $_POST['id_producto'];
         $this->model->borrarProducto($id);
         $this->comparativa();
       }
-    }
+    
   }
   /*FUNCION PARA FILTRAR POR MARCA PRODUCTOS*/
   public function filtro()
@@ -142,19 +177,19 @@ class ProductosController extends SecuredController
   //ABRE LA PAGINA PARA EDITAR EL PRODUCTO
   public function edit()
   {
-    if (isset($_SESSION['usuario'])) {
+    $this->admin();
       if (isset($_POST['id_producto'])) {
         $id = $_POST['id_producto'];
         $productos=$this->model->getProducto($id);
         $this->view->mostraredit($productos);
       }
-     }
+     
   }
 
   //EDITA EL PRODUCTO
   public function editar()
   {
-    if (isset($_SESSION['usuario'])) {
+        $this->admin();
         $id = $_POST['id_producto'];
         $modelo = $_POST['modelo'];
         $memoria = $_POST['memoria'];
@@ -162,7 +197,7 @@ class ProductosController extends SecuredController
         $consumo = $_POST['consumo'];
         $this->model->editarProducto($modelo,$memoria,$banda,$consumo,$id);
         $this->comparativa();
-    }
+    
   }
 
   function traemeElbody(){
