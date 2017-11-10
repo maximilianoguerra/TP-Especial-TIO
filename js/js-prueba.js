@@ -1,15 +1,17 @@
 /*FUNCION PARA NAVER GAR CON PARTIAL*/
-$(document).on('click', '.link-ajax', function () {
+$(document).on('click', '.link-ajax', function (event) {
+  event.preventDefault();
   let url=$(this).attr("href");
   cargar(url);
 });
-$(document).on('click', '.refresh', function () {
+$(document).on('click', '.refresh', function (event) {
+  event.preventDefault();
   let url=$(this).attr("href");
   cargar(url);
 });
 
 function cargar(url) {
-  event.preventDefault();
+  
   $.ajax({
     url: url,
     method:"GET",
@@ -35,16 +37,17 @@ function cargar(url) {
 }
 
 
-$(document).on('submit','.formFiltrar', function(){
+$(document).on('submit','.formFiltrar', function(event){
+  event.preventDefault();
   getForm(this);
 });
-$(document).on('submit','.formAgregarMarca', function(){
+$(document).on('submit','.formAgregarMarca', function(event){
+  event.preventDefault();
   getForm(this);
 });
 
 /*FUNCIONES PARA REGISTRAR LO Q SE ENVIA POR formulario*/
 function getForm (datos) {
-  event.preventDefault();
 
   let dir = $(datos).attr("href");
   let formData = new FormData(datos);
