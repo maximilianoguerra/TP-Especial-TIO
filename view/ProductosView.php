@@ -44,6 +44,14 @@ function guardaProductos($producto,$marca){
   $this->smarty->display('templates/guardarProductos.tpl');
 }
 
+function mostrarDetalleProducto($producto,$marca,$imagenes,$usuario){
+  $this->smarty->assign('productos', $producto);
+  $this->smarty->assign('marcas', $marca);
+  $this->smarty->assign('imagenes', $imagenes);
+  $this->smarty->assign('usuario', $usuario);
+  $this->smarty->display('templates/detalleProducto.tpl');
+}
+
 function mostraredit($producto){
   $this->smarty->assign('productos', $producto);
   $this->smarty->display('templates/formEdit.tpl');

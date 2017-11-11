@@ -94,6 +94,7 @@ $(document).on('click','.borrarProducto', function(event){
   });
 
 });
+
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.editarProducto', function(event){
   event.preventDefault();
@@ -105,6 +106,19 @@ $(document).on('click','.editarProducto', function(event){
     $('.reemplazo').html(data);
   });
 });
+
+/*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
+$(document).on('click','.mostrarProducto', function(event){
+  event.preventDefault();
+
+  let idProducto = $(this).attr("href");
+  let jsonProducto = {id_producto: idProducto};
+
+  $.post("mostrarProducto", jsonProducto, function(data) {
+    $('.reemplazo').html(data);
+  });
+});
+
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.borrarMarca', function(event){
   event.preventDefault();
@@ -130,13 +144,3 @@ $(document).on('click','.comienzoEditarMarca', function(event){
 
 });
 
-/*FUNCION PARA ELIMINAR IMAGEN*/
-/*
-$(document).on("click",'.eliminarImagen', function(){
-    event.preventDefault();
-    var dropdown = $('#dropdownPaquete option:selected').val();
-    $.post( "eliminar_imagen",{imgpath: $(this).attr("data-imgpath"), paqueteSel: dropdown}, function(data) {
-      $('#contenedorTurnos').html(data);
-    });
-  });
-  */

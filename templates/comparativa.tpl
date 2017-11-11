@@ -27,7 +27,7 @@
           <th><p >MEMORIA RAM (GB)</p></th>
           <th><p >ANCHO DE BANDA (GB/s)</p></th>
           <th><p >CONSUMO (W)</p></th>
-          <th><p >IMAGEN</p></th>
+          <th><p >DETALLES</p></th>
           {if $usuario}
           <th><p ></p></th>
           {/if}
@@ -39,7 +39,17 @@
           <td><p>{$producto['memoria']}</p></td>
           <td><p>{$producto['banda']}</p></td>
           <td><p>{$producto['consumo']}</p></td>
-          <td><p></p></td>
+          <td>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="borrarEditarCentrado">
+                <div class="enLinea">
+                  <a href="{$producto['id']}" class="mostrarProducto">
+                    <p><span id="mostrar" class="fa fa-info-circle" aria-hidden="true" value="0"></span></p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </td>
           {if $usuario}
           <td>
             <div class="col-xs-12 col-sm-12 col-md-12">

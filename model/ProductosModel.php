@@ -8,17 +8,24 @@ class ProductosModel extends Model
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  function getImagenes($id_producto){
+    $sentencia = $this->db->prepare( "select * from imagen where fk_id_tarea=?");
+    $sentencia->execute(array($id_producto));
+    return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   /*FUNCION PARA AGREGAR  PRODUCTOS A LA TABLA*/
   function guardarProducto($id_marca,$modelo,$memoria,$banda,$consumo, $imagenes){
 
     $sentencia = $this->db->prepare('INSERT INTO producto(id_marca,modelo,memoria,banda,consumo) VALUES(?,?,?,?,?)');
     $sentencia->execute([$id_marca,$modelo,$memoria,$banda,$consumo]);
+    $id_producto = $this->db->lastInsertId();
 
     foreach ($imagenes as $key => $imagen) {
       $path="img/".uniqid()."_".$imagen["name"];
       move_uploaded_file($imagen["tmp_name"], $path);
-      $insertImagen = $this->db->prepare("INSERT INTO imagen(path,fk_id_tarea) VALUES(?)");
-      $insertImagen->execute(array($path));
+      $insertImagen = $this->db->prepare("INSERT INTO imagen(path,fk_id_tarea) VALUES(?,?)");
+      $insertImagen->execute(array($path,$id_producto));
   }
   }
 
