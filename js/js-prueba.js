@@ -96,6 +96,20 @@ $(document).on('click','.borrarProducto', function(event){
 });
 
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
+$(document).on('click','.borrarImagenProducto', function(event){
+  event.preventDefault();
+
+  let idProducto = $(this).attr("href");//156
+  let imgpath = $(this).attr("data-imgpath"); //ej: 5a076bde41df7_9
+
+ // let jsonProducto = {id_producto: idProducto};
+                                         
+  $.post("borrarImagenProducto", {imgpath, idProducto}, function(data) {
+    $('.reemplazo').html(data);
+  });
+});
+
+/*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.editarProducto', function(event){
   event.preventDefault();
 

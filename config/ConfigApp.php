@@ -14,6 +14,8 @@ class ConfigApp
       'comparativaNormal'=> 'ProductosController#comparativa',
       'agregarProducto'=> 'ProductosController#create',
       'guardarProducto'=> 'ProductosController#store',
+      'guardarImagenProducto'=> 'ProductosController#storeImg',
+      'borrarImagenProducto' => 'ProductosController#destroyImg',
       "guardarMarca"=> 'MarcasController#agregarMarca',
       'borrarProducto' => 'ProductosController#destroy',
       'borrarMarca' => 'MarcasController#destroyMarca',

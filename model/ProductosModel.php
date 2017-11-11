@@ -26,7 +26,18 @@ class ProductosModel extends Model
       move_uploaded_file($imagen["tmp_name"], $path);
       $insertImagen = $this->db->prepare("INSERT INTO imagen(path,fk_id_tarea) VALUES(?,?)");
       $insertImagen->execute(array($path,$id_producto));
+    }
   }
+
+    /*FUNCION PARA AGREGAR IMAGEN DE PRODUCTO A LA TABLA*/
+  function guardarImagenProducto($id_producto,$imagenes){
+
+     foreach ($imagenes as $key => $imagen) {
+      $path="img/".uniqid()."_".$imagen["name"];
+      move_uploaded_file($imagen["tmp_name"], $path);
+      $insertImagen = $this->db->prepare("INSERT INTO imagen(path,fk_id_tarea) VALUES(?,?)");
+      $insertImagen->execute(array($path,$id_producto));
+    }
   }
 
   /*FUNCION PARA BORRAR PRODUCTOS DE LA TABLA*/
@@ -35,7 +46,7 @@ class ProductosModel extends Model
     $sentencia->execute([$id]);
   }
   
-  function borrarImagen ($imgpath) {
+  function borrarImagenProducto($imgpath) {
     $sentencia = $this->db->prepare("delete from imagen where path=?");
     $sentencia->execute(array($imgpath));
   }

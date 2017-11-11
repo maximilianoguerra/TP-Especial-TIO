@@ -45,7 +45,7 @@ class ProductosController extends SecuredController
     $this->view->mostrarProductos($productos, $marcas, $usuario);
   }
 
-  public function mostrarProducto()
+  public function mostrarProducto($value="")
   {
     $usuario = false;
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
@@ -59,14 +59,11 @@ class ProductosController extends SecuredController
       $imagenes=$this->model->getImagenes($id);
       $this->view->mostrarDetalleProducto($productos,$marcas,$imagenes,$usuario);
     }
-
-    /*$id = $_GET['id_producto'];
-
-    pido al model el producto e imagenes asociadas
-
-    se lo mando a la vista
-*/
-
+    else{
+      $productos=$this->model->getProducto($value);
+      $imagenes=$this->model->getImagenes($value);
+      $this->view->mostrarDetalleProducto($productos,$marcas,$imagenes,$usuario);
+    }
   }
 
 
@@ -80,10 +77,6 @@ class ProductosController extends SecuredController
   {
     $this->view->mostrarAti();
   }
-  /*MUESTRO EL PARTIAL COMPARATIVA Y LE CARGO LOS PRODUCTOS*/
-
-  /****************************************************************************************************************/
-  /****************************************************************************************************************/
   /*FUNCION QUE CONTROLA QUE LAS IMAGENES TENGAN LA EXTENSION PERMITIDA*/
 
   function getExtensionesImagenesVerificadas($imagenes){
@@ -99,7 +92,7 @@ class ProductosController extends SecuredController
         $imagenesVerificadas[]=$imagen_aux;
       }
       else{
-        $this->view->errorCrear("Imagen no soportada");//LA EXTENSION DE LA IMAGEN EJ SI ES BMP NO ANDA
+        $this->view->errorCrear("Imagen no soportada / Producto sin imagen");//LA EXTENSION DE LA IMAGEN EJ SI ES BMP NO ANDA
       }
     }
     return $imagenesVerificadas;
@@ -109,10 +102,6 @@ class ProductosController extends SecuredController
   public function store()
   {
     $this->admin();// pregunto si tengo un usuario
-    /****************************************************/
-        // $nombreImagen = $_FILES['imagen']['name'];
-       // $rutaTempImagen = $_FILES['imagen']['tmp_name'];
-    /****************************************************/  
 
     $productos = $this->model->getProductos();
     $marcas = $this->marcasModel->getMarcas();
@@ -127,30 +116,35 @@ class ProductosController extends SecuredController
       (isset($_POST['banda']) && !empty($_POST['banda'])) &&
       (isset($_POST['consumo']) && !empty($_POST['consumo'])))
     {
-      if(isset($_FILES['imagenproducto'])){    
-        $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['imagenproducto']);
+        if(isset($_FILES['imagenproducto'])){    
+          $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['imagenproducto']);
 
-        $this->model->guardarProducto($id_marca,$modelo,$memoria,$banda,$consumo, $imagenes);
-        $this->comparativa();
-      }
-      else{
-        $this->view->errorCrear("Todos los campos son requeridos", $productos, $marcas);
-        $this->comparativa();
-      }
+          $this->model->guardarProducto($id_marca,$modelo,$memoria,$banda,$consumo, $imagenes);
+          $this->comparativa();
+        }   
     }
+    else{
+          $this->view->errorCrear("Todos los campos son requeridos", $productos, $marcas);
+          $this->comparativa();
+        }
     
   }
 
-  public function destroyImagen() {
-    if(isset($_POST['imgpath'])) {
-      $this->model->borrarImagen($_POST['imgpath']);
-      $this->comparativa();
-    }
+   /*FUNCION Q GUARDA IMAGENES*/
+  public function storeImg()
+  {
+    $this->admin();// pregunto si tengo un usuario
+      $id = $_POST['id_producto'];
+      if(isset($_FILES['imagenproducto'])){    
+        $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['imagenproducto']);
+
+        $this->model->guardarImagenProducto($id,$imagenes);
+        $this->mostrarProducto();
+      }
+      
   }
 
-  /****************************************************************************************************************/
-  /****************************************************************************************************************/
-
+  
   /*FUNCION Q BORRA PRODUCTOS*/
   public function destroy()
   {
@@ -163,6 +157,17 @@ class ProductosController extends SecuredController
     }
     
   }
+
+  /*FUNCION Q BORRA IMAGEN DE PRODUCTO*/
+  public function destroyImg()
+  {
+      $this->admin();
+      if(isset($_POST['imgpath'])) {
+      $this->model->borrarImagenProducto($_POST['imgpath']);
+      $this->mostrarProducto($_POST['idProducto']);
+    }
+  }
+
   /*FUNCION PARA FILTRAR POR MARCA PRODUCTOS*/
   public function filtro()
   {
@@ -218,7 +223,6 @@ class ProductosController extends SecuredController
   function traemeElbody(){
     $this->view->seeBody();
   }
-
 
 }
 

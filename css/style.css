@@ -320,6 +320,14 @@ label {
     font-family: 'robotothin', "Lucida Sans Unicode";
 }
 
+.detalleProducto{
+    margin: 10px;
+}
+
+.eliminarImagen{
+    margin-bottom: 5px;
+}
+
 .alineacionfoto a img{
   padding-left: 30px;
 }
