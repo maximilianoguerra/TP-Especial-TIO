@@ -328,6 +328,16 @@ label {
     font-family: 'robotothin', "Lucida Sans Unicode";
 }
 
+.detalleProducto{
+    margin: 10px;
+}
+
+.eliminarImagen{
+    margin-bottom: 5px;
+}
+
+
+
 .alineacionfoto a img{
   padding-left: 30px;
 }
@@ -384,6 +394,8 @@ p{
     margin-bottom: 5px;
     color: white;
 }
+
+
 
 .footer_redes a {
     background: #1f2428 none repeat scroll 0 0;
