@@ -39,23 +39,26 @@ class ProductosController extends SecuredController
       }
     }
     $usuario = false;
+    $superAdmin=false;
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = true;
+      if ($_SESSION['superAdmin']==1) {
+        $superAdmin=true;
+      }
     }
-    $this->view->mostrarProductos($productos, $marcas, $usuario);
+    $this->view->mostrarProductos($productos, $marcas, $usuario,$superAdmin);
   }
 
   public function mostrarProducto($value="")
   {
     $usuario = false;
+    $superAdmin=false;
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = true;
-      $superAdmin=false;
       if ($_SESSION['superAdmin']==1) {
         $superAdmin=true;
       }
-      echo $usuario;
-      echo $superAdmin;
+
     }
     $marcas = $this->marcasModel->getMarcas();
 

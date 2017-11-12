@@ -13,7 +13,6 @@ class TareasApiController extends Api
   {
       parent::__construct();
       $this->model = new ComentariosModel();
-//      $this->palabrasProhibidasModel = new PalabrasProhibidasModel();
   }
 
   public function getComents($url_params = [])
@@ -69,11 +68,6 @@ class TareasApiController extends Api
     return $this->json_response($coments, 200);
   }
 
-  public function updateCompletado($url_params = []) {
-    $id = $url_params[":id"];
-    $this->model->finalizarTarea($id);
-    return $this->json_response("Finalizado exitoso.", 200);
-  }
 }
 
  ?>

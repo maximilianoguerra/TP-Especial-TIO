@@ -12,9 +12,11 @@
                           <p>{{comentario}}</p>
                           <p>Valoracion = {{valoracion}}</p>
                           <div class="enLinea">
-                            <a href="{{id_comentario}}" class="borrarComentario">
+                            {{#superAd}}
+                            <a href="{{id_comentario}}" class="borrarComentario" name="{{superAd}}">
                               <p><span id="borrar" class="fa fa-trash-o " aria-hidden="true" value="0"></span></p>
                             </a>
+                            {{/superAd}}
                           </div>
                       </div>
 

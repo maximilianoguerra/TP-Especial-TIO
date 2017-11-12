@@ -4,13 +4,17 @@ let templateComentario;
 $.ajax({ url: 'js/templates/comentarios.mst'}).done( template => templateComentario = template);
 
 
-function cargarApi(idProduct) {
+function cargarApi(idProduct,superAdmin) {
   let url="api/comentarios/"+idProduct;
+    let administrador=false;
+    if (superAdmin==1) {
+      administrador=true;
+    }
   $.ajax(url).done(function(data) {
       let array=[{n:1},{n:2},{n:3},{n:4},{n:5}]
       let idProd=[{id:idProduct}];
-
-      let rendered = Mustache.render(templateComentario,{arreglo:data,array,idProd});
+      let superAd=administrador;
+      let rendered = Mustache.render(templateComentario,{arreglo:data,array,idProd,superAd});
       $(".comentarios").html(rendered);
     });
 }
@@ -104,15 +108,21 @@ function crearComentario() {
                });
     }
     function borrarComentario() {
+      let superAdmin=0;
       let idComentario=$(".borrarComentario").attr("href");
       let urldelete="api/comentarios/"+idComentario;
       let idProducto=$("#id_producto").val();
+      let admin=$(".borrarComentario").attr("name");
+      if (admin) {
+        superAdmin=1;
+      }
+
       $.ajax({
               method: "DELETE",
               url: urldelete,
             })
           .done(function(data) {
-            cargarApi(idProducto);
+            cargarApi(idProducto,superAdmin);
           })
           .fail(function(data) {
               alert('Imposible crear la tarea');
@@ -188,11 +198,12 @@ $(document).on('click','.mostrarProducto', function(event){
   event.preventDefault();
 
   let idProducto = $(this).attr("href");
+  let superAdmin = $(this).attr("name");
   let jsonProducto = {id_producto: idProducto};
 
   $.post("mostrarProducto", jsonProducto, function(data) {
     $('.reemplazo').html(data);
-    cargarApi(idProducto);
+    cargarApi(idProducto,superAdmin);
   });
 
 });

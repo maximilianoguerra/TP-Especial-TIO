@@ -1,10 +1,12 @@
 <?php
 class ProductosView extends View
 {
-  function mostrarProductos($producto,$marca,$usuario){
+  function mostrarProductos($producto,$marca,$usuario,$superAdmin){
+    echo  $superAdmin;
     $this->smarty->assign('productos', $producto);
     $this->smarty->assign('marcas', $marca);
     $this->smarty->assign('usuario', $usuario);
+    $this->smarty->assign('superAdmin', $superAdmin);
     $this->smarty->display('templates/comparativa.tpl');
     //$this->smarty->display('templates/comparativaNormal.tpl');
   }
