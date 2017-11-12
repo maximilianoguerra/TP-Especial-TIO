@@ -108,7 +108,7 @@
                   <input type="text" class="form-control" id="consumo" name="consumo"  placeholder="Consumo"></input>
                 </div>
                 <div class="form-group">
-                  <label for="consumo">Adjuntar Imagen</label>                  
+                  <label for="consumo">Adjuntar Imagen</label>
                   <input type="file" class="form-control" id="consumo" name="imagenproducto[]"  value="" multiple></input>
                 </div>
 

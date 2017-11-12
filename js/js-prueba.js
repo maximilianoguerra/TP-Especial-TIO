@@ -1,4 +1,7 @@
 /*FUNCION PARA NAVER GAR CON PARTIAL*/
+$(document).ready(function() {
+let templateComentario;
+$.ajax({ url: 'js/templates/comentarios.mst'}).done( template => templateComentario = template);
 $(document).on('click', '.link-ajax', function (event) {
   event.preventDefault();
   let url=$(this).attr("href");
@@ -9,9 +12,22 @@ $(document).on('click', '.refresh', function (event) {
   let url=$(this).attr("href");
   cargar(url);
 });
+$(document).on('click', '.link-api', function (event) {
+  event.preventDefault();
+  let url=$(this).attr("href");
+  cargarApi(url);
+});
+function cargarApi(url) {
+  $.ajax(url).done(function(data) {
+      var array=[{n:1},{n:2},{n:3},{n:4},{n:5}]
+      let rendered = Mustache.render(templateComentario,{arreglo:data,array});
+      alert(array);
+      $(".comentarios").append(rendered);
+    });
+}
 
 function cargar(url) {
-  
+
   $.ajax({
     url: url,
     method:"GET",
@@ -80,7 +96,7 @@ function getForm (datos) {
         $(".reemplazo").html(data);
       }
     }//Cierro el SUCCESS
-  }); 
+  });
 }
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.borrarProducto', function(event){
@@ -88,6 +104,7 @@ $(document).on('click','.borrarProducto', function(event){
 
   let idProducto = $(this).attr("href");
   let jsonProducto = {id_producto: idProducto};
+
 
   $.post("borrarProducto", jsonProducto, function(data) {
     $('.reemplazo').html(data);
@@ -113,10 +130,12 @@ $(document).on('click','.mostrarProducto', function(event){
 
   let idProducto = $(this).attr("href");
   let jsonProducto = {id_producto: idProducto};
-
+  let url="api/comentarios/"+idProducto;
   $.post("mostrarProducto", jsonProducto, function(data) {
     $('.reemplazo').html(data);
+    cargarApi(url);
   });
+
 });
 
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
@@ -143,4 +162,4 @@ $(document).on('click','.comienzoEditarMarca', function(event){
   });
 
 });
-
+});

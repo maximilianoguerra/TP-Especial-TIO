@@ -11,7 +11,7 @@
           <th><p >MEMORIA RAM (GB)</p></th>
           <th><p >ANCHO DE BANDA (GB/s)</p></th>
           <th><p >CONSUMO (W)</p></th>
-          
+
           {if $usuario}
 
           {/if}
@@ -22,7 +22,7 @@
         {if $marca['id'] == $producto['id_marca']}
           <td><p>{$marca['nombre']}</p></td>
         {/if}
-        {/foreach}  
+        {/foreach}
           <td><p>{$producto['modelo']}</p></td>
           <td><p>{$producto['memoria']}</p></td>
           <td><p>{$producto['banda']}</p></td>
@@ -41,8 +41,11 @@
           </div>
           {/foreach}
         </div>
+        <!-- <button type="button" name="button"></button> -->
+        <div >
+          <ul class="comentarios">
+
+          </ul>
+        </div>
 
 </div>
-
-
-    
