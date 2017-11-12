@@ -97,4 +97,35 @@
     </div>
 <!--***FIN AGREGAR NUEVA IMAGEN*******-->
 
+<!--***AGREGAR/MOSTRAR COMENTARIOS*******-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 formulario">
+        <div class="msj">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form href="guardarProducto" class="formFiltrar" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label for="id_marca">Comentarios</label>
+                    </div>
+                    <div class="panelComentarios panel-default">
+                        <div class="nav-bar-default panel-body">
+                            ACA VIENEN LOS COMENTARIOS!
+                        </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="modelo">Agregar Comentario</label>
+                      <input type="text" class="form-control" id="modelo" name="modelo"  placeholder="Comentario..."></input>
+                    </div>
+                    <input type="submit" class="btn btn-default" value="Crear">
+                    {if isset($error)}
+                    <div class="alert alert-danger" role="alert">{$error}</div>
+                    {/if}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--***AGREGAR/MOSTRAR COMENTARIOS*******-->
+
                 
