@@ -2,27 +2,16 @@
 $(document).ready(function() {
 let templateComentario;
 $.ajax({ url: 'js/templates/comentarios.mst'}).done( template => templateComentario = template);
-$(document).on('click', '.link-ajax', function (event) {
-  event.preventDefault();
-  let url=$(this).attr("href");
-  cargar(url);
-});
-$(document).on('click', '.refresh', function (event) {
-  event.preventDefault();
-  let url=$(this).attr("href");
-  cargar(url);
-});
-$(document).on('click', '.link-api', function (event) {
-  event.preventDefault();
-  let url=$(this).attr("href");
-  cargarApi(url);
-});
-function cargarApi(url) {
+
+
+function cargarApi(idProduct) {
+  let url="api/comentarios/"+idProduct;
   $.ajax(url).done(function(data) {
-      var array=[{n:1},{n:2},{n:3},{n:4},{n:5}]
-      let rendered = Mustache.render(templateComentario,{arreglo:data,array});
-      alert(array);
-      $(".comentarios").append(rendered);
+      let array=[{n:1},{n:2},{n:3},{n:4},{n:5}]
+      let idProd=[{id:idProduct}];
+
+      let rendered = Mustache.render(templateComentario,{arreglo:data,array,idProd});
+      $(".comentarios").html(rendered);
     });
 }
 
@@ -51,22 +40,12 @@ function cargar(url) {
 
   return false;
 }
-
-
-$(document).on('submit','.formFiltrar', function(event){
-  event.preventDefault();
-  getForm(this);
-});
-$(document).on('submit','.formAgregarMarca', function(event){
-  event.preventDefault();
-  getForm(this);
-});
-
-/*FUNCIONES PARA REGISTRAR LO Q SE ENVIA POR formulario*/
 function getForm (datos) {
 
   let dir = $(datos).attr("href");
   let formData = new FormData(datos);
+  let idProduct=$(datos).attr("value");
+
 
   $.ajax({
     method: "POST",
@@ -91,13 +70,77 @@ function getForm (datos) {
       }
       else if(dir === "register" ) {
           window.location.reload();
-      }//Cierro el IF
+      }
+      else if(dir === "guardarImagenProducto" ) {
+          $(".reemplazo").html(data);
+          cargarApi(idProduct);
+      }
+      //Cierro el IF
       else{
         $(".reemplazo").html(data);
       }
     }//Cierro el SUCCESS
   });
 }
+function crearComentario() {
+  let coment={
+      "comentario":$("#comentario").val(),
+      "valoracion":$("#valoracion").val(),
+      "id_producto":$("#id_producto").val()
+    };
+    let idProducto=$("#id_producto").val();
+
+
+           $.ajax({
+                   method: "POST",
+                   url: "api/comentarios",
+                   data: JSON.stringify(coment),
+                 })
+               .done(function(data) {
+                 cargarApi(idProducto);
+               })
+               .fail(function(data) {
+                   alert('Imposible crear la tarea');
+               });
+    }
+    function borrarComentario() {
+      let idComentario=$(".borrarComentario").attr("href");
+      let urldelete="api/comentarios/"+idComentario;
+      let idProducto=$("#id_producto").val();
+      $.ajax({
+              method: "DELETE",
+              url: urldelete,
+            })
+          .done(function(data) {
+            cargarApi(idProducto);
+          })
+          .fail(function(data) {
+              alert('Imposible crear la tarea');
+          });
+
+    }
+$(document).on('click', '.link-ajax', function (event) {
+  event.preventDefault();
+  let url=$(this).attr("href");
+  cargar(url);
+});
+$(document).on('click', '.refresh', function (event) {
+  event.preventDefault();
+  let url=$(this).attr("href");
+  cargar(url);
+});
+
+$(document).on('submit','.formFiltrar', function(event){
+  event.preventDefault();
+  getForm(this);
+});
+$(document).on('submit','.formAgregarMarca', function(event){
+  event.preventDefault();
+  getForm(this);
+});
+
+/*FUNCIONES PARA REGISTRAR LO Q SE ENVIA POR formulario*/
+
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.borrarProducto', function(event){
   event.preventDefault();
@@ -120,11 +163,13 @@ $(document).on('click','.borrarImagenProducto', function(event){
   let imgpath = $(this).attr("data-imgpath"); //ej: 5a076bde41df7_9
 
  // let jsonProducto = {id_producto: idProducto};
-                                         
+
   $.post("borrarImagenProducto", {imgpath, idProducto}, function(data) {
     $('.reemplazo').html(data);
+    cargarApi(idProducto);
   });
 });
+
 
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.editarProducto', function(event){
@@ -144,10 +189,10 @@ $(document).on('click','.mostrarProducto', function(event){
 
   let idProducto = $(this).attr("href");
   let jsonProducto = {id_producto: idProducto};
-  let url="api/comentarios/"+idProducto;
+
   $.post("mostrarProducto", jsonProducto, function(data) {
     $('.reemplazo').html(data);
-    cargarApi(url);
+    cargarApi(idProducto);
   });
 
 });
@@ -176,4 +221,16 @@ $(document).on('click','.comienzoEditarMarca', function(event){
   });
 
 });
+$(document).on('submit','.formComentarios', function(event){
+  event.preventDefault();
+  crearComentario();
+});
+
+    $(document).on('click','.borrarComentario', function(event){
+      event.preventDefault();
+      borrarComentario();
+    });
+
+
+
 });

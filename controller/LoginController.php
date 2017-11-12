@@ -27,8 +27,9 @@ class LoginController extends Controller
       $user = $this->model->getUser($userName);
       if((!empty($user)) && password_verify($password, $user[0]['password'])) {
         session_start();
-        $_SESSION['usuario'] = $userName;
+        $_SESSION['usuario'] = $user[0]['nombre'];
         $_SESSION['LAST_ACTIVITY'] = time();
+        $_SESSION['superAdmin']=$user[0]['superAdmin'];
         header('Location: '.HOME);
         die();
         // $this->controllerProduct->comparativa();
@@ -52,7 +53,6 @@ class LoginController extends Controller
   }
   public function registrarEnDB()
   {
-    echo "asdentre";
     $userName = $_POST['usuario'];
     $password = $_POST['password'];
     $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -64,6 +64,7 @@ class LoginController extends Controller
       session_start();
       $_SESSION['usuario'] = $userName;
       $_SESSION['LAST_ACTIVITY'] = time();
+      $_SESSION['superAdmin']=$user[0]['superAdmin'];
       header('Location: '.HOME);
       die();
     }

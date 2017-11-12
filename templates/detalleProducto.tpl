@@ -1,3 +1,4 @@
+
 <div class="tituloEdit">
           <p>Detalle del producto</p>
     </div>
@@ -11,10 +12,6 @@
             <th><p >MEMORIA RAM (GB)</p></th>
             <th><p >ANCHO DE BANDA (GB/s)</p></th>
             <th><p >CONSUMO (W)</p></th>
-
-            {if $usuario}
-
-            {/if}
           </tr>
           {foreach from=$productos item=producto}
           <tr>
@@ -22,30 +19,12 @@
           {if $marca['id'] == $producto['id_marca']}
             <td><p>{$marca['nombre']}</p></td>
           {/if}
-        </tr>
-        {foreach from=$productos item=producto}
-        <tr>
-        {foreach from=$marcas item=marca}
-        {if $marca['id'] == $producto['id_marca']}
-          <td><p>{$marca['nombre']}</p></td>
-        {/if}
-        {/foreach}
-          <td><p>{$producto['modelo']}</p></td>
-          <td><p>{$producto['memoria']}</p></td>
-          <td><p>{$producto['banda']}</p></td>
-          <td><p>{$producto['consumo']}</p></td>
-        </tr>
-        {/foreach}
-      </table>
-    </div>
-        <div class="row">
-          {foreach from=$imagenes key=index item=imagen}
-          <div class="col-md-3 col-xs-6">
-            <a href="{$imagen['path']}" target="_blank" class="thumbnail">
-              <img data-u="image" src="{$imagen['path']}" class="thumbnail img-rounded" >
-            <!--  <img data-u="image" src="{$imagenes[index]['path']}" class="thumbnail img-rounded" >-->
-            </a>
-          </div>
+          {/foreach}
+            <td><p>{$producto['modelo']}</p></td>
+            <td><p>{$producto['memoria']}</p></td>
+            <td><p>{$producto['banda']}</p></td>
+            <td><p>{$producto['consumo']}</p></td>
+          </tr>
           {/foreach}
         </table>
   </div>
@@ -68,18 +47,60 @@
                     <img data-u="image" src="{$imagen['path']}" class="img-thumbnail" >
 
                     </a>
-
-                    <button href="{$imagen['fk_id_tarea']}" avioneta="avion" caca="cacaEjemplo" class="btn btn-danger btn-xs borrarImagenProducto" type="button" data-imgpath="{$imagen['path']}">Eliminar Imagen</button>
-
+                    {if $superAdmin}
+                    <button href="{$imagen['fk_id_tarea']}"class="btn btn-danger btn-xs borrarImagenProducto" type="button" data-imgpath="{$imagen['path']}">Eliminar Imagen</button>
+                    {/if}
                 </div>
                 </div>
               {/foreach}
         </div>
-        <!-- <button type="button" name="button"></button> -->
-        <div >
-          <ul class="comentarios">
 
-          </ul>
+
+    </tr>
+    </table>
+    </div>
+
+<!--***AGREGAR NUEVA IMAGEN*******-->
+
+  {if $superAdmin}
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 formulario">
+        <div class="msj">
+          <div class="panel panel-default">
+
+            <div class="panel-body">
+              {foreach from=$productos item=producto}
+              <form href="guardarImagenProducto" class="formFiltrar" enctype="multipart/form-data" value="{$producto['id']}">
+
+                <div class="form-group">
+                  <label for="consumo">Adjuntar Imagen</label>
+                  <input type="file" class="form-control" id="consumo" name="imagenproducto[]"  value="" multiple></input>
+
+                  <input type="text"  class="idProducto"  name="id_producto" value="{$producto['id']}" hidden="on"></input>
+                   {/foreach}
+                </div>
+
+                <input type="submit" class="btn btn-default" value="Agregar"></input>
+                <div>
+                  {if isset($error)}
+                  <div class="alert alert-danger" role="alert">{$error}</div>
+                  {/if}
+                </div>
+              </form>
+
+            </div>
+
+          </div>
         </div>
+      </div>
+    </div>
+    {/if}
+
+<!--***FIN AGREGAR NUEVA IMAGEN*******-->
+<!--***ACA EMPIEZAN LOS COMENTARIOS*******-->
+          <div class="comentarios">
+
+          </div>
+<!--***FIN DE COMENTARIOS*******-->
 
 </div>

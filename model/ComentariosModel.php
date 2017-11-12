@@ -11,7 +11,7 @@ class ComentariosModel extends Model{
       $sentencia = $this->db->prepare("INSERT INTO `comentarios`(`comentario`,`valoracion`,id_producto) VALUES (?,?,?)");
       $sentencia->execute([$comentario,$valoracioncion,$id_producto]);
       $id = $this->db->lastInsertId();
-      return $this->getComentario($id);
+      return $this->getComentariosdeUnProducto($id_producto);
     }
     public function getComentario($id)
     {
