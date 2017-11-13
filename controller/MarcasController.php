@@ -13,7 +13,7 @@ class MarcasController extends SecuredController
     $this->view = new ProductosView();
     $this->model = new ProductosModel();//nueva linea
     $this->marcasModel = new MarcasModel();
-    
+
   }
 
   public function index()
@@ -23,7 +23,7 @@ class MarcasController extends SecuredController
   }
 
    public function agregarMarca(){
-      $this->admin();
+      if ($this->superAdmin()) {
        if (isset($_POST['marca']) && !empty($_POST['marca'])){
           $marca=$_POST['marca'];
           $this->marcasModel->addmarca($marca);
@@ -32,34 +32,34 @@ class MarcasController extends SecuredController
           $this->view->errorCrear("Campo incompleto");
           header("location:comparativa");
           }
-      
+      }
     }
    /*FUNCION Q BORRA MARCA*/
      public function destroyMarca(){
-          $this->admin();
+          if ($this->superAdmin()) {
            $id = $_POST['id_marca'];
            $this->marcasModel->deleteMarca($id);
             header("location:comparativa");
-        
+          }
      }
    /*FUNCION QUE INICIA LA EDICION DE UNA MARCA*/
    public function comienzoEditMarca()
    {
-          $this->admin();
+        if ($this->superAdmin()) {
          $id=$_POST['id_marca'];
          $marcas=$this->marcasModel->getMarca($id);
          $this->view->mostrarEditMarca($marcas);
-    
+       }
    }
    /*FUNCION Q NOS MUETRA YA LA EDICION REALIZADA*/
    public function editarMarca()
    {
-          $this->admin();
+        if ($this->superAdmin()) {
          $id=$_POST['id_marca'];
          $nombre=$_POST['nombre'];
          $this->marcasModel->editMarca($id,$nombre);
           header("location:comparativa");
-    
+        }
    }
 
 

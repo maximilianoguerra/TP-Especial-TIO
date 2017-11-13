@@ -1,10 +1,8 @@
 <?php
 include_once('model/ProductosModel.php');
 include_once('model/MarcasModel.php');
-// include_once('model/UsuariosModel.php');
 include_once('view/ProductosView.php');
 include_once('view/UsuariosView.php');
-
 class ProductosController extends SecuredController
 {
   function __construct()
@@ -101,27 +99,6 @@ class ProductosController extends SecuredController
   {
     $this->view->mostrarAti();
   }
-  /*FUNCION QUE CONTROLA QUE LAS IMAGENES TENGAN LA EXTENSION PERMITIDA*/
-
-  function getExtensionesImagenesVerificadas($imagenes){
-
-    $imagenesVerificadas = [];
-    for ($i=0; $i < count($imagenes['size']); $i++) {
-
-      //SOPORTA JPEG Y PNG, PARA REDUCIR EL ESPECTRO DE EXTENSIONES
-      if($imagenes['size'][$i]>0 && ($imagenes['type'][$i]=="image/jpeg" || $imagenes['type'][$i]=="image/png")){
-        $imagen_aux = [];
-        $imagen_aux['tmp_name']=$imagenes['tmp_name'][$i];
-        $imagen_aux['name']=$imagenes['name'][$i];
-        $imagenesVerificadas[]=$imagen_aux;
-      }
-      else{
-        $this->view->errorCrear("Imagen no soportada / Producto sin imagen");//LA EXTENSION DE LA IMAGEN EJ SI ES BMP NO ANDA
-      }
-    }
-    return $imagenesVerificadas;
-  }
-
   /*FUNCION Q GUARDA PRODUCTOS*/
   public function store()
   {
@@ -152,67 +129,19 @@ class ProductosController extends SecuredController
         }
     }
     // pregunto si tengo un usuario
-
-   
-
   }
-
-   /*FUNCION Q GUARDA IMAGENES*/
-  public function storeImg()
-  {
-    $id = $_POST['id_producto'];
-    if ($this->superAdmin()) {
-      // var_dump($_FILES['fotos']['size']['0']);
-      // die();
-      if(isset($_FILES['fotos']) && $_FILES['fotos']['size']['0'] > 0){
-        $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['fotos']);
-
-
-        $this->model->guardarImagenProducto($id,$imagenes);
-        $this->mostrarProducto();
-      }
-      else{
-        $this->view->errorCrear("No cargo imagen");
-        $this->mostrarProducto();
-      } 
-    }  
-    else{
-      $this->view->errorCrear("No tiene permiso");
-      $this->mostrarProducto();
-     } 
-
-  }
-
-
   /*FUNCION Q BORRA PRODUCTOS*/
   public function destroy()
   {
-    $this->admin();
+    if ($this->superAdmin()) {
     if (isset($_POST['id_producto'])) {
-
       $id = $_POST['id_producto'];
       $this->model->borrarProducto($id);
       $this->comparativa();
     }
-
   }
 
-  /*FUNCION Q BORRA IMAGEN DE PRODUCTO*/
-  public function destroyImg()
-  {
-    if ($this->superAdmin()) {
-          if(isset($_POST['imgpath'])) {
-          $this->model->borrarImagenProducto($_POST['imgpath']);
-          $this->mostrarProducto($_POST['idProducto']);
-        } 
-    }
-    else{
-          $this->view->errorCrear("No tiene permiso");
-          $this->mostrarProducto();
-    }
-      
   }
-
   /*FUNCION PARA FILTRAR POR MARCA PRODUCTOS*/
   public function filtro()
   {
@@ -247,19 +176,19 @@ class ProductosController extends SecuredController
   //ABRE LA PAGINA PARA EDITAR EL PRODUCTO
   public function edit()
   {
-    $this->admin();
+    if ($this->superAdmin()) {
     if (isset($_POST['id_producto'])) {
       $id = $_POST['id_producto'];
       $productos=$this->model->getProducto($id);
       $this->view->mostraredit($productos);
     }
-
+  }
   }
 
   //EDITA EL PRODUCTO
   public function editar()
   {
-    $this->admin();
+    if ($this->superAdmin()) {
     $id = $_POST['id_producto'];
     $modelo = $_POST['modelo'];
     $memoria = $_POST['memoria'];
@@ -267,11 +196,30 @@ class ProductosController extends SecuredController
     $consumo = $_POST['consumo'];
     $this->model->editarProducto($modelo,$memoria,$banda,$consumo,$id);
     $this->comparativa();
-
+    }
   }
 
   function traemeElbody(){
     $this->view->seeBody();
+  }
+  /*FUNCION QUE CONTROLA QUE LAS IMAGENES TENGAN LA EXTENSION PERMITIDA*/
+  function getExtensionesImagenesVerificadas($imagenes){
+
+    $imagenesVerificadas = [];
+    for ($i=0; $i < count($imagenes['size']); $i++) {
+
+      //SOPORTA JPEG Y PNG, PARA REDUCIR EL ESPECTRO DE EXTENSIONES
+      if($imagenes['size'][$i]>0 && ($imagenes['type'][$i]=="image/jpeg" || $imagenes['type'][$i]=="image/png")){
+        $imagen_aux = [];
+        $imagen_aux['tmp_name']=$imagenes['tmp_name'][$i];
+        $imagen_aux['name']=$imagenes['name'][$i];
+        $imagenesVerificadas[]=$imagen_aux;
+      }
+      else{
+        $this->view->errorCrear("Imagen no soportada / Producto sin imagen");//LA EXTENSION DE LA IMAGEN EJ SI ES BMP NO ANDA
+      }
+    }
+    return $imagenesVerificadas;
   }
 
 }

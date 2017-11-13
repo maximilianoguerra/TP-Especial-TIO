@@ -13,18 +13,7 @@ class SecuredController extends Controller
       }
       $_SESSION['LAST_ACTIVITY'] = time();
     }
- //   else {
-   //   header('Location: '.LOGIN);
-     // die();
-    //}
   }
-  // public function admin($value='')
-  // {
-  //   if(!isset($_SESSION['superAdmin'])&&$_SESSION['superAdmin']==1){
-  //     header('Location: '.LOGIN);
-  //     die();
-  //   }
-  // }
 
   public function superAdmin($value='')
   {

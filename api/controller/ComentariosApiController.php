@@ -27,26 +27,34 @@ class ComentariosApiController extends Api
 
   public function deleteComentario($url_params = [])
   {
-      $this->admin();
-      $id_comentario = $url_params[":id"];
-      $coments = $this->model->getComentario($id_comentario);
-      if($coments)
-      {
-        $this->model->borrarComentario($id_comentario);
-        return $this->json_response("Borrado exitoso.", 200);
+      if ($this->superAdmin()) {
+        $id_comentario = $url_params[":id"];
+        $coments = $this->model->getComentario($id_comentario);
+        if($coments)
+        {
+          $this->model->borrarComentario($id_comentario);
+          return $this->json_response("Borrado exitoso.", 200);
+        }
+        else{
+          return $this->json_response(false, 404);
+        }
       }
       else
         return $this->json_response(false, 404);
   }
 
   public function createComentario($url_params = []) {
-
-    $body = json_decode($this->raw_data);
-    $comentario = $body->comentario;
-    $valoracioncion = $body->valoracion;
-    $id_producto = $body->id_producto;
-    $Coments = $this->model->guardarComentario($comentario,$valoracioncion,$id_producto);
-    return $this->json_response($Coments, 200);
+    if ($this->usuario()) {
+      $body = json_decode($this->raw_data);
+      $comentario = $body->comentario;
+      $valoracioncion = $body->valoracion;
+      $id_producto = $body->id_producto;
+      $Coments = $this->model->guardarComentario($comentario,$valoracioncion,$id_producto);
+      return $this->json_response($Coments, 200);
+    }
+    else{
+      return $this->json_response(false, 400);
+    }
   }
   public function getComent($url_params = [])
   {

@@ -10,12 +10,10 @@ class UsuariosController extends SecuredController{
   }
   public function mostrarListaUsuarios($value="")
 {
-  $superAdmin=false;
-  if (isset($_SESSION['superAdmin'])) { // pregunto si tengo un usuario
-    $superAdmin = true;
+  if ($this->superAdmin()) {
+    $usuarios = $this->usuariosModel->getUsuarios();
+    $this->usuariosView->mostrarUsuarios($usuarios);
   }
-  $usuarios = $this->usuariosModel->getUsuarios();
-  $this->usuariosView->mostrarUsuarios($usuarios);
 }
 }
 ?>

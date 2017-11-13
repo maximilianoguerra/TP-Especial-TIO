@@ -9,10 +9,7 @@ function cargarApi(idProduct,superAdmin) {
   $.ajax(url).done(function(data) {
       let array=[{n:1},{n:2},{n:3},{n:4},{n:5}]
       let idProd=[{id:idProduct}];
-
-      // let superAd=administrador;
       let rendered = Mustache.render(templateComentario,{data,array,idProd});
-
       $(".comentarios").html(rendered);
     });
 }
@@ -163,8 +160,6 @@ $(document).on('click','.borrarProducto', function(event){
 
   let idProducto = $(this).attr("href");
   let jsonProducto = {id_producto: idProducto};
-
-
   $.post("borrarProducto", jsonProducto, function(data) {
     $('.reemplazo').html(data);
   });
