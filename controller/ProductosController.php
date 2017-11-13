@@ -105,7 +105,7 @@ class ProductosController extends SecuredController
 
   function getExtensionesImagenesVerificadas($imagenes){
 
-    $extensionesImagenesVerificadas = [];
+    $imagenesVerificadas = [];
     for ($i=0; $i < count($imagenes['size']); $i++) {
 
       //SOPORTA JPEG Y PNG, PARA REDUCIR EL ESPECTRO DE EXTENSIONES
@@ -125,8 +125,7 @@ class ProductosController extends SecuredController
   /*FUNCION Q GUARDA PRODUCTOS*/
   public function store()
   {
-    $this->admin();// pregunto si tengo un usuario
-
+    if ($this->superAdmin()) {
     $productos = $this->model->getProductos();
     $marcas = $this->marcasModel->getMarcas();
     $id_marca = $_POST['id_marca'];
@@ -151,18 +150,23 @@ class ProductosController extends SecuredController
           $this->view->errorCrear("Todos los campos son requeridos", $productos, $marcas);
           $this->comparativa();
         }
+    }
+    // pregunto si tengo un usuario
+
+   
 
   }
 
    /*FUNCION Q GUARDA IMAGENES*/
   public function storeImg()
   {
-    $this->admin();// pregunto si tengo un usuario
-      $id = $_POST['id_producto'];
+    $id = $_POST['id_producto'];
+    if ($this->superAdmin()) {
       // var_dump($_FILES['fotos']['size']['0']);
       // die();
       if(isset($_FILES['fotos']) && $_FILES['fotos']['size']['0'] > 0){
         $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['fotos']);
+
 
         $this->model->guardarImagenProducto($id,$imagenes);
         $this->mostrarProducto();
@@ -170,7 +174,12 @@ class ProductosController extends SecuredController
       else{
         $this->view->errorCrear("No cargo imagen");
         $this->mostrarProducto();
-      }
+      } 
+    }  
+    else{
+      $this->view->errorCrear("No tiene permiso");
+      $this->mostrarProducto();
+     } 
 
   }
 
@@ -191,11 +200,17 @@ class ProductosController extends SecuredController
   /*FUNCION Q BORRA IMAGEN DE PRODUCTO*/
   public function destroyImg()
   {
-      $this->admin();
-      if(isset($_POST['imgpath'])) {
-      $this->model->borrarImagenProducto($_POST['imgpath']);
-      $this->mostrarProducto($_POST['idProducto']);
+    if ($this->superAdmin()) {
+          if(isset($_POST['imgpath'])) {
+          $this->model->borrarImagenProducto($_POST['imgpath']);
+          $this->mostrarProducto($_POST['idProducto']);
+        } 
     }
+    else{
+          $this->view->errorCrear("No tiene permiso");
+          $this->mostrarProducto();
+    }
+      
   }
 
   /*FUNCION PARA FILTRAR POR MARCA PRODUCTOS*/

@@ -18,13 +18,14 @@ class SecuredController extends Controller
      // die();
     //}
   }
-  public function admin($value='')
-  {
-    if(isset($_SESSION['superAdmin'])&&$_SESSION['superAdmin']==1){
-      header('Location: '.LOGIN);
-       die();
-    }
-  }
+  // public function admin($value='')
+  // {
+  //   if(!isset($_SESSION['superAdmin'])&&$_SESSION['superAdmin']==1){
+  //     header('Location: '.LOGIN);
+  //     die();
+  //   }
+  // }
+
   public function superAdmin($value='')
   {
     $superAdmin=false;
@@ -33,6 +34,7 @@ class SecuredController extends Controller
     }
     return $superAdmin;
   }
+
   public function usuario($value='')
   {
     $usuario=false;

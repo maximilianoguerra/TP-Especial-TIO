@@ -40,7 +40,7 @@ class ComentariosApiController extends Api
   }
 
   public function createComentario($url_params = []) {
-    $this->admin();
+
     $body = json_decode($this->raw_data);
     $comentario = $body->comentario;
     $valoracioncion = $body->valoracion;

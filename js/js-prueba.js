@@ -60,7 +60,6 @@ function getForm (datos) {
       // Si el usuario está logueado refresco la web
       if(dir === "verificarUsuario" ) {
          // Si ingreso la contraseña
-         alert(dir+data)
          if(data === "User pass error"){
           $("div .form-group").addClass('has-error');
           $("input").val("");
@@ -72,7 +71,6 @@ function getForm (datos) {
         }
       }
       else if(dir === "register" ) {
-        alert(data);
         if(data == "Email Invalido"){
           $("div .form-group").addClass('has-error');
           $("input").val("");
@@ -80,7 +78,7 @@ function getForm (datos) {
         }
         else{
           //Sino Reload la web completa
-          $(".reemplazo").html(data);
+          window.location.reload();
         }
       }
       else if(dir === "guardarImagenProducto" ) {

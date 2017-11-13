@@ -57,7 +57,10 @@ class LoginController extends Controller
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $nombre =$_POST['nombre'];
     $apellido=$_POST['apellido'];
-    if ((isset($_POST['password']) && !empty($_POST['password'])) &&
+
+    
+    if ((filter_var($userName,FILTER_VALIDATE_EMAIL)) &&
+      (isset($_POST['password']) && !empty($_POST['password'])) &&
       (isset($_POST['nombre']) && !empty($_POST['nombre'])) &&
       (isset($_POST['apellido']) && !empty($_POST['apellido'])))  {
       $this->model->guardardatosusuario($userName,$hash,$nombre,$apellido);
