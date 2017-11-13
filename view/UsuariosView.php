@@ -5,7 +5,5 @@ class UsuariosView extends View
     $this->smarty->assign('usuarios', $usuarios);
     $this->smarty->display('templates/listaUsuarios.tpl');
   }
-
 }
-
 ?>

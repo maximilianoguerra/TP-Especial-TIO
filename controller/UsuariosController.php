@@ -2,7 +2,6 @@
 include_once('model/UsuariosModel.php');
 include_once('view/UsuariosView.php');
 class UsuariosController extends SecuredController{
-
   function __construct()
   {
     parent::__construct();
@@ -18,6 +17,5 @@ class UsuariosController extends SecuredController{
   $usuarios = $this->usuariosModel->getUsuarios();
   $this->usuariosView->mostrarUsuarios($usuarios);
 }
-
 }
- ?>
+?>
