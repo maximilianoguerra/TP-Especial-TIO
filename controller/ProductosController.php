@@ -1,7 +1,9 @@
 <?php
 include_once('model/ProductosModel.php');
 include_once('model/MarcasModel.php');
+include_once('model/UsuariosModel.php');
 include_once('view/ProductosView.php');
+include_once('view/UsuariosView.php');
 
 class ProductosController extends SecuredController
 {
@@ -9,18 +11,24 @@ class ProductosController extends SecuredController
   {
     parent::__construct();
     $this->view = new ProductosView();
+    $this->usuariosView = new UsuariosView();
     $this->model = new ProductosModel();
     $this->marcasModel = new MarcasModel();
+    $this->usuariosModel = new UsuariosModel();
   }
 
   public function index()
   {
     $usuario = null;
+    $superAdmin = null;
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = $_SESSION['usuario'];
     }
+    if (isset($_SESSION['superAdmin'])) { // pregunto si tengo un usuario
+      $superAdmin = $_SESSION['superAdmin'];
+    }
 
-    $this->view->mostrarIndex($usuario);
+    $this->view->mostrarIndex($usuario, $superAdmin);
   }
 
   public function comparativa()
@@ -76,6 +84,16 @@ class ProductosController extends SecuredController
       $imagenes=$this->model->getImagenes($value);
       $this->view->mostrarDetalleProducto($productos,$marcas,$imagenes,$usuario,$superAdmin);
     }
+  }
+
+  public function mostrarListaUsuarios($value="")
+  {
+    $superAdmin=false;
+    if (isset($_SESSION['superAdmin'])) { // pregunto si tengo un usuario
+      $superAdmin = true;
+    }
+    $usuarios = $this->usuariosModel->getUsuarios();
+    $this->usuariosView->mostrarUsuarios($usuarios);
   }
 
 

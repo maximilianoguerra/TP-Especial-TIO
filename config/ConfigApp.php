@@ -31,6 +31,7 @@ class ConfigApp
       'sesionExpirada' => 'LoginController#expirada',
       'body'=>'ProductosController#traemeElbody',
       'registrarse' => 'LoginController#register',
+      'listaUsuarios' => 'ProductosController#mostrarListaUsuarios',
       'register' => 'LoginController#registrarEnDB',
       'mostrarProducto' => 'ProductosController#mostrarProducto'
 

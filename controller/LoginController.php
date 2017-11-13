@@ -58,15 +58,22 @@ class LoginController extends Controller
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $nombre =$_POST['nombre'];
     $apellido=$_POST['apellido'];
-    $this->model->guardardatosusuario($userName,$hash,$nombre,$apellido);
-    $user = $this->model->getUser($userName);
-    if((!empty($user)) && password_verify($password, $user[0]['password'])) {
-      session_start();
-      $_SESSION['usuario'] = $userName;
-      $_SESSION['LAST_ACTIVITY'] = time();
-      $_SESSION['superAdmin']=$user[0]['superAdmin'];
-      header('Location: '.HOME);
-      die();
+
+   if ((filter_var($userName,FILTER_VALIDATE_EMAIL))) {   
+    echo("Entre");
+      $this->model->guardardatosusuario($userName,$hash,$nombre,$apellido);
+      $user = $this->model->getUser($userName);
+      if((!empty($user)) && password_verify($password, $user[0]['password'])) {
+        session_start();
+        $_SESSION['usuario'] = $userName;
+        $_SESSION['LAST_ACTIVITY'] = time();
+        $_SESSION['superAdmin']=$user[0]['superAdmin'];
+        header('Location: '.HOME);
+        die();
+      }
+    }
+    else{
+      echo("Email Invalido");
     }
   }
 

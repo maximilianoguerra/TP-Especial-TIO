@@ -69,7 +69,15 @@ function getForm (datos) {
         }
       }
       else if(dir === "register" ) {
+        if(data === "Email Invalido"){
+          $("div .form-group").addClass('has-error');
+          $("input").val("");
+          $('#loginError').css('visibility', 'visible');
+        }
+        else{
+          //Sino Reload la web completa
           window.location.reload();
+        }          
       }
       else if(dir === "guardarImagenProducto" ) {
           $(".reemplazo").html(data);
