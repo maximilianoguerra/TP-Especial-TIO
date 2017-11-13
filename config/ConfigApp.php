@@ -34,8 +34,9 @@ class ConfigApp
       'listaUsuarios' => 'ProductosController#mostrarListaUsuarios',
       'register' => 'LoginController#registrarEnDB',
       'mostrarProducto' => 'ProductosController#mostrarProducto',
-      'listaUsuarios' => 'UsuariosController#mostrarListaUsuarios'
-
+      'listaUsuarios' => 'UsuariosController#mostrarListaUsuarios',
+      'borrarUsuario' => 'UsuariosController#borrarUsuario',
+      'editarPermiso' => 'UsuariosController#editarPermisoUsuario'
     ];
 
 }

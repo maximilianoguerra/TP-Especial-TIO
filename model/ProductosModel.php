@@ -3,13 +3,13 @@ class ProductosModel extends Model
 {
   /*FUNCION PARA TRAER LOS PRODUCTOS DE LA TABLA*/
   function getProductos(){
-    $sentencia = $this->db->prepare( "select * from producto");//producto es la tabla de la BBDD
+    $sentencia = $this->db->prepare("select * from producto");//producto es la tabla de la BBDD
     $sentencia->execute();
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }
 
   function getImagenes($id_producto){
-    $sentencia = $this->db->prepare( "select * from imagen where fk_id_tarea=?");
+    $sentencia = $this->db->prepare("select * from imagen where fk_id_tarea=?");
     $sentencia->execute(array($id_producto));
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }
@@ -42,7 +42,7 @@ class ProductosModel extends Model
 
   /*FUNCION PARA BORRAR PRODUCTOS DE LA TABLA*/
   function borrarProducto($id){
-    $sentencia = $this->db->prepare( "delete from producto where id=?");
+    $sentencia = $this->db->prepare("delete from producto where id=?");
     $sentencia->execute([$id]);
   }
   
@@ -53,7 +53,7 @@ class ProductosModel extends Model
 
   /*FUNCION PARA PARA FILTRAR POR MARCA*/
   function getFiltro($id_marca){
-    $sentencia = $this->db->prepare( "select * from producto where id_marca =?");
+    $sentencia = $this->db->prepare("select * from producto where id_marca =?");
   //producto es la tabla de la BBDD
     $sentencia->execute([$id_marca]);
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
