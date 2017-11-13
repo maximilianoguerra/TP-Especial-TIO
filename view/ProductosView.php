@@ -10,7 +10,8 @@ class ProductosView extends View
     //$this->smarty->display('templates/comparativaNormal.tpl');
   }
 
-   function mostrarIndex($usuario){
+   function mostrarIndex($usuario,$superAdmin){
+    $this->smarty->assign('superAdmin',$superAdmin);
     $this->smarty->assign('usuario', $usuario);
     $this->smarty->display('templates/index.tpl');
   }

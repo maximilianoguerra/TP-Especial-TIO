@@ -5,7 +5,7 @@ require_once('Api.php');
 /**
  *
  */
-class TareasApiController extends Api
+class ComentariosApiController extends Api
 {
   protected $model;
 
@@ -60,6 +60,7 @@ class TareasApiController extends Api
     $Coments = $this->model->getComentariosdeUnProducto($id_producto);
     $response = new stdClass();
         $response->comentarios =$Coments;
+        $response->usuario =$this->usuario();
         $response->admin =$this->superAdmin();
         $response->status = 200;
     return $this->json_response($response, 200);

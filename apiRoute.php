@@ -6,17 +6,17 @@ define('PARAMS', 1);
 
 
 require_once('api/config/Router.php');
-require_once('api/controller/TareasApiController.php');
+require_once('api/controller/ComentariosApiController.php');
 
 
 $router = new Router();
 //url, verb, controller, method
-$router->AddRoute("comentarios", "GET", "TareasApiController", "getComents");
+$router->AddRoute("comentarios", "GET", "ComentariosApiController", "getComents");
 // $router->AddRoute("comentarios/:id", "GET", "TareasApiController", "getComent");
-$router->AddRoute("comentarios/:id", "GET", "TareasApiController", "getComentsdeUnProducto");
-$router->AddRoute("comentarios", "POST", "TareasApiController", "createComentario");
-$router->AddRoute("comentarios/:id", "DELETE", "TareasApiController", "deleteComentario");
-$router->AddRoute("comentarios/:id", "PUT", "TareasApiController", "editComentario");
+$router->AddRoute("comentarios/:id", "GET", "ComentariosApiController", "getComentsdeUnProducto");
+$router->AddRoute("comentarios", "POST", "ComentariosApiController", "createComentario");
+$router->AddRoute("comentarios/:id", "DELETE", "ComentariosApiController", "deleteComentario");
+$router->AddRoute("comentarios/:id", "PUT", "ComentariosApiController", "editComentario");
 
 $route = $_GET['resource'];
 $array = $router->Route($route);

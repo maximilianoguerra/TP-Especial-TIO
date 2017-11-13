@@ -22,7 +22,6 @@ class LoginController extends Controller
   {
     $userName = $_POST['usuario'];
     $password = $_POST['password'];
-
     if(!empty($userName) && !empty($password)){
       $user = $this->model->getUser($userName);
       if((!empty($user)) && password_verify($password, $user[0]['password'])) {
@@ -58,16 +57,23 @@ class LoginController extends Controller
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $nombre =$_POST['nombre'];
     $apellido=$_POST['apellido'];
-    $this->model->guardardatosusuario($userName,$hash,$nombre,$apellido);
-    $user = $this->model->getUser($userName);
-    if((!empty($user)) && password_verify($password, $user[0]['password'])) {
-      session_start();
-      $_SESSION['usuario'] = $userName;
-      $_SESSION['LAST_ACTIVITY'] = time();
-      $_SESSION['superAdmin']=$user[0]['superAdmin'];
-      header('Location: '.HOME);
-      die();
+    if ((isset($_POST['password']) && !empty($_POST['password'])) &&
+      (isset($_POST['nombre']) && !empty($_POST['nombre'])) &&
+      (isset($_POST['apellido']) && !empty($_POST['apellido'])))  {
+      $this->model->guardardatosusuario($userName,$hash,$nombre,$apellido);
+      $user = $this->model->getUser($userName);
+      if((!empty($user)) && password_verify($password, $user[0]['password'])) {
+        session_start();
+        $_SESSION['usuario'] = $userName;
+        $_SESSION['LAST_ACTIVITY'] = time();
+        $_SESSION['superAdmin']=$user[0]['superAdmin'];
+        header('Location: '.HOME);
+        die();
+      }
+    }else {
+      echo "Email Invalido";
     }
+
   }
 
 

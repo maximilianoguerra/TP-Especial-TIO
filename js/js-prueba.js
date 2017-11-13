@@ -6,9 +6,7 @@ $.ajax({ url: 'js/templates/comentarios.mst'}).done( template => templateComenta
 
 function cargarApi(idProduct,superAdmin) {
   let url="api/comentarios/"+idProduct;
-    alert(url);
   $.ajax(url).done(function(data) {
-      alert(data);
       let array=[{n:1},{n:2},{n:3},{n:4},{n:5}]
       let idProd=[{id:idProduct}];
 
@@ -62,7 +60,8 @@ function getForm (datos) {
       // Si el usuario está logueado refresco la web
       if(dir === "verificarUsuario" ) {
          // Si ingreso la contraseña
-         if(data === "User pass error"){
+         alert(dir+data)
+         if(data === ""){
           $("div .form-group").addClass('has-error');
           $("input").val("");
           $('#loginError').css('visibility', 'visible');
@@ -72,9 +71,18 @@ function getForm (datos) {
           window.location.reload();
         }
       }
-      else if(dir === "register" ) {
-          window.location.reload();
-      }
+      // else if(dir === "register" ) {
+      //   alert(data);
+      //   if(data == "Email Invalido"){
+      //     $("div .form-group").addClass('has-error');
+      //     $("input").val("");
+      //     $('#loginError').css('visibility', 'visible');
+      //   }
+      //   else{
+      //     //Sino Reload la web completa
+      //     $(".reemplazo").html(data);
+      //   }
+      // }
       else if(dir === "guardarImagenProducto" ) {
           $(".reemplazo").html(data);
           cargarApi(idProduct);

@@ -32,7 +32,8 @@ class ConfigApp
       'body'=>'ProductosController#traemeElbody',
       'registrarse' => 'LoginController#register',
       'register' => 'LoginController#registrarEnDB',
-      'mostrarProducto' => 'ProductosController#mostrarProducto'
+      'mostrarProducto' => 'ProductosController#mostrarProducto',
+      'listaUsuarios' => 'UsuariosController#mostrarListaUsuarios'
 
     ];
 

@@ -20,7 +20,7 @@ class SecuredController extends Controller
   }
   public function admin($value='')
   {
-    if(!isset($_SESSION['usuario'])){
+    if(isset($_SESSION['superAdmin'])&&$_SESSION['superAdmin']==1){
       header('Location: '.LOGIN);
        die();
     }
@@ -32,6 +32,14 @@ class SecuredController extends Controller
       $superAdmin=true;
     }
     return $superAdmin;
+  }
+  public function usuario($value='')
+  {
+    $usuario=false;
+    if(isset($_SESSION['usuario'])){
+      $usuario=true;
+    }
+    return $usuario;
   }
 }
 

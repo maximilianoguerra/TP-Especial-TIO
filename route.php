@@ -10,6 +10,7 @@ include_once 'controller/SecuredController.php';
 include_once 'controller/ProductosController.php';
 include_once 'controller/MarcasController.php';
 include_once 'controller/LoginController.php';
+include_once 'controller/UsuariosController.php';
 
 function parseURL($url)
 {

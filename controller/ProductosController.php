@@ -15,12 +15,14 @@ class ProductosController extends SecuredController
 
   public function index()
   {
-    $usuario = null;
-    if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
+      $usuario=null;
+    if ($this->usuario()) {
       $usuario = $_SESSION['usuario'];
     }
 
-    $this->view->mostrarIndex($usuario);
+    $superAdmin =$this->superAdmin();
+
+    $this->view->mostrarIndex($usuario,$superAdmin);
   }
 
   public function comparativa()
