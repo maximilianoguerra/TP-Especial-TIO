@@ -8,7 +8,8 @@ class LoginView extends View
   function mostrarsesionExpirada(){
   	$this->smarty->display('templates/sesionExpirada.tpl');
   }
-  function mostrarRegister(){
+  function mostrarRegister($error = ''){
+    $this->smarty->assign('error', $error);
     $this->smarty->display('templates/register.tpl');
   }
 

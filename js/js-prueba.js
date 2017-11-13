@@ -61,7 +61,7 @@ function getForm (datos) {
       if(dir === "verificarUsuario" ) {
          // Si ingreso la contraseña
          alert(dir+data)
-         if(data === ""){
+         if(data === "User pass error"){
           $("div .form-group").addClass('has-error');
           $("input").val("");
           $('#loginError').css('visibility', 'visible');
@@ -71,18 +71,18 @@ function getForm (datos) {
           window.location.reload();
         }
       }
-      // else if(dir === "register" ) {
-      //   alert(data);
-      //   if(data == "Email Invalido"){
-      //     $("div .form-group").addClass('has-error');
-      //     $("input").val("");
-      //     $('#loginError').css('visibility', 'visible');
-      //   }
-      //   else{
-      //     //Sino Reload la web completa
-      //     $(".reemplazo").html(data);
-      //   }
-      // }
+      else if(dir === "register" ) {
+        alert(data);
+        if(data == "Email Invalido"){
+          $("div .form-group").addClass('has-error');
+          $("input").val("");
+          $('#loginError').css('visibility', 'visible');
+        }
+        else{
+          //Sino Reload la web completa
+          $(".reemplazo").html(data);
+        }
+      }
       else if(dir === "guardarImagenProducto" ) {
           $(".reemplazo").html(data);
           cargarApi(idProduct);

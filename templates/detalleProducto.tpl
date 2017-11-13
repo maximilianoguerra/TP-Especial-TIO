@@ -74,7 +74,7 @@
 
                 <div class="form-group">
                   <label for="consumo">Adjuntar Imagen</label>
-                  <input type="file" class="form-control" id="consumo" name="imagenproducto[]"  value="" multiple></input>
+                  <input type="file" class="form-control" id="consumo" name="fotos[]"  value="" multiple required></input>
 
                   <input type="text"  class="idProducto"  name="id_producto" value="{$producto['id']}" hidden="on"></input>
                    {/foreach}

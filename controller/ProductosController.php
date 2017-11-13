@@ -1,7 +1,9 @@
 <?php
 include_once('model/ProductosModel.php');
 include_once('model/MarcasModel.php');
+include_once('model/UsuariosModel.php');
 include_once('view/ProductosView.php');
+include_once('view/UsuariosView.php');
 
 class ProductosController extends SecuredController
 {
@@ -9,8 +11,10 @@ class ProductosController extends SecuredController
   {
     parent::__construct();
     $this->view = new ProductosView();
+    $this->usuariosView = new UsuariosView();
     $this->model = new ProductosModel();
     $this->marcasModel = new MarcasModel();
+    $this->usuariosModel = new UsuariosModel();
   }
 
   public function index()
@@ -19,7 +23,6 @@ class ProductosController extends SecuredController
     if ($this->usuario()) {
       $usuario = $_SESSION['usuario'];
     }
-
     $superAdmin =$this->superAdmin();
 
     $this->view->mostrarIndex($usuario,$superAdmin);
@@ -75,6 +78,16 @@ class ProductosController extends SecuredController
       $imagenes=$this->model->getImagenes($value);
       $this->view->mostrarDetalleProducto($productos,$marcas,$imagenes,$usuario,$superAdmin);
     }
+  }
+
+  public function mostrarListaUsuarios($value="")
+  {
+    $superAdmin=false;
+    if (isset($_SESSION['superAdmin'])) { // pregunto si tengo un usuario
+      $superAdmin = true;
+    }
+    $usuarios = $this->usuariosModel->getUsuarios();
+    $this->usuariosView->mostrarUsuarios($usuarios);
   }
 
 
@@ -146,10 +159,16 @@ class ProductosController extends SecuredController
   {
     $this->admin();// pregunto si tengo un usuario
       $id = $_POST['id_producto'];
-      if(isset($_FILES['imagenproducto'])){
-        $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['imagenproducto']);
+      // var_dump($_FILES['fotos']['size']['0']);
+      // die();
+      if(isset($_FILES['fotos']) && $_FILES['fotos']['size']['0'] > 0){
+        $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['fotos']);
 
         $this->model->guardarImagenProducto($id,$imagenes);
+        $this->mostrarProducto();
+      }
+      else{
+        $this->view->errorCrear("No cargo imagen");
         $this->mostrarProducto();
       }
 
@@ -197,12 +216,14 @@ class ProductosController extends SecuredController
         $j++;
       }
     }
+    $usuario = false;
+    $superAdmin=false;
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = true;
+
       if ($_SESSION['superAdmin']==1) {
         $superAdmin=true;
       }
-
     }
 
     $this->view->mostrarProductos($productos, $marcas, $usuario,$superAdmin);

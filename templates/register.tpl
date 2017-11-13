@@ -19,7 +19,7 @@
         <input type="text" class="form-control" id="apellido" name ="apellido" placeholder="Apellido" >
       </div>
         <div class="formulario">
-        <button type="submit" class="btn btn-default">Register</button>
+        <button type="submit" class="btn btn-default">Registrar</button>
         </div>
       </form>
     </div>

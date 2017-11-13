@@ -13,6 +13,7 @@ class ProductosView extends View
    function mostrarIndex($usuario,$superAdmin){
     $this->smarty->assign('superAdmin',$superAdmin);
     $this->smarty->assign('usuario', $usuario);
+    $this->smarty->assign('superAdmin', $superAdmin);
     $this->smarty->display('templates/index.tpl');
   }
 
@@ -51,7 +52,7 @@ function mostrarDetalleProducto($producto,$marca,$imagenes,$usuario,$superAdmin)
   $this->smarty->assign('marcas', $marca);
   $this->smarty->assign('imagenes', $imagenes);
   $this->smarty->assign('usuario', $usuario);
-    $this->smarty->assign('superAdmin', $superAdmin);
+  $this->smarty->assign('superAdmin', $superAdmin);
   $this->smarty->display('templates/detalleProducto.tpl');
 }
 
