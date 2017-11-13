@@ -1,5 +1,5 @@
 <?php
-
+include_once("controller/Controller.php");
 class SecuredController extends Controller
 {
 
@@ -24,6 +24,14 @@ class SecuredController extends Controller
       header('Location: '.LOGIN);
        die();
     }
+  }
+  public function superAdmin($value='')
+  {
+    $superAdmin=false;
+    if(isset($_SESSION['superAdmin'])&&$_SESSION['superAdmin']==1){
+      $superAdmin=true;
+    }
+    return $superAdmin;
   }
 }
 

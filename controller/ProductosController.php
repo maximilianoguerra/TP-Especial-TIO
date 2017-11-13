@@ -195,12 +195,15 @@ class ProductosController extends SecuredController
         $j++;
       }
     }
-    $usuario = false;
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = true;
+      if ($_SESSION['superAdmin']==1) {
+        $superAdmin=true;
+      }
+
     }
 
-    $this->view->mostrarProductos($productos, $marcas, $usuario);
+    $this->view->mostrarProductos($productos, $marcas, $usuario,$superAdmin);
   }
 
   //ABRE LA PAGINA PARA EDITAR EL PRODUCTO

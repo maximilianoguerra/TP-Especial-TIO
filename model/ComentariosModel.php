@@ -1,4 +1,5 @@
 <?php
+require_once('model/Model.php');
 class ComentariosModel extends Model{
     public function getComentarios()
     {

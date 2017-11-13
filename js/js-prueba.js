@@ -6,15 +6,15 @@ $.ajax({ url: 'js/templates/comentarios.mst'}).done( template => templateComenta
 
 function cargarApi(idProduct,superAdmin) {
   let url="api/comentarios/"+idProduct;
-    let administrador=false;
-    if (superAdmin==1) {
-      administrador=true;
-    }
+    alert(url);
   $.ajax(url).done(function(data) {
+      alert(data);
       let array=[{n:1},{n:2},{n:3},{n:4},{n:5}]
       let idProd=[{id:idProduct}];
-      let superAd=administrador;
-      let rendered = Mustache.render(templateComentario,{arreglo:data,array,idProd,superAd});
+
+      // let superAd=administrador;
+      let rendered = Mustache.render(templateComentario,{data,array,idProd});
+
       $(".comentarios").html(rendered);
     });
 }

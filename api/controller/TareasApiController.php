@@ -1,6 +1,6 @@
 <?php
 
-require_once('../model/ComentariosModel.php');
+require_once('model/ComentariosModel.php');
 require_once('Api.php');
 /**
  *
@@ -13,6 +13,7 @@ class TareasApiController extends Api
   {
       parent::__construct();
       $this->model = new ComentariosModel();
+      $this->modelUsuario =false;
   }
 
   public function getComents($url_params = [])
@@ -24,8 +25,9 @@ class TareasApiController extends Api
       return $this->json_response($comentarios, 200);
   }
 
-  public function deleteTareas($url_params = [])
+  public function deleteComentario($url_params = [])
   {
+      $this->admin();
       $id_comentario = $url_params[":id"];
       $coments = $this->model->getComentario($id_comentario);
       if($coments)
@@ -38,6 +40,7 @@ class TareasApiController extends Api
   }
 
   public function createComentario($url_params = []) {
+    $this->admin();
     $body = json_decode($this->raw_data);
     $comentario = $body->comentario;
     $valoracioncion = $body->valoracion;
@@ -55,11 +58,15 @@ class TareasApiController extends Api
   {
     $id_producto=$url_params[":id"];
     $Coments = $this->model->getComentariosdeUnProducto($id_producto);
-
-    return $this->json_response($Coments, 200);
+    $response = new stdClass();
+        $response->comentarios =$Coments;
+        $response->admin =$this->superAdmin();
+        $response->status = 200;
+    return $this->json_response($response, 200);
   }
 
   public function editComentario($url_params = []) {
+    $this->admin();
     $body = json_decode($this->raw_data);
     $id = $url_params[":id"];
     $comentario = $body->comentario;

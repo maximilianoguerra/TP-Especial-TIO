@@ -2,7 +2,6 @@
 class ProductosView extends View
 {
   function mostrarProductos($producto,$marca,$usuario,$superAdmin){
-    echo  $superAdmin;
     $this->smarty->assign('productos', $producto);
     $this->smarty->assign('marcas', $marca);
     $this->smarty->assign('usuario', $usuario);

@@ -6,22 +6,24 @@
                   <div class="form-group">
                     <label for="id_marca">Comentarios</label>
                   </div>
-                  {{#arreglo}}<!--array de comentarios-->
+                  {{#data}}<!--array de comentarios-->
+                    {{#comentarios}}
                   <div class="panelComentarios panel-default">
                       <div class="nav-bar-default panel-body">
                           <p>{{comentario}}</p>
                           <p>Valoracion = {{valoracion}}</p>
                           <div class="enLinea">
-                            {{#superAd}}
-                            <a href="{{id_comentario}}" class="borrarComentario" name="{{superAd}}">
+                            {{#admin}}
+                            <a href="{{id_comentario}}" class="borrarComentario" name="">
                               <p><span id="borrar" class="fa fa-trash-o " aria-hidden="true" value="0"></span></p>
                             </a>
-                            {{/superAd}}
+                            {{/admin}}
                           </div>
                       </div>
 
                   </div>
-                    {{/arreglo}}
+                    {{/comentarios}}
+                    {{/data}}
                   <form href="api/comentarios" class="formComentarios" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="comentario">Agregar Comentario</label>
@@ -41,6 +43,7 @@
                   <div class="alert alert-danger" role="alert">{$error}</div>
                   {/if} -->
             </form>
+
           </div>
         </div>
       </div>

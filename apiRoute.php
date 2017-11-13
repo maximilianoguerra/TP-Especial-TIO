@@ -3,9 +3,10 @@
 define('RESOURCE', 0);
 define('PARAMS', 1);
 
-include_once 'config/Router.php';
-include_once '../model/Model.php';
-include_once 'controller/TareasApiController.php';
+
+
+require_once('api/config/Router.php');
+require_once('api/controller/TareasApiController.php');
 
 
 $router = new Router();
@@ -13,9 +14,8 @@ $router = new Router();
 $router->AddRoute("comentarios", "GET", "TareasApiController", "getComents");
 // $router->AddRoute("comentarios/:id", "GET", "TareasApiController", "getComent");
 $router->AddRoute("comentarios/:id", "GET", "TareasApiController", "getComentsdeUnProducto");
-$router->AddRoute("tareas/:id/descripcion", "GET", "TareasApiController", "getDescripcion");
 $router->AddRoute("comentarios", "POST", "TareasApiController", "createComentario");
-$router->AddRoute("comentarios/:id", "DELETE", "TareasApiController", "deleteTareas");
+$router->AddRoute("comentarios/:id", "DELETE", "TareasApiController", "deleteComentario");
 $router->AddRoute("comentarios/:id", "PUT", "TareasApiController", "editComentario");
 
 $route = $_GET['resource'];
