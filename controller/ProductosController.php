@@ -39,23 +39,29 @@ class ProductosController extends SecuredController
       }
     }
     $usuario = false;
+    $superAdmin=false;
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = true;
+      
+      if ($_SESSION['superAdmin']==1) {
+        $superAdmin=true;
+      }
     }
-    $this->view->mostrarProductos($productos, $marcas, $usuario);
+    $this->view->mostrarProductos($productos, $marcas, $usuario,$superAdmin);
   }
 
   public function mostrarProducto($value="")
   {
     $usuario = false;
+    $superAdmin=false;
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = true;
-      $superAdmin=false;
+      
       if ($_SESSION['superAdmin']==1) {
         $superAdmin=true;
       }
-      echo $usuario;
-      echo $superAdmin;
+   //   echo $usuario;
+    //  echo $superAdmin;
     }
     $marcas = $this->marcasModel->getMarcas();
 
@@ -141,10 +147,16 @@ class ProductosController extends SecuredController
   {
     $this->admin();// pregunto si tengo un usuario
       $id = $_POST['id_producto'];
-      if(isset($_FILES['imagenproducto'])){
-        $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['imagenproducto']);
+      // var_dump($_FILES['fotos']['size']['0']);
+      // die();
+      if(isset($_FILES['fotos']) && $_FILES['fotos']['size']['0'] > 0){
+        $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['fotos']);
 
         $this->model->guardarImagenProducto($id,$imagenes);
+        $this->mostrarProducto();
+      }
+      else{
+        $this->view->errorCrear("No cargo imagen");
         $this->mostrarProducto();
       }
 
@@ -193,11 +205,16 @@ class ProductosController extends SecuredController
       }
     }
     $usuario = false;
+    $superAdmin=false;
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = true;
+      
+      if ($_SESSION['superAdmin']==1) {
+        $superAdmin=true;
+      }
     }
 
-    $this->view->mostrarProductos($productos, $marcas, $usuario);
+    $this->view->mostrarProductos($productos, $marcas, $usuario,$superAdmin);
   }
 
   //ABRE LA PAGINA PARA EDITAR EL PRODUCTO

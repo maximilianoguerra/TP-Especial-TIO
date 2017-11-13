@@ -28,7 +28,7 @@
           <th><p >ANCHO DE BANDA (GB/s)</p></th>
           <th><p >CONSUMO (W)</p></th>
           <th><p >DETALLES</p></th>
-          {if $usuario}
+          {if $superAdmin}
           <th><p ></p></th>
           {/if}
         </tr>
@@ -50,7 +50,7 @@
               </div>
             </div>
           </td>
-          {if $usuario}
+          {if $superAdmin}
           <td>
             <div class="col-xs-12 col-sm-12 col-md-12">
               <div class="borrarEditarCentrado">
@@ -72,7 +72,7 @@
         {/foreach}
       </table>
     </div>
-    {if $usuario}
+    {if $superAdmin}
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 formulario">
         <div class="msj">
