@@ -14,7 +14,7 @@
                           <p>Valoracion = {{valoracion}}</p>
                           <div class="enLinea">
                             {{#admin}}
-                            <a href="{{id_comentario}}" class="borrarComentario" name="">
+                            <a href="{{id_comentario}}" class="borrarComentario" name="{{admin}}">
                               <p><span id="borrar" class="fa fa-trash-o " aria-hidden="true" value="0"></span></p>
                             </a>
                             {{/admin}}

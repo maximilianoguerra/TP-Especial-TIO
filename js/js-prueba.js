@@ -110,12 +110,10 @@ function crearComentario() {
                    alert('Imposible crear la tarea');
                });
     }
-    function borrarComentario() {
+    function borrarComentario(idComentario,admin) {
       let superAdmin=0;
-      let idComentario=$(".borrarComentario").attr("href");
       let urldelete="api/comentarios/"+idComentario;
       let idProducto=$("#id_producto").val();
-      let admin=$(".borrarComentario").attr("name");
       if (admin) {
         superAdmin=1;
       }
@@ -267,7 +265,10 @@ $(document).on('submit','.formComentarios', function(event){
 
     $(document).on('click','.borrarComentario', function(event){
       event.preventDefault();
-      borrarComentario();
+      let idComentario=$(this).attr("href");
+      let admin=$(this).attr("name");
+      alert(idComentario+admin);
+      borrarComentario(idComentario,admin);
     });
 
 
