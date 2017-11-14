@@ -91,6 +91,7 @@ function crearComentario() {
       "id_producto":$("#id_producto").val()
     };
     let idProducto=$("#id_producto").val();
+          alert(idProducto);
            $.ajax({
                    method: "POST",
                    url: "api/comentarios",
