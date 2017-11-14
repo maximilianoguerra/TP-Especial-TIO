@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2017 a las 01:30:06
+-- Tiempo de generación: 14-11-2017 a las 15:44:28
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -46,33 +46,6 @@ CREATE TABLE `imagen` (
   `fk_id_tarea` int(11) NOT NULL,
   `path` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `imagen`
---
-
-INSERT INTO `imagen` (`id`, `fk_id_tarea`, `path`) VALUES
-(39, 137, 'img/5a076dcdd178a_1.jpg'),
-(40, 137, 'img/5a076dcdda346_2.jpg'),
-(41, 137, 'img/5a076dcde31dc_3.jpg'),
-(45, 137, 'img/5a076dce23ce1_11.jpg'),
-(46, 137, 'img/5a076dce2c051_12.jpg'),
-(47, 137, 'img/5a076dce3c413_13.jpg'),
-(49, 156, 'img/5a076f617c41b_6.jpg'),
-(52, 156, 'img/5a076f61a8d36_9.jpg'),
-(53, 156, 'img/5a076f61b0e37_10.jpg'),
-(55, 156, 'img/5a076f61c12e7_12.jpg'),
-(56, 156, 'img/5a076f61c9670_13.jpg'),
-(57, 156, 'img/5a076f61d58e4_14.jpg'),
-(66, 160, 'img/5a0774f46a607_6.jpg'),
-(67, 160, 'img/5a0774f476c77_7.jpg'),
-(68, 160, 'img/5a0774f47f578_8.jpg'),
-(75, 148, 'img/5a0775160736d_6.jpg'),
-(76, 148, 'img/5a07751610c01_7.jpg'),
-(77, 148, 'img/5a0775161924d_8.jpg'),
-(78, 148, 'img/5a07751627747_9.jpg'),
-(79, 148, 'img/5a07751635a3d_10.jpg'),
-(81, 148, 'img/5a0775166a885_12.jpg');
 
 -- --------------------------------------------------------
 
@@ -125,9 +98,9 @@ INSERT INTO `producto` (`id`, `modelo`, `memoria`, `banda`, `consumo`, `id_marca
 (136, 'asdasd', 0, 0, 0, 1, ''),
 (137, 'GTX 1080 Ti', 8, 450, 500, 5, ''),
 (148, 'GTX 1070 Ti', 6, 500, 600, 7, ''),
-(156, 'aaaa', 1, 1, 1, 6, ''),
 (157, 'q', 1, 1, 1, 4, ''),
-(160, '1', 1, 1, 1, 5, '');
+(161, 'w', 1, 1, 1, 5, ''),
+(163, 'q', 2, 2, 2, 1, '');
 
 -- --------------------------------------------------------
 
@@ -149,7 +122,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `usuario`, `password`, `nombre`, `apellido`, `superAdmin`) VALUES
-(1, 'admin', '$2y$10$mX0CJe.TzCawcbgGb1x4h.GLC4ZYlqCtqtjI85vaqmxc/kmNbX9s.', 'carlos', 'cabrera', 0);
+(4, 'admin', '$2y$10$ovkYyYGMTt8lh4pIMeBn4uNxXRLh2KfJmMOKmdXEqcLgVhvA8go66', 'carlos', 'cabrera', 1);
 
 --
 -- Índices para tablas volcadas
@@ -196,12 +169,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `imagen`
 --
 ALTER TABLE `imagen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 --
 -- AUTO_INCREMENT de la tabla `marca`
 --
@@ -211,12 +184,12 @@ ALTER TABLE `marca`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Restricciones para tablas volcadas
 --
