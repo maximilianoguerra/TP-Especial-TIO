@@ -4,13 +4,11 @@ include_once('view/LoginView.php');
 
 class LoginController extends Controller
 {
-
   function __construct()
   {
     $this->view = new LoginView();
     $this->model = new LoginModel();
   }
-
   public function index()
   {
     $this->view->mostrarLogin();
@@ -73,14 +71,10 @@ class LoginController extends Controller
         header('Location: '.HOME);
         die();
       }
-    }else {
+    }
+    else {
       echo "Email Invalido";
     }
-
   }
-
-
 }
-
-
 ?>

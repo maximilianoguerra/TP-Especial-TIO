@@ -11,7 +11,6 @@
     {
       $this->routes = [];
     }
-
     public function AddRoute($url, $verb, $controller, $method)
     {
       $this->routes[] = [$url, $verb, $controller, $method];
@@ -37,7 +36,6 @@
             return false;
       return true;
     }
-
     public function Route($url)
     {
       foreach ($this->routes as  $route) {
@@ -53,5 +51,4 @@
       }
     }
   }
-
 ?>

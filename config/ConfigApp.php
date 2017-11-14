@@ -38,6 +38,5 @@ class ConfigApp
       'borrarUsuario' => 'UsuariosController#borrarUsuario',
       'editarPermiso' => 'UsuariosController#editarPermisoUsuario'
     ];
-
 }
 ?>

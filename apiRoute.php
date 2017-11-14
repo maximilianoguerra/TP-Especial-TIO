@@ -3,8 +3,6 @@
 define('RESOURCE', 0);
 define('PARAMS', 1);
 
-
-
 require_once('api/config/Router.php');
 require_once('api/controller/ComentariosApiController.php');
 
@@ -30,9 +28,4 @@ else
   $url_params = $array[2];
   echo (new $controller())->$metodo($url_params);
 }
-
-
-
-
-
 ?>

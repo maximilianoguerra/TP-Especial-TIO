@@ -8,14 +8,12 @@ require_once('Api.php');
 class ComentariosApiController extends Api
 {
   protected $model;
-
   function __construct()
   {
       parent::__construct();
       $this->model = new ComentariosModel();
       $this->modelUsuario =false;
   }
-
   public function getComents($url_params = [])
   {
       $comentarios = $this->model->getComentarios();
@@ -24,7 +22,6 @@ class ComentariosApiController extends Api
       $response->status = 200;
       return $this->json_response($comentarios, 200);
   }
-
   public function deleteComentario($url_params = [])
   {
       if ($this->superAdmin()) {
@@ -42,7 +39,6 @@ class ComentariosApiController extends Api
       else
         return $this->json_response(false, 404);
   }
-
   public function createComentario($url_params = []) {
     if ($this->usuario()) {
       $body = json_decode($this->raw_data);
@@ -73,7 +69,6 @@ class ComentariosApiController extends Api
         $response->status = 200;
     return $this->json_response($response, 200);
   }
-
   public function editComentario($url_params = []) {
     $this->admin();
     $body = json_decode($this->raw_data);
@@ -83,7 +78,5 @@ class ComentariosApiController extends Api
     $coments = $this->model->modificarComentario($id, $comentario,$valoracioncion);
     return $this->json_response($coments, 200);
   }
-
 }
-
- ?>
+?>

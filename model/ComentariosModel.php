@@ -3,7 +3,7 @@ require_once('model/Model.php');
 class ComentariosModel extends Model{
     public function getComentarios()
     {
-      $sentencia = $this->db->prepare("select * from comentarios");//producto es la tabla de la BBDD
+      $sentencia = $this->db->prepare("select * from comentarios");//comentarios es la tabla de la BBDD
       $sentencia->execute();
       return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -16,7 +16,7 @@ class ComentariosModel extends Model{
     }
     public function getComentario($id)
     {
-      $sentencia = $this->db->prepare("select * from comentarios where id_comentario =?");//producto es la tabla de la BBDD
+      $sentencia = $this->db->prepare("select * from comentarios where id_comentario =?");//comentarios es la tabla de la BBDD
       $sentencia->execute([$id]);
       return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -33,10 +33,9 @@ class ComentariosModel extends Model{
     }
     public function getComentariosdeUnProducto($id_producto)
     {
-      $sentencia = $this->db->prepare("select * from comentarios where id_producto=?");//producto es la tabla de la BBDD
+      $sentencia = $this->db->prepare("select * from comentarios where id_producto=?");//comentarios es la tabla de la BBDD
       $sentencia->execute([$id_producto]);
       return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }
- ?>
+?>

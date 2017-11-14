@@ -14,7 +14,6 @@ class ProductosController extends SecuredController
     $this->marcasModel = new MarcasModel();
     // $this->usuariosModel = new UsuariosModel();
   }
-
   public function index()
   {
       $usuario=null;
@@ -22,15 +21,12 @@ class ProductosController extends SecuredController
       $usuario = $_SESSION['usuario'];
     }
     $superAdmin =$this->superAdmin();
-
     $this->view->mostrarIndex($usuario,$superAdmin);
   }
-
   public function comparativa()
   {
     $productos = $this->model->getProductos();
     $marcas = $this->marcasModel->getMarcas();
-
     for ($i=0; $i < count($productos); $i++) {
       $id_marca = $productos[$i]['id_marca'];// puede ser 1, 2, 3, etc son los id que envio con el formulario
       $j=0;
@@ -51,7 +47,6 @@ class ProductosController extends SecuredController
     }
     $this->view->mostrarProductos($productos, $marcas, $usuario,$superAdmin);
   }
-
   public function mostrarProducto($value="")
   {
     $usuario = false;
@@ -61,10 +56,8 @@ class ProductosController extends SecuredController
       if ($_SESSION['superAdmin']==1) {
         $superAdmin=true;
       }
-
     }
     $marcas = $this->marcasModel->getMarcas();
-
     if (isset($_POST['id_producto'])) {
       $id = $_POST['id_producto'];
       $productos=$this->model->getProducto($id);
@@ -110,7 +103,6 @@ class ProductosController extends SecuredController
     $memoria = $_POST['memoria'];
     $banda = $_POST['banda'];
     $consumo = $_POST['consumo'];
-
     if((isset($_POST['modelo']) && !empty($_POST['modelo'])) &&
       (isset($_POST['memoria']) && !empty($_POST['memoria'])) &&
       (isset($_POST['banda']) && !empty($_POST['banda'])) &&
@@ -118,7 +110,6 @@ class ProductosController extends SecuredController
     {
         if(isset($_FILES['imagenproducto'])){
           $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['imagenproducto']);
-
           $this->model->guardarProducto($id_marca,$modelo,$memoria,$banda,$consumo, $imagenes);
           $this->comparativa();
         }
@@ -140,20 +131,18 @@ class ProductosController extends SecuredController
       $this->comparativa();
     }
   }
-
   }
   /*FUNCION PARA FILTRAR POR MARCA PRODUCTOS*/
   public function filtro()
   {
-
     $id_marca = $_POST['id_marca'];
     $productos = $this->model->getFiltro($id_marca);
     $marcas = $this->marcasModel->getMarcas();
-
     for ($i=0; $i < count($productos); $i++) {
       $id_marca = $productos[$i]['id_marca'];// puede ser 1, 2, 3, etc son los id que envio con el formulario
       $j=0;
-      while (( $j < count($marcas) && (!(isset($productos[$i]['marca']))) ) ) {
+      while (( $j < count($marcas) && (!(isset($productos[$i]['marca']))) ) ) 
+      {
         if ($id_marca == $marcas[$j]['id']) {
           $productos[$i]['marca'] = $marcas[$j]['nombre'];
         }
@@ -164,12 +153,10 @@ class ProductosController extends SecuredController
     $superAdmin=false;
     if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
       $usuario = true;
-
       if ($_SESSION['superAdmin']==1) {
         $superAdmin=true;
       }
     }
-
     $this->view->mostrarProductos($productos, $marcas, $usuario,$superAdmin);
   }
 
@@ -177,39 +164,38 @@ class ProductosController extends SecuredController
   public function edit()
   {
     if ($this->superAdmin()) {
-    if (isset($_POST['id_producto'])) {
-      $id = $_POST['id_producto'];
-      $productos=$this->model->getProducto($id);
-      $this->view->mostraredit($productos);
+      if (isset($_POST['id_producto'])) {
+        $id = $_POST['id_producto'];
+        $productos=$this->model->getProducto($id);
+        $this->view->mostraredit($productos);
+      }
     }
-  }
   }
 
   //EDITA EL PRODUCTO
   public function editar()
   {
-    if ($this->superAdmin()) {
-    $id = $_POST['id_producto'];
-    $modelo = $_POST['modelo'];
-    $memoria = $_POST['memoria'];
-    $banda = $_POST['banda'];
-    $consumo = $_POST['consumo'];
-    $this->model->editarProducto($modelo,$memoria,$banda,$consumo,$id);
-    $this->comparativa();
+    if ($this->superAdmin()) 
+    {
+      $id = $_POST['id_producto'];
+      $modelo = $_POST['modelo'];
+      $memoria = $_POST['memoria'];
+      $banda = $_POST['banda'];
+      $consumo = $_POST['consumo'];
+      $this->model->editarProducto($modelo,$memoria,$banda,$consumo,$id);
+      $this->comparativa();
     }
   }
-
   function traemeElbody(){
     $this->view->seeBody();
   }
   /*FUNCION QUE CONTROLA QUE LAS IMAGENES TENGAN LA EXTENSION PERMITIDA*/
   function getExtensionesImagenesVerificadas($imagenes){
-
     $imagenesVerificadas = [];
     for ($i=0; $i < count($imagenes['size']); $i++) {
-
       //SOPORTA JPEG Y PNG, PARA REDUCIR EL ESPECTRO DE EXTENSIONES
-      if($imagenes['size'][$i]>0 && ($imagenes['type'][$i]=="image/jpeg" || $imagenes['type'][$i]=="image/png")){
+      if($imagenes['size'][$i]>0 && ($imagenes['type'][$i]=="image/jpeg" || $imagenes['type'][$i]=="image/png"))
+      {
         $imagen_aux = [];
         $imagen_aux['tmp_name']=$imagenes['tmp_name'][$i];
         $imagen_aux['name']=$imagenes['name'][$i];
@@ -221,18 +207,17 @@ class ProductosController extends SecuredController
     }
     return $imagenesVerificadas;
   }
-
-    /*FUNCION Q GUARDA IMAGENES*/
+  /*FUNCION Q GUARDA IMAGENES*/
   public function storeImg()
   {
     $id = $_POST['id_producto'];
-    if ($this->superAdmin()) {
+    if ($this->superAdmin()) 
+    {
       // var_dump($_FILES['fotos']['size']['0']);
       // die();
-      if(isset($_FILES['fotos']) && $_FILES['fotos']['size']['0'] > 0){
+      if(isset($_FILES['fotos']) && $_FILES['fotos']['size']['0'] > 0)
+      {
         $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['fotos']);
-
-
         $this->model->guardarImagenProducto($id,$imagenes);
         $this->mostrarProducto();
       }
@@ -246,23 +231,22 @@ class ProductosController extends SecuredController
       $this->mostrarProducto();
      }
   }
-
-    /*FUNCION Q BORRA IMAGEN DE PRODUCTO*/
+  /*FUNCION Q BORRA IMAGEN DE PRODUCTO*/
   public function destroyImg()
   {
-    if ($this->superAdmin()) {
-          if(isset($_POST['imgpath'])) {
-          $this->model->borrarImagenProducto($_POST['imgpath']);
-          $this->mostrarProducto($_POST['idProducto']);
-        }
+    if ($this->superAdmin()) 
+    {
+      if(isset($_POST['imgpath'])) 
+      {
+        $this->model->borrarImagenProducto($_POST['imgpath']);
+        $this->mostrarProducto($_POST['idProducto']);
+      }
     }
-    else{
-          $this->view->errorCrear("No tiene permiso");
-          $this->mostrarProducto();
+    else
+    {
+      $this->view->errorCrear("No tiene permiso");
+      $this->mostrarProducto();
     }
-
   }
-
 }
-
 ?>
