@@ -1,9 +1,8 @@
 /*FUNCION PARA NAVER GAR CON PARTIAL*/
 $(document).ready(function() {
+var temporizador;
 let templateComentario;
 $.ajax({ url: 'js/templates/comentarios.mst'}).done( template => templateComentario = template);
-
-
 function cargarApi(idProduct,superAdmin) {
   let url="api/comentarios/"+idProduct;
   $.ajax(url).done(function(data) {
@@ -13,7 +12,6 @@ function cargarApi(idProduct,superAdmin) {
       $(".comentarios").html(rendered);
     });
 }
-
 function cargar(url) {
 
   $.ajax({
@@ -40,12 +38,9 @@ function cargar(url) {
   return false;
 }
 function getForm (datos) {
-
   let dir = $(datos).attr("href");
   let formData = new FormData(datos);
   let idProduct=$(datos).attr("value");
-
-
   $.ajax({
     method: "POST",
     url: dir,
@@ -96,8 +91,6 @@ function crearComentario() {
       "id_producto":$("#id_producto").val()
     };
     let idProducto=$("#id_producto").val();
-
-
            $.ajax({
                    method: "POST",
                    url: "api/comentarios",
@@ -107,7 +100,7 @@ function crearComentario() {
                  cargarApi(idProducto);
                })
                .fail(function(data) {
-                   alert('Imposible crear la tarea');
+                   alert('Imposible crear la Comentario');
                });
     }
     function borrarComentario(idComentario,admin) {
@@ -123,15 +116,16 @@ function crearComentario() {
               url: urldelete,
             })
           .done(function(data) {
-            cargarApi(idProducto,superAdmin);
+            cargarApi(idProducto);
           })
           .fail(function(data) {
-              alert('Imposible crear la tarea');
+              alert('Imposible Borrar Comentario');
           });
 
     }
 $(document).on('click', '.link-ajax', function (event) {
   event.preventDefault();
+  clearInterval(temporizador);
   let url=$(this).attr("href");
   cargar(url);
 });
@@ -151,7 +145,6 @@ $(document).on('submit','.formAgregarMarca', function(event){
 });
 
 /*FUNCIONES PARA REGISTRAR LO Q SE ENVIA POR formulario*/
-
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.borrarProducto', function(event){
   event.preventDefault();
@@ -163,7 +156,6 @@ $(document).on('click','.borrarProducto', function(event){
   });
 
 });
-
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.borrarUsuario', function(event){
   event.preventDefault();
@@ -176,7 +168,6 @@ $(document).on('click','.borrarUsuario', function(event){
   });
 
 });
-
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.editarPermiso', function(event){
   event.preventDefault();
@@ -190,7 +181,6 @@ $(document).on('click','.editarPermiso', function(event){
   });
 
 });
-
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.borrarImagenProducto', function(event){
   event.preventDefault();
@@ -205,8 +195,6 @@ $(document).on('click','.borrarImagenProducto', function(event){
     cargarApi(idProducto);
   });
 });
-
-
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.editarProducto', function(event){
   event.preventDefault();
@@ -218,22 +206,20 @@ $(document).on('click','.editarProducto', function(event){
     $('.reemplazo').html(data);
   });
 });
-
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.mostrarProducto', function(event){
   event.preventDefault();
-
   let idProducto = $(this).attr("href");
   let superAdmin = $(this).attr("name");
   let jsonProducto = {id_producto: idProducto};
 
   $.post("mostrarProducto", jsonProducto, function(data) {
     $('.reemplazo').html(data);
-    cargarApi(idProducto,superAdmin);
+    clearInterval(temporizador);
+    temporizador=setInterval(function(){cargarApi(idProducto); }, 2000);
   });
 
 });
-
 /*FUNCIONES PARA ASIGNARLES EVENTOS A LOS BOTONES*/
 $(document).on('click','.borrarMarca', function(event){
   event.preventDefault();
@@ -261,16 +247,17 @@ $(document).on('click','.comienzoEditarMarca', function(event){
 $(document).on('submit','.formComentarios', function(event){
   event.preventDefault();
   crearComentario();
+  refreshInputComentarios();
 });
+function refreshInputComentarios() {
+  $('#comentario').val('');
+  $('#valoracion').val('1');
+}
 
-    $(document).on('click','.borrarComentario', function(event){
+$(document).on('click','.borrarComentario', function(event){
       event.preventDefault();
       let idComentario=$(this).attr("href");
       let admin=$(this).attr("name");
-      alert(idComentario+admin);
       borrarComentario(idComentario,admin);
     });
-
-
-
 });

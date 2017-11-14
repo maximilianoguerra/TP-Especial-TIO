@@ -33,23 +33,34 @@ class ComentariosApiController extends Api
           return $this->json_response("Borrado exitoso.", 200);
         }
         else{
-          return $this->json_response(false, 404);
+          return $this->json_response("Access Denied", 400);
         }
-      }
-      else
-        return $this->json_response(false, 404);
+        }
+        else{
+          return $this->json_response("Access Denied", 400);
+        }
   }
   public function createComentario($url_params = []) {
     if ($this->usuario()) {
       $body = json_decode($this->raw_data);
       $comentario = $body->comentario;
-      $valoracioncion = $body->valoracion;
+      $valoracion = $body->valoracion;
       $id_producto = $body->id_producto;
-      $Coments = $this->model->guardarComentario($comentario,$valoracioncion,$id_producto);
-      return $this->json_response($Coments, 200);
+      if((isset($comentario) && !empty($comentario)) &&
+        (isset($valoracion) && !empty($valoracion)) &&
+        ( $valoracion >= 1)&&( $valoracion <= 5)&&
+        (isset($id_producto) && !empty($id_producto)))
+
+      {
+        $Coments = $this->model->guardarComentario($comentario,$valoracion,$id_producto);
+        return $this->json_response($Coments, 200);
+      }
+      else{
+        return $this->json_response("Access Denied", 400);
+      }
     }
     else{
-      return $this->json_response(false, 400);
+      return $this->json_response("Access Denied", 400);
     }
   }
   public function getComent($url_params = [])
@@ -69,14 +80,14 @@ class ComentariosApiController extends Api
         $response->status = 200;
     return $this->json_response($response, 200);
   }
-  public function editComentario($url_params = []) {
-    $this->admin();
-    $body = json_decode($this->raw_data);
-    $id = $url_params[":id"];
-    $comentario = $body->comentario;
-    $valoracioncion = $body->valoracion;
-    $coments = $this->model->modificarComentario($id, $comentario,$valoracioncion);
-    return $this->json_response($coments, 200);
-  }
+  // public function editComentario($url_params = []) {
+  //   $this->admin();
+  //   $body = json_decode($this->raw_data);
+  //   $id = $url_params[":id"];
+  //   $comentario = $body->comentario;
+  //   $valoracioncion = $body->valoracion;
+  //   $coments = $this->model->modificarComentario($id, $comentario,$valoracioncion);
+  //   return $this->json_response($coments, 200);
+  // }
 }
 ?>

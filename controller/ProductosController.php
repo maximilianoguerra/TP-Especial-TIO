@@ -141,7 +141,7 @@ class ProductosController extends SecuredController
     for ($i=0; $i < count($productos); $i++) {
       $id_marca = $productos[$i]['id_marca'];// puede ser 1, 2, 3, etc son los id que envio con el formulario
       $j=0;
-      while (( $j < count($marcas) && (!(isset($productos[$i]['marca']))) ) ) 
+      while (( $j < count($marcas) && (!(isset($productos[$i]['marca']))) ) )
       {
         if ($id_marca == $marcas[$j]['id']) {
           $productos[$i]['marca'] = $marcas[$j]['nombre'];
@@ -175,7 +175,7 @@ class ProductosController extends SecuredController
   //EDITA EL PRODUCTO
   public function editar()
   {
-    if ($this->superAdmin()) 
+    if ($this->superAdmin())
     {
       $id = $_POST['id_producto'];
       $modelo = $_POST['modelo'];
@@ -211,7 +211,7 @@ class ProductosController extends SecuredController
   public function storeImg()
   {
     $id = $_POST['id_producto'];
-    if ($this->superAdmin()) 
+    if ($this->superAdmin())
     {
       // var_dump($_FILES['fotos']['size']['0']);
       // die();
@@ -234,9 +234,9 @@ class ProductosController extends SecuredController
   /*FUNCION Q BORRA IMAGEN DE PRODUCTO*/
   public function destroyImg()
   {
-    if ($this->superAdmin()) 
+    if ($this->superAdmin())
     {
-      if(isset($_POST['imgpath'])) 
+      if(isset($_POST['imgpath']))
       {
         $this->model->borrarImagenProducto($_POST['imgpath']);
         $this->mostrarProducto($_POST['idProducto']);
@@ -248,5 +248,6 @@ class ProductosController extends SecuredController
       $this->mostrarProducto();
     }
   }
+
 }
 ?>

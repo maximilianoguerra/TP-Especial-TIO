@@ -42,7 +42,7 @@ class ProductosView extends View
     $this->smarty->assign('usuario', $usuario);
     $this->smarty->assign('superAdmin', $superAdmin);
     $this->smarty->display('templates/detalleProducto.tpl');
-  } 
+  }
   function mostraredit($producto){
     $this->smarty->assign('productos', $producto);
     $this->smarty->display('templates/formEdit.tpl');
@@ -55,5 +55,6 @@ class ProductosView extends View
   {
     $this->smarty->display('templates/body.tpl');
   }
+
 }
 ?>

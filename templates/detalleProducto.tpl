@@ -101,6 +101,7 @@
           <div class="comentarios">
 
           </div>
+        {include file="formComentarios.tpl"}
 <!--***FIN DE COMENTARIOS*******-->
 
 </div>

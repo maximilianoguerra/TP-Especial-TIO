@@ -3,6 +3,7 @@
       <div class="msj">
         <div class="panel panel-default">
           <div class="panel-body">
+              <div class="refreshComentarios">
                   <div class="form-group">
                     <label for="id_marca">Comentarios</label>
                   </div>
@@ -24,7 +25,8 @@
                   </div>
                     {{/comentarios}}
                     {{/data}}
-                  {{#data}}
+                  </div>
+                  <!-- {{#data}}
                       {{#usuario}}
                             <form href="api/comentarios" class="formComentarios" enctype="multipart/form-data">
                             <div class="form-group">
@@ -41,12 +43,9 @@
                               {{/idProd}}
                             </div>
                             <input type="submit" class="btn btn-default" value="Agregar">
-                            <!-- {if isset($error)}
-                            <div class="alert alert-danger" role="alert">{$error}</div>
-                            {/if} -->
                           </form>
                     {{/usuario}}
-                  {{/data}}
+                  {{/data}} -->
           </div>
         </div>
       </div>
