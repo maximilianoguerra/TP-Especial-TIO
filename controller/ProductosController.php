@@ -222,6 +222,47 @@ class ProductosController extends SecuredController
     return $imagenesVerificadas;
   }
 
+    /*FUNCION Q GUARDA IMAGENES*/
+  public function storeImg()
+  {
+    $id = $_POST['id_producto'];
+    if ($this->superAdmin()) {
+      // var_dump($_FILES['fotos']['size']['0']);
+      // die();
+      if(isset($_FILES['fotos']) && $_FILES['fotos']['size']['0'] > 0){
+        $imagenes = $this->getExtensionesImagenesVerificadas($_FILES['fotos']);
+
+
+        $this->model->guardarImagenProducto($id,$imagenes);
+        $this->mostrarProducto();
+      }
+      else{
+        $this->view->errorCrear("No cargo imagen");
+        $this->mostrarProducto();
+      }
+    }
+    else{
+      $this->view->errorCrear("No tiene permiso");
+      $this->mostrarProducto();
+     }
+  }
+
+    /*FUNCION Q BORRA IMAGEN DE PRODUCTO*/
+  public function destroyImg()
+  {
+    if ($this->superAdmin()) {
+          if(isset($_POST['imgpath'])) {
+          $this->model->borrarImagenProducto($_POST['imgpath']);
+          $this->mostrarProducto($_POST['idProducto']);
+        }
+    }
+    else{
+          $this->view->errorCrear("No tiene permiso");
+          $this->mostrarProducto();
+    }
+
+  }
+
 }
 
 ?>
