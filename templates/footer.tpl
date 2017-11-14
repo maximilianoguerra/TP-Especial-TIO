@@ -50,7 +50,7 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
-
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 
 <script  src="js/js-prueba.js"></script>

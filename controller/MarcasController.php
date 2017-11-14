@@ -32,29 +32,37 @@ class MarcasController extends SecuredController
    /*FUNCION Q BORRA MARCA*/
   public function destroyMarca(){
     if ($this->superAdmin()) {
-      $id = $_POST['id_marca'];
-      $this->marcasModel->deleteMarca($id);
-      header("location:comparativa");
-      }
+        if (isset($_POST['id_marca']) && !empty($_POST['id_marca'])){
+            $id = $_POST['id_marca'];
+            $this->marcasModel->deleteMarca($id);
+            header("location:comparativa");
+        }
+    }
   }
    /*FUNCION QUE INICIA LA EDICION DE UNA MARCA*/
    public function comienzoEditMarca()
    {
         if ($this->superAdmin()) {
-         $id=$_POST['id_marca'];
-         $marcas=$this->marcasModel->getMarca($id);
-         $this->view->mostrarEditMarca($marcas);
-       }
+            if (isset($_POST['id_marca']) && !empty($_POST['id_marca'])){
+                 $id=$_POST['id_marca'];
+                 $marcas=$this->marcasModel->getMarca($id);
+                 $this->view->mostrarEditMarca($marcas);
+           }
+     }
    }
    /*FUNCION Q NOS MUETRA YA LA EDICION REALIZADA*/
    public function editarMarca()
    {
     if ($this->superAdmin()) {
-      $id=$_POST['id_marca'];
-      $nombre=$_POST['nombre'];
-      $this->marcasModel->editMarca($id,$nombre);
-      header("location:comparativa");
-    }
+      if ((isset($_POST['id_marca']) && !empty($_POST['id_marca']))&&
+          (isset($_POST['nombre']) && !empty($_POST['nombre'])))
+          {
+          $id=$_POST['id_marca'];
+          $nombre=$_POST['nombre'];
+          $this->marcasModel->editMarca($id,$nombre);
+          header("location:comparativa");
+        }
+      }
    }
 }
 ?>

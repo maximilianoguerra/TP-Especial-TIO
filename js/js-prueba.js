@@ -216,6 +216,7 @@ $(document).on('click','.mostrarProducto', function(event){
   $.post("mostrarProducto", jsonProducto, function(data) {
     $('.reemplazo').html(data);
     clearInterval(temporizador);
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     temporizador=setInterval(function(){cargarApi(idProducto); }, 2000);
   });
 

@@ -58,7 +58,7 @@ class ProductosController extends SecuredController
       }
     }
     $marcas = $this->marcasModel->getMarcas();
-    if (isset($_POST['id_producto'])) {
+    if (isset($_POST['id_producto'])&&!empty($_POST['id_producto'])) {
       $id = $_POST['id_producto'];
       $productos=$this->model->getProducto($id);
       $imagenes=$this->model->getImagenes($id);
@@ -177,6 +177,13 @@ class ProductosController extends SecuredController
   {
     if ($this->superAdmin())
     {
+
+      if((isset($_POST['id_producto'])&&!empty($_POST['id_producto']))&&
+        (isset($_POST['modelo']) && !empty($_POST['modelo'])) &&
+        (isset($_POST['memoria']) && !empty($_POST['memoria'])) &&
+        (isset($_POST['banda']) && !empty($_POST['banda'])) &&
+        (isset($_POST['consumo']) && !empty($_POST['consumo'])))
+      {
       $id = $_POST['id_producto'];
       $modelo = $_POST['modelo'];
       $memoria = $_POST['memoria'];
@@ -184,6 +191,7 @@ class ProductosController extends SecuredController
       $consumo = $_POST['consumo'];
       $this->model->editarProducto($modelo,$memoria,$banda,$consumo,$id);
       $this->comparativa();
+      }
     }
   }
   function traemeElbody(){

@@ -26,15 +26,17 @@ class ComentariosApiController extends Api
   {
       if ($this->superAdmin()) {
         $id_comentario = $url_params[":id"];
-        $coments = $this->model->getComentario($id_comentario);
-        if($coments)
-        {
-          $this->model->borrarComentario($id_comentario);
-          return $this->json_response("Borrado exitoso.", 200);
-        }
-        else{
-          return $this->json_response("Access Denied", 400);
-        }
+        if((isset($id_comentario) && !empty($id_comentario)){
+            $coments = $this->model->getComentario($id_comentario);
+            if($coments)
+            {
+              $this->model->borrarComentario($id_comentario);
+              return $this->json_response("Borrado exitoso.", 200);
+            }
+            else{
+              return $this->json_response("Access Denied", 400);
+              }
+            }
         }
         else{
           return $this->json_response("Access Denied", 400);
@@ -72,22 +74,18 @@ class ComentariosApiController extends Api
   public function getComentsdeUnProducto($url_params = [])
   {
     $id_producto=$url_params[":id"];
-    $Coments = $this->model->getComentariosdeUnProducto($id_producto);
-    $response = new stdClass();
-        $response->comentarios =$Coments;
-        $response->usuario =$this->usuario();
-        $response->admin =$this->superAdmin();
-        $response->status = 200;
-    return $this->json_response($response, 200);
+    if((isset($id_producto) && !empty($id_producto)){
+        $Coments = $this->model->getComentariosdeUnProducto($id_producto);
+        $response = new stdClass();
+            $response->comentarios =$Coments;
+            $response->usuario =$this->usuario();
+            $response->admin =$this->superAdmin();
+            $response->status = 200;
+        return $this->json_response($response, 200);
+    }else {
+        return $this->json_response("ID invalido", 200);
+    }
   }
-  // public function editComentario($url_params = []) {
-  //   $this->admin();
-  //   $body = json_decode($this->raw_data);
-  //   $id = $url_params[":id"];
-  //   $comentario = $body->comentario;
-  //   $valoracioncion = $body->valoracion;
-  //   $coments = $this->model->modificarComentario($id, $comentario,$valoracioncion);
-  //   return $this->json_response($coments, 200);
-  // }
+
 }
 ?>
