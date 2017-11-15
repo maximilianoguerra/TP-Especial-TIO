@@ -35,12 +35,13 @@ class ProductosView extends View
     $this->smarty->assign('marcas', $marca);
     $this->smarty->display('templates/guardarProductos.tpl');
   }
-  function mostrarDetalleProducto($producto,$marca,$imagenes,$usuario,$superAdmin){
+  function mostrarDetalleProducto($producto,$marca,$imagenes,$usuario,$superAdmin,$imagenCaptcha){
     $this->smarty->assign('productos', $producto);
     $this->smarty->assign('marcas', $marca);
     $this->smarty->assign('imagenes', $imagenes);
     $this->smarty->assign('usuario', $usuario);
     $this->smarty->assign('superAdmin', $superAdmin);
+    $this->smarty->assign('imagenCaptcha', $imagenCaptcha);
     $this->smarty->display('templates/detalleProducto.tpl');
   }
   function mostraredit($producto){
@@ -50,6 +51,13 @@ class ProductosView extends View
   function mostrarEditMarca($marcas){
     $this->smarty->assign('marcas', $marcas);
     $this->smarty->display('templates/editMarca.tpl');
+  }
+  public function recargarCaptcha($imagenCaptcha,$usuario,$producto)
+  {
+    $this->smarty->assign('productos', $producto);
+    $this->smarty->assign('imagenCaptcha', $imagenCaptcha);
+    $this->smarty->assign('usuario', $usuario);
+    $this->smarty->display('templates/formComentarios.tpl');
   }
   public function seeBody()
   {

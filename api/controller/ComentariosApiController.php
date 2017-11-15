@@ -14,14 +14,6 @@ class ComentariosApiController extends Api
       $this->model = new ComentariosModel();
       $this->modelUsuario =false;
   }
-  // public function getComents($url_params = [])
-  // {
-  //     $comentarios = $this->model->getComentarios();
-  //     $response = new stdClass();
-  //     $response->tareas = [$comentarios];
-  //     $response->status = 200;
-  //     return $this->json_response($comentarios, 200);
-  // }
   public function deleteComentario($url_params = [])
   {
       if ($this->superAdmin()) {
@@ -48,16 +40,26 @@ class ComentariosApiController extends Api
       $comentario = $body->comentario;
       $valoracion = $body->valoracion;
       $id_producto = $body->id_producto;
+      $captcha = $body->captcha;
       if((isset($comentario) && !empty($comentario)) &&
-        (isset($valoracion) && !empty($valoracion) &&
-        (isset($id_producto) && !empty($id_producto))))
+        (isset($valoracion) && !empty($valoracion)) &&
+        (isset($captcha) && !empty($captcha))&&
+        (isset($id_producto) && !empty($id_producto)))
         {
-        $Coments = $this->model->guardarComentario($comentario,$valoracion,$id_producto);
-        return $this->json_response($Coments, 200);
+          if($_SESSION['captcha_array']['code'] == $captcha){
+            $coments = $this->model->guardarComentario($comentario,$valoracion,$id_producto);
+            return $this->json_response($coments, 200);
+            }
+            else{
+              return $this->json_response("Error Comentario", 400);
+            }
         }
         else{
-          return $this->json_response(false, 400);
+          return $this->json_response("Error Comentario", 400);
         }
+    }
+    else{
+      return $this->json_response(false, 400);
     }
   }
   public function getComent($url_params = [])
@@ -70,21 +72,13 @@ class ComentariosApiController extends Api
   {
     $id_producto=$url_params[":id"];
     $Coments = $this->model->getComentariosdeUnProducto($id_producto);
-    $response = new stdClass();
+        $response = new stdClass();
         $response->comentarios =$Coments;
         $response->usuario =$this->usuario();
         $response->admin =$this->superAdmin();
         $response->status = 200;
     return $this->json_response($response, 200);
   }
-  // public function editComentario($url_params = []) {
-  //   $this->admin();
-  //   $body = json_decode($this->raw_data);
-  //   $id = $url_params[":id"];
-  //   $comentario = $body->comentario;
-  //   $valoracioncion = $body->valoracion;
-  //   $coments = $this->model->modificarComentario($id, $comentario,$valoracioncion);
-  //   return $this->json_response($coments, 200);
-  // }
+
 }
 ?>

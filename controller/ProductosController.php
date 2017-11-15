@@ -3,6 +3,7 @@ include_once('model/ProductosModel.php');
 include_once('model/MarcasModel.php');
 include_once('view/ProductosView.php');
 include_once('view/UsuariosView.php');
+require_once('simple-php-captcha-master/simple-php-captcha.php');
 class ProductosController extends SecuredController
 {
   function __construct()
@@ -49,26 +50,32 @@ class ProductosController extends SecuredController
   }
   public function mostrarProducto($value="")
   {
-    $usuario = false;
-    $superAdmin=false;
-    if (isset($_SESSION['usuario'])) { // pregunto si tengo un usuario
-      $usuario = true;
-      if ($_SESSION['superAdmin']==1) {
-        $superAdmin=true;
-      }
-    }
+    $usuario = $this->usuario();
+    $superAdmin= $this->superadmin();
     $marcas = $this->marcasModel->getMarcas();
+    $_SESSION['captcha_array'] = $_SESSION['captcha'] = simple_php_captcha();//cuando entramos por primera vez a la pagina inicia el captcha
+    $imagenCaptcha=$_SESSION['captcha_array']['image_src'];//toamos la imagene del captcha
     if (isset($_POST['id_producto'])&&!empty($_POST['id_producto'])) {
       $id = $_POST['id_producto'];
       $productos=$this->model->getProducto($id);
       $imagenes=$this->model->getImagenes($id);
-      $this->view->mostrarDetalleProducto($productos,$marcas,$imagenes,$usuario,$superAdmin);
+
+      $this->view->mostrarDetalleProducto($productos,$marcas,$imagenes,$usuario,$superAdmin,$imagenCaptcha);
     }
     else{
       $productos=$this->model->getProducto($value);
       $imagenes=$this->model->getImagenes($value);
-      $this->view->mostrarDetalleProducto($productos,$marcas,$imagenes,$usuario,$superAdmin);
+      $this->view->mostrarDetalleProducto($productos,$marcas,$imagenes,$usuario,$superAdmin,$imagenCaptcha);
     }
+  }
+  public function ReloadimagenCaptcha($value='')
+  {
+    $usuario=$this->usuario();
+    $id=$_POST["id_producto"];
+    $productos=$this->model->getProducto($id);
+    $_SESSION['captcha_array'] = $_SESSION['captcha'] = simple_php_captcha();
+    $imagenCaptcha=$_SESSION['captcha_array']['image_src'];
+    $this->view->recargarCaptcha($imagenCaptcha,$usuario,$productos);
   }
 
   // public function mostrarListaUsuarios($value="")

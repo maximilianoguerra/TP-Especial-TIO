@@ -36,7 +36,8 @@ class ConfigApp
       'mostrarProducto' => 'ProductosController#mostrarProducto',
       'listaUsuarios' => 'UsuariosController#mostrarListaUsuarios',
       'borrarUsuario' => 'UsuariosController#borrarUsuario',
-      'editarPermiso' => 'UsuariosController#editarPermisoUsuario'
+      'editarPermiso' => 'UsuariosController#editarPermisoUsuario',
+      'refreshAddComentarios'=>'ProductosController#ReloadimagenCaptcha'
     ];
 }
 ?>

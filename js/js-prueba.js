@@ -88,10 +88,10 @@ function crearComentario() {
   let coment={
       "comentario":$("#comentario").val(),
       "valoracion":$("#valoracion").val(),
-      "id_producto":$("#id_producto").val()
+      "id_producto":$("#id_producto").val(),
+      "captcha":$("#captcha").val()
     };
     let idProducto=$("#id_producto").val();
-          alert(idProducto);
            $.ajax({
                    method: "POST",
                    url: "api/comentarios",
@@ -251,8 +251,11 @@ $(document).on('submit','.formComentarios', function(event){
   refreshInputComentarios();
 });
 function refreshInputComentarios() {
-  $('#comentario').val('');
-  $('#valoracion').val('1');
+      let idProducto =$("#id_producto").val();
+      let jsonProducto = {id_producto: idProducto};
+      $.post("refreshAddComentarios", jsonProducto, function(data) {
+        $('.formAddComentarios').html(data);
+      });
 }
 
 $(document).on('click','.borrarComentario', function(event){

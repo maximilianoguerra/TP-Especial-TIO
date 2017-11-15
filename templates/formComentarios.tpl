@@ -15,10 +15,11 @@
                   </select>
                     {foreach from=$productos item=producto}
                   <input type="text"  class="idProducto"  id="id_producto"name="id_producto" value="{$producto['id']}" hidden="on"></input>
-                         {/foreach}
+                    {/foreach}
 
             </div>
-              <div class="g-recaptcha" data-sitekey="6LevvjgUAAAAAK7NJL5GE0VfytnUWaFUe2DikCdv"></div>
+              <img src="{$imagenCaptcha}" alt="captcha">
+              <input type="text" class="form-control" id="captcha" placeholder="Ingresar Captcha" value="" required>
               <input type="submit" class="btn btn-default" value="Agregar">
         </form>
       </div>

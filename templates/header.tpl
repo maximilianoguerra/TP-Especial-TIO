@@ -12,7 +12,6 @@
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
 
 	<title>Tarjetas Graficas</title>
-	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 	<div class="contenedor">
