@@ -4,7 +4,7 @@
         <form href="api/comentarios" class="formComentarios" enctype="multipart/form-data">
             <div class="form-group">
                   <label for="comentario">Agregar Comentario</label>
-                  <input type="text" class="form-control" id="comentario" name="comentario"  placeholder="Comentario..."></input>
+                  <input type="text" class="form-control" id="comentario" name="comentario"  placeholder="Comentario..." required></input>
                   <label for="valoracion">Valoracion</label>
                   <select class="marca" id="valoracion" name="valoracion">
                         <option class="marca" value="1" name="valoracion">1</option>
