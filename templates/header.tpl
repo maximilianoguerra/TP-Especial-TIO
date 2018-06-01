@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="fonts/font-robotoregular.css" media="all">
 	<link rel="stylesheet" type="text/css" href="fonts/font-robotothin.css" media="all">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="css/style2.css" type="text/css" media="screen">
 
 	<title>Tarjetas Graficas</title>
 </head>

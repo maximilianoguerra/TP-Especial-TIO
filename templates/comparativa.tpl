@@ -3,6 +3,86 @@
   <div class="conthome2">
     <p>Comparativa entre ATI y NVidia</p>
   </div>
+  <!-- RESERVATION FORM -->
+        <section class="reservation-form-over no-padding">
+            <div class="container">
+                <div class="row">
+
+                    <div class="reservation-form">
+                        <form action="#" method="post">
+
+                            <div class="col-md-3">
+                                <div class="form-group2">
+                                    <label>Check in</label>
+                                    <div class="form-group2">
+                                        <div class="input-group date" id="datetimepicker1">
+                                            <input type="text" class="form-control" />
+                                            <span class="input-group-addon">
+                      <span class="fa fa-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group2">
+                                    <label>Check in</label>
+                                    <div class="form-group2">
+                                        <div class="input-group date" id="datetimepicker2">
+                                            <input type="text" class="form-control" />
+                                            <span class="input-group-addon">
+                      <span class="fa fa-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-1">
+                                <div class="form-group2">
+                                    <label>Adults</label>
+                                    <input type="number" placeholder="2" name="adults" value="" max="10" min="1">
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="form-group2">
+                                    <label>Children</label>
+                                    <input type="number" placeholder="0" name="children" value="" max="10" min="1">
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-2">
+                                <div class="form-group2">
+                                    <label>Room type</label>
+                                    <select id="room_type" name="room_type">
+                                        <option value="">Select Room</option>
+
+                                        <option value="Single Room">Single Room</option>
+
+                                        <option value="Double Room">Double Room</option>
+
+                                        <option value="King double Room">King double Room</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group2">
+                                    <button class="btn btn-default m-t-35">Check Avaliability</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end: RESERVATION FORM -->
   <div class="container">
     <div class="filtrar form-group">
 
